@@ -1,4 +1,4 @@
-# Project Name
+# Disaster Tracking App
 
 > Pithy project description
 

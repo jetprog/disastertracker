@@ -1,0 +1,26 @@
+{
+  "name": "disastertracker",
+  "version": "1.0.0",
+  "description": "> Pithy project description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrr32team-aajs/disastertracker.git"
+  },
+  "author": "Andy, Ashleigh Josiah, Seth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hrr32team-aajs/disastertracker/issues"
+  },
+  "homepage": "https://github.com/hrr32team-aajs/disastertracker#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mysql2": "^1.6.1",
+    "node": "^10.8.0",
+    "react": "^16.4.2"
+  }
+}
