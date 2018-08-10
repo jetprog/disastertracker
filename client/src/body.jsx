@@ -18,11 +18,11 @@ export default class Body extends React.Component {
   render() {
     return(
      <Switch>
-      <Route path="/landing" exact render={landing} />
-      <Route exact path="/main" exact component={main} />
-      <Route path="/login" exact component={login} />
-      <Route path="/profile" exact component={profile} />
-      <Route path="/community" exact component={community} />
+      <Route path="/landing" exact component={Landing} />
+      <Route exact path="/main" exact component={Main} />
+      <Route path="/login" exact component={Login} />
+      <Route path="/profile" exact component={Profile} />
+      <Route path="/community" exact component={Community} />
     </Switch>
     )
   }
