@@ -1,0 +1,4 @@
+.eslint*
+**/node_modules
+**/*.min.js
+**/dist
