@@ -1,39 +1,42 @@
-import React from 'react';
-import GoogleMapReact from 'google-map-react';
+import React, {Component} from 'react';
+import MapGL, {NavigationControl} from 'react-map-gl';
 
-const MAPKEY = process.env.MAPKEY;
+const TOKEN = 'pk.eyJ1IjoiYXNobGVpZ2hrZXNzZWwiLCJhIjoiY2prb2F2aGFoMncxZTNya3hpczZ3YThxeiJ9.O4qpf9vBaMZi5OmyKH9AxQ'
 
-const Location = ({ text }) => <div>{text}</div>;
+const navStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  padding: '10px'
+};
 
-
-export default class Map extends React.Component {
-  constructor(props) {
+export default class Map extends Component {
+constructor(props) {
     super(props);
     this.state = {
-      center: {
-      lat: 59.95,
-      lng: 30.33
-    },
-    zoom: 11
-    }
+      viewport: {
+        latitude: 37.785164,
+        longitude: -100,
+        zoom: 3,
+        width: 700,
+        height: 600
+      }
+    };
   }
-
-  render() {
-    return(
-      <div style={{ height: '100vh', width: '100%' }}>
-
-      <GoogleMapReact
-          bootstrapURLKeys={{ key: MapKEY}}
-          defaultCenter={this.state.center}
-          defaultZoom={this.state.zoom}
-        >
-          <Location
-            lat={59.955413}
-            lng={30.337844}
-            text={'Test'}
-          />
-        </GoogleMapReact>
-      </div>
-      );
+render() {
+    //const {viewport} = this.state;
+return (
+      <MapGL
+        //{...viewport}
+        {...this.state.viewport}
+        onViewportChange={(viewport) => this.setState({viewport})}
+        mapStyle="mapbox://styles/mapbox/light-v9"
+        mapboxApiAccessToken={TOKEN}>
+        <div className="nav" style={navStyle}>
+          <NavigationControl {...this.state.viewport}
+        onViewportChange={(viewport) => this.setState({viewport})}/>
+        </div>
+      </MapGL>
+    );
   }
 }

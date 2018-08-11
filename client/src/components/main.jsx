@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import Map from './map.jsx';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class Main extends React.Component {
           <div>Locations</div>
         </Grid>
         <Grid item xs={9}>
-          <div>Map</div>
+          <Map />
         </Grid>
       </Grid>
       </div>
