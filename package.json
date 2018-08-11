@@ -20,17 +20,26 @@
   },
   "homepage": "https://github.com/hrr32team-aajs/disastertracker#readme",
   "dependencies": {
+    "@material-ui/core": "^1.4.3",
+    "@material-ui/icons": "^2.0.1",
     "axios": "^0.18.0",
     "babel-jest": "^23.4.2",
     "body-parser": "^1.18.3",
+    "dotenv-webpack": "^1.5.7",
     "express": "^4.16.3",
+    "google-map-react": "^1.0.6",
+    "mapbox-gl": "^0.47.0",
     "node": "^10.8.0",
     "ololog": "^1.1.111",
     "path": "^0.12.7",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-facebook-login": "^4.0.1",
+    "react-google-login": "^3.2.1",
     "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "react-select": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

@@ -1,28 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import axios from 'axios';
-import Nav from './nav.jsx';
-import Body from './body.jsx';
-
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import Nav from './nav.jsx'
+import Body from './body.jsx'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
+  constructor (props) {
+    super(props)
+    this.state = {}
   }
 
-  render() {
-    return(
+  render () {
+    return (
       <Router>
-       <React.Fragment>
-        <Nav/>
-        <Body/>
+        <React.Fragment>
+          <Nav />
+          <Body />
         </React.Fragment>
-       </Router>
-      )
+      </Router>
+    )
   }
 }
 
-  ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'))
