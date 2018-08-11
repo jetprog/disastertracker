@@ -19,14 +19,21 @@ export default class Nav extends React.Component {
     return (
       <React.Fragment>
         <AppBar position="static">
-          <Grid container direction="row" justify="space-between"alignItems="center">
-            <Typography variant="title" color="inherit">
-              <Link to="/main">Home</Link>
-            </Typography>
-            <Button color="inherit">Login</Button>
+          <Grid container direction="row" justify="space-between" alignItems="center">
+            <Grid item xs={6}>
+              <Typography variant="title" color="primary">
+                <Link to="/main">Home</Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={4} color="primary">
+              <Search />
+            </Grid>
+            <Grid item xs={2}>
+              <Button color="inherit">Login</Button>
+            </Grid>
           </Grid>
         </AppBar>
-        <Search />
+
       </React.Fragment>
     )
   }

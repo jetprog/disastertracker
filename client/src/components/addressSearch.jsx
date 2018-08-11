@@ -27,26 +27,32 @@ export default class Search extends Component {
   };
 
   loadOptions (inputAddress, callback) {
+    if (inputAddress.length < 4) { return [] }
     const params = {
       country: 'USA',
       query: inputAddress,
-      app_code: process.env.HERE_APP_CODE || 'PvEOUu7LkcsHBrzuI3kIXw',
-      app_id: process.env.HERE_APP_ID || 'pRLEjo1k3F9qTNYhcZvY'
+      app_code: process.env.HERE_APP_CODE,
+      app_id: process.env.HERE_APP_ID
     }
     axios
       .get('http://autocomplete.geocoder.api.here.com/6.2/suggest.json', { params })
       .then(response => callback(parseSuggestions(response.data)))
   };
 
+  handleSelectedOne (choice) {
+    console.log(`Choice selected was ${choice.label}`)
+  }
+
   render () {
     return (
       <div>
-        <pre>inputAddress: "{this.state.inputAddress}"</pre>
         <AsyncSelect
           cacheOptions
           loadOptions={this.loadOptions}
           defaultOptions
           onInputChange={this.handleInputChange}
+          placeholder="Address..."
+          onChange={this.handleSelectedOne}
         />
       </div>
     )
