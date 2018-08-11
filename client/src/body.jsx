@@ -18,7 +18,7 @@ export default class Body extends React.Component {
   render() {
     return(
      <Switch>
-      <Route path="/landing" exact component={Landing} />
+      <Route path="/" exact component={Landing} />
       <Route exact path="/main" exact component={Main} />
       <Route path="/login" exact component={Login} />
       <Route path="/profile" exact component={Profile} />
