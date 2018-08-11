@@ -12,6 +12,10 @@ const parseSuggestions = ({suggestions}) =>
     label: makeAddressLine(suggestion.address)
   }))
 
+// const = navigator.geolocation.getCurrentPosition(function(position) {
+//   console.log(position.coords.latitude, position.coords.longitude);
+// });
+
 export default class Search extends Component {
   constructor (props) {
     super(props)
@@ -39,9 +43,18 @@ export default class Search extends Component {
       .then(response => callback(parseSuggestions(response.data)))
   };
 
-  handleSelectedOne (choice) {
-    console.log(`Choice selected was ${choice.label}`)
-  }
+  handleSelectedOne (choice, callback) {
+    const params = {
+      locationid: choice.value,
+      jsonattributes: 1,
+      gen: 9,
+      app_code: process.env.HERE_APP_CODE,
+      app_id: process.env.HERE_APP_ID
+    }
+    axios
+      .get('http://geocoder.api.here.com/6.2/geocode.json', { params })
+      .then(response => callback(response.data.response.view[0].result[0].location))
+  };
 
   render () {
     return (
@@ -52,7 +65,7 @@ export default class Search extends Component {
           defaultOptions
           onInputChange={this.handleInputChange}
           placeholder="Address..."
-          onChange={this.handleSelectedOne}
+          onChange={choice => this.handleSelectedOne(choice, this.props.handleSearchClick)}
         />
       </div>
     )
