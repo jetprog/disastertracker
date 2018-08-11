@@ -11,8 +11,16 @@ export default class Nav extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-
+      mapCenter: {
+        latitude: null,
+        longitude: null
+      }
     }
+    this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this)
+  }
+  handleAppBarSearchClick (location) {
+    const {latitude, longitude} = location.displayPosition
+    this.setState({mapCenter: {latitude, longitude}})
   }
 
   render () {
@@ -26,7 +34,7 @@ export default class Nav extends React.Component {
               </Typography>
             </Grid>
             <Grid item xs={4} color="primary">
-              <Search />
+              <Search handleSearchClick={this.handleAppBarSearchClick}/>
             </Grid>
             <Grid item xs={2}>
               <Button color="inherit">Login</Button>
