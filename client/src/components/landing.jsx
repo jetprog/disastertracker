@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -7,6 +9,8 @@ export default class Landing extends React.Component {
 
     }
   }
+
+
 
   render() {
     return(
@@ -16,3 +20,4 @@ export default class Landing extends React.Component {
       )
   }
 }
+

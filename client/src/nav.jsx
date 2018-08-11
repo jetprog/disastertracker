@@ -1,5 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid';
 
 export default class Nav extends React.Component {
   constructor(props) {
@@ -11,15 +16,15 @@ export default class Nav extends React.Component {
 
   render() {
     return(
-      <React.Fragment>
-      <Link to="/landing">Landing</Link>
+      <AppBar position="static">
+      <Grid container direction="row" justify="space-between"alignItems="center">
+      <Typography variant="title" color="inherit">
       <Link to="/main">Home</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/logout">Logout</Link>
-      <Link to="/profile">Profile</Link>
-      <Link to="/community">Community</Link>
-      </React.Fragment>
+      </Typography>
+      <Button color="inherit">Login</Button>
+      </Grid>
+      </AppBar>
       )
   }
-}
 
+}
