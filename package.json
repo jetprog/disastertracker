@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "node server/server.js",
     "react": "webpack --mode development --watch",
-    "server": "nodemon -r dotenv/config server/server.js"
+    "server": "nodemon -r dotenv/config server/server.js",
   },
   "repository": {
     "type": "git",
