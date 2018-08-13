@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Map from './map.jsx';
+import Map from './Map.jsx';
 
 export default class Main extends React.Component {
   constructor(props) {

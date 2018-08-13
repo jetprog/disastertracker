@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
-import Search from './components/addressSearch.jsx'
+import Search from './components/Search.jsx'
+
 
 export default class Nav extends React.Component {
   constructor (props) {
@@ -41,7 +42,6 @@ export default class Nav extends React.Component {
             </Grid>
           </Grid>
         </AppBar>
-
       </React.Fragment>
     )
   }

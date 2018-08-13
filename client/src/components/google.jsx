@@ -4,7 +4,7 @@ import GoogleLogin from 'react-google-login';
 import config from '../../../config/config'
 
 
-class Facebook extends React.Component {
+class Google extends React.Component {
     responseGoogle(response) {
       console.log(response);
     }
