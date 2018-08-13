@@ -16,7 +16,7 @@ var Knex = require('knex')({
 
 var Knex = require('knex')({
     client:'mysql',
-    connection: {
+    connection: process.env.DATABASE_URL || {
         host:'localhost',
         user:'event_tracker',
         password:'thesis',
@@ -158,9 +158,29 @@ module.exports = db;
 
 db.knex.schema.hasTable('category').then(function(exists) {
     if (!exists) {
-        db.knex.schema.createTable(function('category') {
-            category.increments()
+        db.knex.schema.createTable('category', function(category) {
+            category.increments('category_id').primary();
+            category.string('event_name').unique();
+        }).then(function(table) {
+            console.log(`${table} created`);
         })
     }
 })
+
+db.knex.schema.hasTable('coordinates').then(function(exists) {
+    if (!exists) {
+        db.knex.schema.createTable('coordinates', function(coordinates) {
+            coordinates.increments('coordinates').primary();
+            coordinates.string('location')
+        }).then(function(table) {
+            console.log(`${table} created`);
+        })
+    }
+})
+<<<<<<< HEAD:database/db.js
 >>>>>>> inital db
+=======
+
+
+module.exports = db;
+>>>>>>> Additional database changes:database/config.js
