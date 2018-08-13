@@ -41,7 +41,9 @@ export default class Nav extends React.Component {
               <Link to="/login">Login</Link>
             </Grid>
             <Grid item xs={1}>
+              {/*need to change colors*/}
               <Link to="/signup">Sign up</Link>
+              }
             </Grid>
           </Grid>
         </AppBar>
