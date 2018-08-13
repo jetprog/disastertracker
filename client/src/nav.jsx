@@ -36,9 +36,12 @@ export default class Nav extends React.Component {
             <Grid item xs={4} color="primary">
               <Search handleSearchClick={this.handleAppBarSearchClick}/>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1}>
               {/* <Button color="inherit" href="#/login">Login</Button> */}
               <Link to="/login">Login</Link>
+            </Grid>
+            <Grid item xs={1}>
+              <Link to="/signup">Sign up</Link>
             </Grid>
           </Grid>
         </AppBar>
