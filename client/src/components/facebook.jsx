@@ -1,23 +1,20 @@
-  import React from 'react';
-  import FacebookLogin from 'react-facebook-login';
-  import config from '../../../config/config'
+import React from 'react'
+import FacebookLogin from 'react-facebook-login'
 
-  class Facebook extends React.Component {
-    responseFacebook(response) {
-      console.log(response);
-    }
-
-    render() {
-      return (
-        <FacebookLogin
-          appId = {config.facebookID}
-          autoLoad = {true}
-          fields = "name,email,picture"
-          scope = "public_profile,user_friends,user_actions.books"
-          callback={this.responseFacebook}
-        />
-      )
-    }
+export default class Facebook extends React.Component {
+  responseFacebook (response) {
+    console.log(response)
   }
 
-  export default Facebook;
+  render () {
+    return (
+      <FacebookLogin
+        appId = {process.env.FACEBOOK}
+        autoLoad = {true}
+        fields = "name,email,picture"
+        scope = "public_profile,user_friends,user_actions.books"
+        callback={this.responseFacebook}
+      />
+    )
+  }
+}
