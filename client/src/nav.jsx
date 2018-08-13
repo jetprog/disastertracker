@@ -7,7 +7,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
 import Search from './components/Search.jsx'
 
-
 export default class Nav extends React.Component {
   constructor (props) {
     super(props)
@@ -38,7 +37,8 @@ export default class Nav extends React.Component {
               <Search handleSearchClick={this.handleAppBarSearchClick}/>
             </Grid>
             <Grid item xs={2}>
-              <Button color="inherit">Login</Button>
+              {/* <Button color="inherit" href="#/login">Login</Button> */}
+              <Link to="/login">Login</Link>
             </Grid>
           </Grid>
         </AppBar>
