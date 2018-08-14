@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
 export default class Signup extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
 
     }
   }
 
-  render() {
-    return(
+  render () {
+    return (
       <div>
         <h1>Sign up</h1>
         <TextField
@@ -54,11 +54,6 @@ export default class Signup extends React.Component {
         Sign up
         </Button>
       </div>
-      )
+    )
   }
 }
-
-
-
-
-
