@@ -4,13 +4,29 @@ import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
+import Modal from '@material-ui/core/Modal'
+import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+import { withStyles } from '@material-ui/core/styles'
 import Search from './components/Search.jsx'
+import Login from './components/Login.jsx'
+
+const paperStyle = {
+  position: 'absolute',
+  width: '50%',
+  height: '50%',
+  backgroundColor: 'white',
+  boxShadow: 'black',
+  padding: 4
+}
+
+const modalStyle = { top: '25%', left: '25%' }
 
 export default class Nav extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      loginFormOpen: false,
       mapCenter: {
         latitude: null,
         longitude: null
@@ -37,13 +53,17 @@ export default class Nav extends React.Component {
               <Search handleSearchClick={this.handleAppBarSearchClick}/>
             </Grid>
             <Grid item xs={1}>
-              {/* <Button color="inherit" href="#/login">Login</Button> */}
-              <Link to="/login">Login</Link>
+              <Button color="inherit" onClick={() => this.setState({loginFormOpen: true})}>Login</Button>
+              <Modal style={modalStyle} open={this.state.loginFormOpen} onClose={() => this.setState({loginFormOpen: false})}>
+                <Paper style={paperStyle}>
+                  <Login />
+                </Paper>
+              </Modal>
+              {/* <Link to="/login">Login</Link> */}
             </Grid>
             <Grid item xs={1}>
-              {/*need to change colors*/}
+              {/* need to change colors */}
               <Link to="/signup">Sign up</Link>
-              }
             </Grid>
           </Grid>
         </AppBar>
