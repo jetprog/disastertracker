@@ -1,42 +1,38 @@
-import React, {Component} from 'react';
-import MapGL, {NavigationControl} from 'react-map-gl';
-
-const TOKEN = 'pk.eyJ1IjoiYXNobGVpZ2hrZXNzZWwiLCJhIjoiY2prb2F2aGFoMncxZTNya3hpczZ3YThxeiJ9.O4qpf9vBaMZi5OmyKH9AxQ'
+import React, {Component} from 'react'
+import MapGL, {NavigationControl} from 'react-map-gl'
 
 const navStyle = {
   position: 'absolute',
   top: 0,
   left: 0,
   padding: '10px'
-};
+}
 
 export default class Map extends Component {
-constructor(props) {
-    super(props);
+  constructor(props) {
+    super(props)
     this.state = {
       viewport: {
         latitude: 37.785164,
         longitude: -100,
         zoom: 3,
-        width: 700,
+        width: 900,
         height: 600
       }
-    };
+    }
   }
-render() {
-    //const {viewport} = this.state;
-return (
+
+  render() {
+    return (
       <MapGL
-        //{...viewport}
         {...this.state.viewport}
         onViewportChange={(viewport) => this.setState({viewport})}
         mapStyle="mapbox://styles/mapbox/light-v9"
-        mapboxApiAccessToken={TOKEN}>
+        mapboxApiAccessToken={process.env.MAPKEY}>
         <div className="nav" style={navStyle}>
-          <NavigationControl {...this.state.viewport}
-        onViewportChange={(viewport) => this.setState({viewport})}/>
+          <NavigationControl onViewportChange={(viewport) => this.setState({viewport})}/>
         </div>
-      </MapGL>
+     </MapGL>
     );
   }
 }
