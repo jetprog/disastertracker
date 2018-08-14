@@ -16,9 +16,15 @@ export default class Body extends React.Component {
     return (
       <Switch>
         <Route path="/" exact component={Landing} />
-        <Route path="/main" exact component={Main} />
+        {/* <Route path="/main" exact component={Main} mapCenter={this.props.mapCenter}/> */}
+        <Route path="/main" exact render={(props) => <Main {...props} mapCenter={this.props.mapCenter} />} />
         <Route path="/community" exact component={Community} />
       </Switch>
     )
   }
 }
+
+/* <Route
+  path='/dashboard'
+  render={(props) => <Dashboard {...props} isAuthed={true} />}
+/> */

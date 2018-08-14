@@ -9,7 +9,7 @@ const navStyle = {
 }
 
 export default class Map extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       viewport: {
@@ -22,17 +22,32 @@ export default class Map extends Component {
     }
   }
 
-  render() {
+  componentDidUpdate (prevProps) {
+    if (prevProps.mapCenter.longitude !== this.props.mapCenter.longitude ||
+      prevProps.mapCenter.latitude !== this.props.mapCenter.latitude) {
+      this.setState({viewport:
+        {
+          latitude: this.props.mapCenter.latitude,
+          longitude: this.props.mapCenter.longitude,
+          zoom: 8,
+          width: this.state.viewport.width,
+          height: this.state.viewport.height
+        }
+      })
+    }
+  }
+
+  render () {
     return (
       <MapGL
         {...this.state.viewport}
         onViewportChange={(viewport) => this.setState({viewport})}
-        mapStyle="mapbox://styles/mapbox/light-v9"
+        mapStyle="mapbox://styles/mapbox/street-v10"
         mapboxApiAccessToken={process.env.MAPKEY}>
         <div className="nav" style={navStyle}>
           <NavigationControl onViewportChange={(viewport) => this.setState({viewport})}/>
         </div>
-     </MapGL>
-    );
+      </MapGL>
+    )
   }
 }
