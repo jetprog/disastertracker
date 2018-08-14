@@ -1,16 +1,16 @@
 const db = require('../config.js');
-const event = require('../event.js');
-const category = require('../category.js');
+const Event = require('../event.js');
+const Category = require('../category.js');
 
-var eventList = db.Model.extend({
+var EventList = db.Model.extend({
     tableName: 'category',
     hasTimeStamps: true,
     eventID: function() {
-        return this.belongsTo(event, 'event_id');
+        return this.belongsTo(Event, 'event_id');
     },
     categoryID: function() {
-        return this.belongsTo(category, 'category_id');
+        return this.belongsTo(Category, 'category_id');
     },
 });
 
-module.exports = require('eventList', eventList);
+module.exports = db.model('eventList', EventList);

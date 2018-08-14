@@ -1,9 +1,11 @@
-const db = require('../config');
+const db = require('./config.js');
+const Users = require('./collections/users.js');
+const User = require('./models/users.js');
 
 //export saves user to database input fields are (username, password)
 exports.saveUser = (user) => {
     new Promise({function (resolve, reject) {
-        new User({ username: user.username }).fetch().then(found => (found ? reject() : URLSearchParams.create(user).then(resolve)));
+        new User({ username: user.username }).fetch().then(found => (found ? reject() : users.create(user).then(resolve)));
     }})
 }
 

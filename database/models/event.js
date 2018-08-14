@@ -1,9 +1,9 @@
 const db = require('../config.js');
 
-var event = db.Model.extend({
+var Event = db.Model.extend({
     tableName: 'event',
     hasTimeStamps: true,
 });
 
 
-module.exports = db.model('event', event);
+module.exports = db.model('Event', Event);

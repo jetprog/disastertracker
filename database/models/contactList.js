@@ -1,16 +1,16 @@
 const db = require('../config.js');
-const user = require('../user.js');
-const contactList = require('../contacts.js')
+const User = require('../users.js');
+const Contacts = require('../contacts.js')
 
-var contactList = db.Model.extend({
+var ContactList = db.Model.extend({
     tableName:'contactList',
     hasTimeStamps: true,
     userID: function() {
-        return this.belongsTo(user, 'user_id');
+        return this.belongsTo(User, 'user_id');
     },
     contactID: function() {
-        return this.belongsTo(contacts, 'contact_id');
+        return this.belongsTo(Contacts, 'contact_id');
     },
 });
 
-module.exports = db.Model('contactList', contactList);
+module.exports = db.model('contactList', ContactList);

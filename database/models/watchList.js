@@ -1,16 +1,16 @@
 const db = require('../config.js');
-const user = require('../user.js');
-const event = require('../event.js');
+const User = require('../users.js');
+const Event = require('../event.js');
 
 var watchList = db.Model.extend({
     tableName:'contactList',
     hasTimeStamps: true,
     userID: function() {
-        return this.belongsTo(user, 'user_id');
+        return this.belongsTo(User, 'user_id');
     },
     eventID: function() {
-        return this.belongsTo(event, 'event_id');
+        return this.belongsTo(Event, 'event_id');
     },
 });
 
-module.exports = db.model('watchList', watchList);
+module.exports = db.model('watchList', WatchList);

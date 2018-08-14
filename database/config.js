@@ -1,8 +1,7 @@
-
 const path = require('path');
 const config = require('../.env');
 
-var Knex = require('knex')({
+var knex = require('knex')({
     client:'mysql',
     connection: process.env.DATABASE_URL || {
         host: process.env.HOST,
@@ -15,7 +14,9 @@ var Knex = require('knex')({
 
 var db = require('bookshelf')(knex);
 
-db.knex.hasTable('user').then(function(exists) {
+db.plugin('registry');
+
+db.knex.schema.hasTable('user').then(function(exists) {
     if (!exists) {
         db.knex.createTable('user', function(user) {
             user.increments('user_id').primary();
@@ -30,7 +31,7 @@ db.knex.hasTable('user').then(function(exists) {
     }
 });
 
-db.knex.hasTable('event').then(function(exists) {
+db.knex.schema.hasTable('event').then(function(exists) {
     if (!exists) {
         db.knex.createdTable('event', function(event) {
             event.increments('event_id').primary();
@@ -49,7 +50,7 @@ db.knex.hasTable('event').then(function(exists) {
     }
 });
 
-db.knex.hasTable('contact').then(function(exists) {
+db.knex.schema.hasTable('contact').then(function(exists) {
     if (!exists) {
         db.knex.createdTable('contact', function(contact) {
             contact.increments('contact_id').primary();
@@ -62,7 +63,7 @@ db.knex.hasTable('contact').then(function(exists) {
     }
 });
 
-db.knex.hasTable('locations').then(function(exists) {
+db.knex.schema.hasTable('locations').then(function(exists) {
     if (!exists) {
         db.knex.createdTable('location', function(location) {
             location.increments('location_id').primary();
@@ -73,7 +74,7 @@ db.knex.hasTable('locations').then(function(exists) {
     }
 });
 
-db.knex.hasTable('category').then(function(exists) {
+db.knex.schema.hasTable('category').then(function(exists) {
     if (!exists) {
         db.knex.createdTable('category', function(category) {
             category.increments('event_name').primary();

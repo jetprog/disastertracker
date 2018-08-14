@@ -1,8 +1,8 @@
 var db = require('../config.js');
 
-var contact = db.Model.extend({
+var Contact = db.Model.extend({
     tableName: 'contact',
     hasTimeStamps: true,
 });
 
-module.exports = db.Model('contact', contact);
+module.exports = db.model('Contact', Contact);

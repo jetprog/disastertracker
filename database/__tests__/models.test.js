@@ -1,4 +1,6 @@
 const db = require('../utils.js');
+const Users = require('../collections/users.js');
+const User = require('../models/users.js');
 
 describe('database models', () => {
 
