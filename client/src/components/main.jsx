@@ -20,7 +20,7 @@ export default class Main extends React.Component {
     // check if user is logged in
     // logged in with no locations or not logged in
     // navigator position if allowed or default
-
+    //
   }
   handleLocationClick () {
     // this is the clcikhandler in location list

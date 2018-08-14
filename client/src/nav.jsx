@@ -35,6 +35,7 @@ export default class Nav extends React.Component {
         longitude: null
       }
     }
+    //
     this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this)
   }
   handleAppBarSearchClick (location) {
