@@ -11,7 +11,13 @@ app.use(express.static(`${__dirname}/../client/dist`))
 
 app.get('/', function (req, res) {
   res.send('Server running')
-})
+});
+
+app.get('/api/user');
+
+app.put('/api/user');
+
+app.delete('/api/user');
 
 const PORT = process.env.PORT || 3000
 

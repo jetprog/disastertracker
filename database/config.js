@@ -1,14 +1,14 @@
 
 const path = require('path');
-const config = require('../config/config.js');
+const config = require('../.env');
 
 var Knex = require('knex')({
     client:'mysql',
     connection: process.env.DATABASE_URL || {
-        host: config.database.host,
-        user: config.database.user,
-        password: config.database.password,
-        database:'test_db'
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
     },
     userNullAsDefault: true,
 });
