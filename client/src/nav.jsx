@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import Search from './components/Search.jsx'
 import Login from './components/Login.jsx'
+import Locations from './components/Locations.jsx'
+import Signup from './components/Signup.jsx'
 
 const paperStyle = {
   position: 'absolute',
@@ -27,11 +29,13 @@ export default class Nav extends React.Component {
     super(props)
     this.state = {
       loginFormOpen: false,
+      signUpFormOpen: false,
       mapCenter: {
         latitude: null,
         longitude: null
       }
     }
+    //
     this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this)
   }
   handleAppBarSearchClick (location) {
@@ -62,8 +66,12 @@ export default class Nav extends React.Component {
               {/* <Link to="/login">Login</Link> */}
             </Grid>
             <Grid item xs={1}>
-              {/* need to change colors */}
-              <Link to="/signup">Sign up</Link>
+              <Button color="inherit" onClick={() => this.setState({signUpFormOpen: true})}>SignUp</Button>
+              <Modal style={modalStyle} open={this.state.signUpFormOpen} onClose={() => this.setState({signUpFormOpen: false})}>
+                <Paper style={paperStyle}>
+                  <Signup />
+                </Paper>
+              </Modal>
             </Grid>
           </Grid>
         </AppBar>
