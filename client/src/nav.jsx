@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
@@ -16,8 +16,8 @@ const paperStyle = {
   width: '50%',
   height: '50%',
   backgroundColor: 'white',
-  boxShadow: 'black',
-  padding: 4
+  border: '3px solid',
+  padding: 10
 }
 
 const modalStyle = { top: '25%', left: '25%' }
@@ -46,7 +46,7 @@ export default class Nav extends React.Component {
           <Grid container direction="row" justify="space-between" alignItems="center">
             <Grid item xs={6}>
               <Typography variant="title" color="primary">
-                <Link to="/main">Home</Link>
+                <Link to="/main">DisasterTracker</Link>
               </Typography>
             </Grid>
             <Grid item xs={4} color="primary">
