@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 
 app.use(express.static(`${__dirname}/../client/dist`))
 
-app.get('/home', function (req, res) {
+app.get('/', function (req, res) {
   res.send('Server running')
 })
 
