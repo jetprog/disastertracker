@@ -7,14 +7,23 @@ import Body from './Body.jsx'
 class App extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      mapCenter: {
+        latitude: 123,
+        longitude: 456
+      }
+    }
+    this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this)
   }
-
+  handleAppBarSearchClick (location) {
+    const {latitude, longitude} = location.displayPosition
+    this.setState({mapCenter: {latitude, longitude}})
+  }
   render () {
     return (
       <React.Fragment>
-        <Nav />
-        <Body />
+        <Nav handleSearchClick={this.handleAppBarSearchClick}/>
+        <Body mapCenter={this.state.mapCenter}/>
       </React.Fragment>
     )
   }

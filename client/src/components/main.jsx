@@ -9,14 +9,19 @@ export default class Main extends React.Component {
     super(props)
     this.state = {
       mapLocation: {
-        label: null,
+        // label: null,
         latitude: null,
         longitude: null}
 
     }
     this.handleLocationClick = this.handleLocationClick.bind(this)
   }
-  componentDidMount () {
+  componentDidUpdate () {
+    const {mapCenter} = this.props
+    if (mapCenter.latitude !== this.state.mapLocation.latitude ||
+      mapCenter.longitude !== this.state.mapLocation.longitude) {
+      this.setState({mapLocation: mapCenter})
+    }
     // check if user is logged in
     // logged in with no locations or not logged in
     // navigator position if allowed or default
@@ -34,7 +39,7 @@ export default class Main extends React.Component {
             {this.props.userLoggedIn ? <Locations clickHandler={this.handleLocationClick}/> : <NoLoggedInUser />}
           </Grid>
           <Grid item xs={9}>
-            <Map mapcenter={this.state.mapLocation}/>
+            <Map mapCenter={this.state.mapLocation}/>
           </Grid>
         </Grid>
       </div>
