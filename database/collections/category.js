@@ -1,8 +1,8 @@
 var db = require('../config.js');
 var Category = require('../models/category.js');
 
-var Category = new db.Collection();
+var Categories = new db.Collection();
 
-Category.model = Category;
+Categories.model = Category;
 
-module.exports = Category;
+module.exports = Categories;

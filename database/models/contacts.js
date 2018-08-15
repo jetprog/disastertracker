@@ -1,4 +1,4 @@
-var db = require('../config.js');
+const db = require('../config.js');
 
 var Contact = db.Model.extend({
     tableName: 'contact',

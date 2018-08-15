@@ -1,5 +1,5 @@
 var db = require('../config.js');
-var Locations = require('../models/locations.js');
+var Location = require('../models/locations.js');
 
 var Locations = new db.Collection();
 

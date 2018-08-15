@@ -1,6 +1,6 @@
 const db = require('../config.js');
 const User = require('../users.js');
-const Contacts = require('../contacts.js')
+const Contact = require('../contacts.js')
 
 var ContactList = db.Model.extend({
     tableName:'contactList',
@@ -9,7 +9,7 @@ var ContactList = db.Model.extend({
         return this.belongsTo(User, 'user_id');
     },
     contactID: function() {
-        return this.belongsTo(Contacts, 'contact_id');
+        return this.belongsTo(Contact, 'contact_id');
     },
 });
 

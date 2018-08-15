@@ -1,8 +1,8 @@
 const db = require('../config.js');
 
-var Locations = db.Model.extend({
-    tableName: '',
+var Location = db.Model.extend({
+    tableName: 'location',
     hasTimeStamps: true,
 });
 
-module.exports = db.model('Locations', Locations);
+module.exports = db.model('Locations', Location);

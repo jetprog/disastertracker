@@ -1,6 +1,6 @@
 const db = require('../config.js');
 const User = require('../users.js');
-const Locations = require('../locations.js');
+const Location = require('../locations.js');
 
 var CurrentLocation = db.Model.extend({
     tableName: '',
@@ -9,7 +9,7 @@ var CurrentLocation = db.Model.extend({
         return this.belongsTo(User, 'user_id');
     },
     locationID: function() {
-        return this.belongsTo(Locations, 'location_id')
+        return this.belongsTo(Location, 'location_id')
     },
 });
 
