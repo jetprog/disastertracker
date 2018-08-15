@@ -9,8 +9,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       mapCenter: {
-        latitude: 123,
-        longitude: 456
+        latitude: 37.785164,
+        longitude: -100
       }
     }
     this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this)

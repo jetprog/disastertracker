@@ -13,7 +13,7 @@ export default class Signup extends React.Component {
   render () {
     return (
       <div>
-        <h1>Sign up</h1>
+        <h2>Sign up</h2>
         <TextField
           autoFocus
           name="firstname"
