@@ -5,7 +5,7 @@ var knex = require('knex')({
     client:'mysql',
     connection: process.env.DATABASE_URL || {
         host: process.env.HOST,
-        user: process.env.USERNAME,
+        user: process.env.USER,
         password: process.env.PASSWORD,
         database: process.env.DATABASE
     },
@@ -84,5 +84,6 @@ db.knex.schema.hasTable('category').then(function(exists) {
         })
     }
 });
+
 
 module.exports = db;
