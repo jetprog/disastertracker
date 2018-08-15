@@ -63,7 +63,7 @@ db.knex.schema.hasTable('contact').then(function(exists) {
     }
 });
 
-db.knex.schema.hasTable('locations').then(function(exists) {
+db.knex.schema.hasTable('location').then(function(exists) {
     if (!exists) {
         db.knex.createdTable('location', function(location) {
             location.increments('location_id').primary();
@@ -84,17 +84,5 @@ db.knex.schema.hasTable('category').then(function(exists) {
         })
     }
 });
-
-db.knex.schema.hasTable('coordinates').then(function(exists) {
-    if (!exists) {
-        db.knex.schema.createTable('coordinates', function(coordinates) {
-            coordinates.increments('coordinates').primary();
-            coordinates.string('location')
-        }).then(function(table) {
-            console.log(`${table} created`);
-        })
-    }
-});
-
 
 module.exports = db;

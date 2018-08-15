@@ -1,8 +1,8 @@
 var db = require('../config.js');
-var Contacts = require('../models/user.js');
+var Contact = require('../models/user.js');
 
 var Contacts = new db.Collection();
 
-Contacts.model = Contacts;
+Contacts.model = Contact;
 
 module.exports = Contacts;
