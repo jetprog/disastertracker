@@ -17,6 +17,8 @@ app.get('/', function (req, res) {
 
 app.post('api/login', helper.login);
 
+app.post('api/signup', helper.signup);
+
 app.get('/api/user');
 
 app.put('/api/user');
