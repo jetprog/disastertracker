@@ -85,5 +85,4 @@ db.knex.schema.hasTable('category').then(function(exists) {
     }
 });
 
-
 module.exports = db;

@@ -1,5 +1,5 @@
 var db = require('../config.js');
-var Contact = require('../models/contacts.js');
+var Contact = require('../models/user.js');
 
 var Contacts = new db.Collection();
 
