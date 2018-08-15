@@ -1,4 +1,4 @@
-const db = require('../../database/utils');
+const db = require('../database/utils');
 
 const postRes = (promise, res, errMessage, successStatus = 201, errStatus = 400) =>
   promise
@@ -14,14 +14,10 @@ const login = (req, res) =>{
         req.session.regenerate(() =>
           res
           .status(200)
-          .send((req.session.user = req.body.username) && req.session)
-        )
+          .send((req.session.user = req.body.username) && req.session))
       }
-    }
-  // }else{
-     //implement our login there
-  // }
-
+    })
+  }
 }
 
 const signup = (req, res) =>{
@@ -30,7 +26,7 @@ const signup = (req, res) =>{
     req.session.regenerate(() =>
       res
       .status(200)
-      .send((req.session.user = user.username) && req.session)
+      .send((req.session.user = user.username) && req.session))
   })
   .catch(function (err) {
     res.status(400).send({ serverMessage: "User alredy exists", error: err })
