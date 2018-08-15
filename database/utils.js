@@ -23,7 +23,7 @@ exports.saveFacebookUser = (user, cb) => {
     }
   })
   .catch(function (err) {
-    cb(erro);
+    cb(err);
   });
 }
 
