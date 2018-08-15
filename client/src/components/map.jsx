@@ -42,7 +42,7 @@ export default class Map extends Component {
       <MapGL
         {...this.state.viewport}
         onViewportChange={(viewport) => this.setState({viewport})}
-        mapStyle="mapbox://styles/mapbox/street-v10"
+        mapStyle="mapbox://styles/mapbox/streets-v10"
         mapboxApiAccessToken={process.env.MAPKEY}>
         <div className="nav" style={navStyle}>
           <NavigationControl onViewportChange={(viewport) => this.setState({viewport})}/>
