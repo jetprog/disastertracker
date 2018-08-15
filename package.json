@@ -29,6 +29,7 @@
     "babel-jest": "^23.4.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "node": "^10.8.0",
     "ololog": "^1.1.111",
     "path": "^0.12.7",

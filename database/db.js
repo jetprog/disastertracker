@@ -30,6 +30,19 @@ db.knex.hasTbale('user').then(function(exists) {
     }
 });
 
+db.knex.hasTbale('facebookUsers').then(function(exists) {
+    if (!exists) {
+        db.knex.createTable('facebookUsers', function(user) {
+            user.string('facebook_id').primary();
+            user.string('token', 50);
+            user.string('email', 30);
+            user.string('name', 100);
+        }).then(function(table) {
+            console.log(`${table} created`);
+        })
+    }
+});
+
 db.knex.hasTable('event').then(function(exists) {
     if (!exists) {
         db.knex.createdTable('event', function(event) {
