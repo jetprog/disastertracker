@@ -17,7 +17,6 @@ app.get('/api/', function (req, res) {
 });
 
 app.get('/api/event', function(req, res) {
-<<<<<<< HEAD
   res.send('Server running')
 });
 
@@ -36,22 +35,6 @@ app.post('/api/user', function(req, res) {
 
 app.put('/api/user', function(req, res) {
   res.send('Server running')
-=======
-  .then())
-
-app.get('/api/location', function(req, res) {
-  .then())
-
-//include user location, array of locations.
-app.get('/api/user', function(req, res) {
-  .then())
-
-app.post('/api/user', function(req, res) {
-  .then())
-
-app.put('/api/user', function(req, res) {
-  .then()
->>>>>>> changes to server files
 });
 
 app.delete('/api/user');
