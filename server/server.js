@@ -1,32 +1,43 @@
-const express = require('express');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const path = require('path');
-const log = require('ololog');
-const helper = require('./helper.js');
+const express = require('express')
+const bodyParser = require('body-parser')
+const path = require('path')
+const log = require('ololog')
 
-const app = express();
+const app = express()
 
-app.use(bodyParser.json());
+app.use(bodyParser.json())
+app.use(express.static(`${__dirname}/../client/dist`))
 
-app.use(express.static(`${__dirname}/../client/dist`));
-
-app.get('/', function (req, res) {
-  res.send('Server running');
+app.get('/', function(req, res) {
+  res.redirect('/');
 });
 
-app.post('api/login', helper.login);
+app.get('/api/', function (req, res) {
+  res.send('Server running')
+});
 
-app.post('api/signup', helper.signup);
+app.get('/api/event', function(req, res) {
+}
 
-app.get('/api/user');
+app.get('/api/location', function(req, res) {
 
-app.put('/api/user');
+}
+//include user location, array of locations.
+app.get('/api/user', function(req, res) {
+
+}
+app.post('/api/user', function(req, res) {
+
+}
+
+app.put('/api/user', function(req, res) {
+
+});
 
 app.delete('/api/user');
 
-const PORT = process.env.PORT || 3000
+const port = process.env.PORT || 3000
 
-app.listen(PORT, function () {
-  log(`Application listening on port ${PORT}`)
+app.listen(port, function() {
+  log(`Application listening on port ${port}`)
 })
