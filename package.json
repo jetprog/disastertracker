@@ -4,10 +4,13 @@
   "description": "> Pithy project description",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
     "start": "node server/server.js",
     "react": "webpack --mode development --watch",
-    "server": "nodemon -r dotenv/config server/server.js"
+    "server": "nodemon -r dotenv/config server/server.js",
+    "test": "set NODE_ENV=test&& jest"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/test_setup.js"
   },
   "repository": {
     "type": "git",
@@ -29,9 +32,6 @@
     "path": "^0.12.7",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-facebook-login": "^4.0.1",
-    "react-google-login": "^3.2.1",
-    "react-map-gl": "^3.3.4",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1"
   },
