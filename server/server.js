@@ -16,8 +16,18 @@ app.get('/api/', function (req, res) {
   res.send('Server running')
 });
 
+<<<<<<< HEAD
 app.get('/api/event', function(req, res) {
 }
+=======
+app.get('/api/event');
+
+app.get('/api/location');
+
+app.get('/api/user'); //include user location, array of locations.
+
+app.post('/api/user');
+>>>>>>> database changes
 
 app.get('/api/location', function(req, res) {
 
