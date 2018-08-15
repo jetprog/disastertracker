@@ -16,32 +16,25 @@ app.get('/api/', function (req, res) {
   res.send('Server running')
 });
 
-<<<<<<< HEAD
 app.get('/api/event', function(req, res) {
-}
-=======
-app.get('/api/event');
-
-app.get('/api/location');
-
-app.get('/api/user'); //include user location, array of locations.
-
-app.post('/api/user');
->>>>>>> database changes
+  res.send('Server running')
+});
 
 app.get('/api/location', function(req, res) {
+  res.send('Server running')
+});
 
-}
 //include user location, array of locations.
 app.get('/api/user', function(req, res) {
+  res.send('Server running')
+});
 
-}
 app.post('/api/user', function(req, res) {
-
-}
+  res.send('Server running')
+});
 
 app.put('/api/user', function(req, res) {
-
+  res.send('Server running')
 });
 
 app.delete('/api/user');
