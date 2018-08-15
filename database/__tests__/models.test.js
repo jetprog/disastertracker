@@ -25,13 +25,13 @@ describe('database models', () => {
       event_name: 'hurricane chris',
       severity:'high',
       status: 'active',
-      expires: '',
-      urgency:'',
-      description: '',
-      affected_zones: '',
-      instructions: '',
-      headline: '',
-      current_coordinates:''
+      expires: '2018-08-10T13:33:56+00:00',
+      urgency:'high',
+      description: 'congratulations you made it to the testing folder',
+      affected_zones: 'https://api.weather.gov/zones/county/MDC031',
+      instructions: 'Monitoring message only. Please disregard. Keep dancing.',
+      headline: 'celebrate',
+      current_coordinates:[[[186121.000091283981273, 1192.01298329187987321]]]
     }).then(() => {
       new Event({event_name: 'hurricane chris'}).fetch().then(save => expect(save.attributes.event_name).toEqual('hurricane chris'));
     });
