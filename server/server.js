@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const log = require('ololog')
+const utils = require('./helper.js');
 
 const app = express()
 
@@ -25,6 +26,7 @@ app.get('/api/location', function(req, res) {
 });
 
 //include user location, array of locations.
+
 app.get('/api/user', function(req, res) {
   res.send('Server running')
 });
@@ -38,6 +40,8 @@ app.put('/api/user', function(req, res) {
 });
 
 app.delete('/api/user');
+
+app.post('/api/signup', utils.signup);
 
 const port = process.env.PORT || 3000
 

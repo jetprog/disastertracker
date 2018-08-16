@@ -1,11 +1,10 @@
 const path = require('path');
-const config = require('../.env');
 
 var knex = require('knex')({
     client:'mysql',
     connection: process.env.DATABASE_URL || {
         host: process.env.HOST,
-        user: process.env.USER,
+        user: process.env.USERNAME,
         password: process.env.PASSWORD,
         database: process.env.DATABASE
     },
@@ -18,7 +17,7 @@ db.plugin('registry');
 
 db.knex.schema.hasTable('user').then(function(exists) {
     if (!exists) {
-        db.knex.createTable('user', function(user) {
+        db.knex.schema.createTable('user', function(user) {
             user.increments('user_id').primary();
             user.string('username', 30).unique();
             user.string('password', 30);
@@ -33,11 +32,11 @@ db.knex.schema.hasTable('user').then(function(exists) {
 
 db.knex.schema.hasTable('event').then(function(exists) {
     if (!exists) {
-        db.knex.createdTable('event', function(event) {
+        db.knex.schema.createTable('event', function(event) {
             event.increments('event_id').primary();
             event.string('severity', 20);
             event.string('status', 20);
-            event.data('expires');
+            event.date('expires');
             event.string('urgency', 20);
             event.string('description', 100);
             event.string('affected_zones', 100);
@@ -52,7 +51,7 @@ db.knex.schema.hasTable('event').then(function(exists) {
 
 db.knex.schema.hasTable('contact').then(function(exists) {
     if (!exists) {
-        db.knex.createdTable('contact', function(contact) {
+        db.knex.schema.createTable('contact', function(contact) {
             contact.increments('contact_id').primary();
             contact.string('name', 20);
             contact.integer('phone_number');
@@ -65,7 +64,7 @@ db.knex.schema.hasTable('contact').then(function(exists) {
 
 db.knex.schema.hasTable('location').then(function(exists) {
     if (!exists) {
-        db.knex.createdTable('location', function(location) {
+        db.knex.schema.createTable('location', function(location) {
             location.increments('location_id').primary();
             location.string('location', 100);
         }).then(function(table) {
@@ -76,8 +75,8 @@ db.knex.schema.hasTable('location').then(function(exists) {
 
 db.knex.schema.hasTable('category').then(function(exists) {
     if (!exists) {
-        db.knex.createdTable('category', function(category) {
-            category.increments('event_name').primary();
+        db.knex.schema.createTable('category', function(category) {
+            category.increments('event_id').primary();
             category.string('event_name').unique();
         }).then(function(table) {
             console.log(`${table} created`);

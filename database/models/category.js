@@ -5,4 +5,4 @@ var Category = db.Model.extend({
     hasTimeStamps: true,
 });
 
-module.exports = db.model('Category', Category);
+module.exports = db.model('Category', Category);     
