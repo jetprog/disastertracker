@@ -20,9 +20,9 @@ const login = (req, res) =>{
   //   })
   // }
 
-    db.getUserInfo(req.query.username)
+    db.getUserInfo(req.body.username)
     .then((user) => {
-      if(req.query.password === user.password) {
+      if(req.body.password === user.password) {
         delete user.password;
         req.session.regenerate(() =>
           res
