@@ -30,6 +30,8 @@ app.get('/api/event', function(req, res) {
   res.send('Server running')
 });
 
+app.post('/api/login', utils.login);
+
 app.post('/api/signup', utils.signup)
 
 app.get('/api/location', function(req, res) {

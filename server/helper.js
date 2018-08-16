@@ -19,13 +19,15 @@ const login = (req, res) =>{
   //     }
   //   })
   // }
-    db.getUser(req.body.username)
+
+    db.getUserInfo(req.query.username)
     .then((user) => {
-      if(req.body.password === user.password) {
+      if(req.query.password === user.password) {
+        delete user.password;
         req.session.regenerate(() =>
           res
           .status(200)
-          .send((req.session.user = req.body.username) && req.session))
+          .send(req.session.user = user))
       }
       else{
         res.status(400).send('Wrong password');
