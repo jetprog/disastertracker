@@ -20,7 +20,7 @@ const login = (req, res) =>{
   //   })
   // }
 
-    db.getUserInfo(req.body.username)
+    db.getUserInfo(req.body.email)
     .then((user) => {
       if(req.body.password === user.password) {
         delete user.password;
