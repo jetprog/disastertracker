@@ -16,7 +16,7 @@ exports.saveUser = user =>
   new Promise(function (resolve, reject) {
     new User({ username: user.username }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
   });
-  
+
 
 //fsave acebook user and export
 exports.saveFacebookUser = (user, cb) => {
@@ -34,9 +34,16 @@ exports.saveFacebookUser = (user, cb) => {
 }
 
 //Get all information of the user that is currently logged in without a password for security purposes.
-exports.getUser = (username) => {
-    new Promise(resolve => new User({ username: username }).fetch().then(found => resolve(delete found.attributes.password && found.attributes)))
+exports.getUser = (usernam) => {
+    new Promise(resolve => new User({ username: usernam }).fetch().then(found => resolve(delete found.attributes.password && found.attributes)))
 }
+
+exports.getUserInfo = username =>
+  new Promise(function (resolve, reject) {
+    new User({ username: username })
+      .fetch()
+      .then(found => (found ? resolve(found.attributes) : reject()));
+  });
 
 //export saves event to database input fields are (event_name: event_name)
 exports.saveEvent = event =>

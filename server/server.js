@@ -1,10 +1,19 @@
 const express = require('express')
+const session = require('express-session')
 const bodyParser = require('body-parser')
 const path = require('path')
 const log = require('ololog')
-const utils = require('./helper.js');
+const utils = require('./helper.js')
 
 const app = express()
+
+app.use(
+  require('express-session')({
+    secret: 'repalceByRightkey@110',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(bodyParser.json())
 app.use(express.static(`${__dirname}/../client/dist`))
@@ -21,12 +30,15 @@ app.get('/api/event', function(req, res) {
   res.send('Server running')
 });
 
+app.post('/api/login', utils.login);
+
+app.post('/api/signup', utils.signup)
+
 app.get('/api/location', function(req, res) {
   res.send('Server running')
 });
 
 //include user location, array of locations.
-
 app.get('/api/user', function(req, res) {
   res.send('Server running')
 });
@@ -40,8 +52,6 @@ app.put('/api/user', function(req, res) {
 });
 
 app.delete('/api/user');
-
-app.post('/api/signup', utils.signup);
 
 const port = process.env.PORT || 3000
 
