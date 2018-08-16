@@ -1,7 +1,7 @@
 const db = require('../config.js');
 
 var User = db.Model.extend({
-    tableName: 'users',
+    tableName: 'user',
     hasTimeStamps: true
 });
 

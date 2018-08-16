@@ -16,7 +16,7 @@ exports.saveUser = user =>
   new Promise(function (resolve, reject) {
     new User({ username: user.username }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
   });
-  
+
 
 //fsave acebook user and export
 exports.saveFacebookUser = (user, cb) => {
