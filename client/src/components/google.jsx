@@ -1,6 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import GoogleLogin from 'react-google-login'
+import { GoogleLogin } from 'react-google-login'
 
 export default class Google extends React.Component {
   responseGoogle (response) {
@@ -13,7 +12,9 @@ export default class Google extends React.Component {
         clientId={process.env.GOOGLE}
         onSuccess={this.responseGoogle}
         onFailure={this.responseGoogle}
+        buttonText='Login with Google'
       />
+
     )
   }
 }

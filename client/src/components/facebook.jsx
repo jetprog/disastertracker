@@ -11,9 +11,10 @@ export default class Facebook extends React.Component {
       <FacebookLogin
         appId = {process.env.FACEBOOK}
         autoLoad = {true}
-        fields = "name,email,picture"
-        scope = "public_profile,user_friends,user_actions.books"
+        fields = "name,email"
+        scope = "public_profile"
         callback={this.responseFacebook}
+        buttonText='Facebook Login'
       />
     )
   }
