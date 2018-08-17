@@ -60,5 +60,9 @@ const signup = (req, res) =>{
 
 }
 
+
+const checkLoggedIn = (req, res, next) => (req.session.user ? next() : res.status(401).send('user not logged in'));
+
 exports.login = login;
 exports.signup = signup;
+exports.checkLoggedIn = checkLoggedIn;
