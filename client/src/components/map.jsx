@@ -23,12 +23,12 @@ export default class Map extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (prevProps.mapCenter.longitude !== this.props.mapCenter.longitude ||
-      prevProps.mapCenter.latitude !== this.props.mapCenter.latitude) {
+    if (prevProps.mapLocation.longitude !== this.props.mapLocation.longitude ||
+      prevProps.mapLocation.latitude !== this.props.mapLocation.latitude) {
       this.setState({viewport:
         {
-          latitude: this.props.mapCenter.latitude,
-          longitude: this.props.mapCenter.longitude,
+          latitude: this.props.mapLocation.latitude,
+          longitude: this.props.mapLocation.longitude,
           zoom: 8,
           width: this.state.viewport.width,
           height: this.state.viewport.height

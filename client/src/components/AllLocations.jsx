@@ -10,11 +10,13 @@ export default class AllLocations extends React.Component {
     }
   }
 
+//MAP THROUGH ALL LOCATIONS COMPONENT
+
   render() {
     return(
       <div>
       <h1>All Locations List</h1>
-      <Location />
+      <Location handleLocationClick={this.props.handleLocationClick} />
       </div>
     )
   }

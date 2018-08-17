@@ -25,27 +25,16 @@ export default class Main extends React.Component {
     super(props)
     this.state = {
       mapLocation: {
-        // label: null,
         latitude: 37.785164,
         longitude: -100}
-      //locationFormOpen: false
-
     }
-    this.handleLocationClick = this.handleLocationClick.bind(this)
   }
   componentDidUpdate () {
-    const {mapCenter} = this.props
-    if (mapCenter.latitude !== this.state.mapLocation.latitude ||
-      mapCenter.longitude !== this.state.mapLocation.longitude) {
-      this.setState({mapLocation: mapCenter})
+    const {mapLocation} = this.props
+    if (mapLocation.latitude !== this.state.mapLocation.latitude ||
+      mapLocation.longitude !== this.state.mapLocation.longitude) {
+      this.setState({mapLocation: mapLocation})
     }
-    // check if user is logged in
-    // logged in with no locations or not logged in
-    // navigator position if allowed or default
-    //
-  }
-  handleLocationClick () {
-    // this is the clcikhandler in location list
   }
 
   render () {
@@ -54,12 +43,11 @@ export default class Main extends React.Component {
         <Grid container alignItems="stretch" spacing={0}>
           <Grid item xs={3}>
             {/*this.props.userLoggedIn ? <Locations clickHandler={this.handleLocationClick}/> : <NoLoggedInUser />*/}
-            <LocationsSearch handleSearchClick={this.props.handleSearchClick} />
-            <AllLocations />
+            <AllLocations handleLocationClick={this.props.handleLocationClick} />
             <AddLocation />
           </Grid>
           <Grid item xs={9}>
-            <Map mapCenter={this.state.mapLocation}/>
+            <Map mapLocation={this.state.mapLocation}/>
           </Grid>
         </Grid>
       </div>

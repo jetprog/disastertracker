@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react'
+import AsyncSelect from 'react-select/lib/Async'
+import axios from 'axios'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-export default class Location extends React.Component {
-  constructor(props) {
-    super(props);
+export default class Location extends Component {
+  constructor (props) {
+    super(props)
     this.state = {
 
     }
@@ -19,8 +21,8 @@ export default class Location extends React.Component {
             <Typography>
               Sample Data
             </Typography>
-            <Typography>
-              944 Market Street, San Francisco, CA 94102
+            <Typography onClick={() => this.props.handleLocationClick({latitude:35.3672579, longitude:-120.8463576})}>
+            944 Market Street, San Francisco, CA 94102
             </Typography>
             <Typography>
               No alerts at this time
