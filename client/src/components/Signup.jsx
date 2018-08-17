@@ -22,15 +22,17 @@ export default class Signup extends React.Component {
   handleLoginClick (source, data) {
     var {firstname, lastname, email, password} = this.state
     if (source === 'local') {
-      var combinedUserData = {firstname, lastname, email, password, source}
+      var combinedUserData = {
+        first_name: firstname,
+        last_name: lastname,
+        email,
+        password}
     } if (source === 'google') {
       var combinedUserData = {
-        firstname: data.profileobj.givenName,
-        lastname: data.profileobj.familyName,
+        first_name: data.profileobj.givenName,
+        last_name: data.profileobj.familyName,
         email: data.profileobj.email,
-        password: null,
-        source: source,
-        tokenId: data.tokenId
+        type: 'social'
       }
     }
 

@@ -23,18 +23,20 @@ export default class Login extends React.Component {
   handleLoginClick (source, data, err) {
     var {firstname, lastname, email, password} = this.state
     if (source === 'local') {
-      var combinedUserData = {firstname, lastname, email, password, source}
+      var combinedUserData = {
+        first_name: firstname,
+        last_name: lastname,
+        email,
+        password}
     } if (source === 'google') {
       err
         ? console.log('google login failed ->', err)
         : console.log('google login response ->', data)
       var combinedUserData = {
-        firstname: data.profileObj.givenName,
-        lastname: data.profileObj.familyName,
+        first_name: data.profileObj.givenName,
+        last_name: data.profileObj.familyName,
         email: data.profileObj.email,
-        password: null,
-        source: source,
-        tokenId: data.tokenId
+        type: 'social'
       }
     }
     this.postToServer(combinedUserData, (err, resp) => {
