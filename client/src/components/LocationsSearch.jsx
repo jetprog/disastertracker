@@ -1,0 +1,121 @@
+// import React from 'react'
+// import Button from '@material-ui/core/Button'
+// import TextField from '@material-ui/core/TextField'
+
+
+// export default class Locations extends React.Component {
+//   constructor (props) {
+//     super(props)
+//     this.state = {
+//     }
+//   }
+
+//   render () {
+//     return (
+//       <div>
+//         <TextField
+//           autoFocus
+//           name="name"
+//           margin="none"
+//           id="name"
+//           label="Name"
+//           type="name"
+//           fullWidth
+//         />
+//         <TextField
+//           name="address"
+//           margin="none"
+//           id="address"
+//           label="Address"
+//           type="address"
+//           fullWidth
+//         />
+//         <Button handleSearchClick={this.props.handleSearchClick} color="primary">
+//         Add Location
+//         </Button>
+//       </div>
+//     )
+//   }
+// }
+
+import React, { Component } from 'react'
+import AsyncSelect from 'react-select/lib/Async'
+import axios from 'axios'
+
+
+const makeAddressLine = ({ houseNumber, street, city, state, postalCode }) =>
+  `${houseNumber + ' ' || ''}${street + ', ' || ''}${city + ', ' || ''}${state +
+    '  ' || ''}${postalCode || ''}`
+
+const parseSuggestions = ({suggestions}) =>
+  suggestions.map(suggestion => ({
+    value: suggestion.locationId,
+    label: makeAddressLine(suggestion.address)
+  }))
+
+// const = navigator.geolocation.getCurrentPosition(function(position) {
+//   console.log(position.coords.latitude, position.coords.longitude);
+// });
+
+export default class LocationsSearch extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      inputAddress: ''
+    }
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.loadOptions = this.loadOptions.bind(this)
+  }
+
+  handleInputChange (inputAddress) {
+    this.setState({ inputAddress })
+  };
+
+  loadOptions (inputAddress, callback) {
+    if (inputAddress.length < 4) { return [] }
+    const params = {
+      country: 'USA',
+      query: inputAddress,
+      app_code: process.env.HERE_APP_CODE,
+      app_id: process.env.HERE_APP_ID
+    }
+    axios
+      .get('http://autocomplete.geocoder.api.here.com/6.2/suggest.json', { params })
+      .then(response => callback(parseSuggestions(response.data)))
+  };
+
+  handleSelectedOne (choice, callback) {
+    const params = {
+      locationid: choice.value,
+      jsonattributes: 1,
+      gen: 9,
+      app_code: process.env.HERE_APP_CODE,
+      app_id: process.env.HERE_APP_ID
+    }
+    axios
+      .get('http://geocoder.api.here.com/6.2/geocode.json', { params })
+      .then(response => callback(response.data.response.view[0].result[0].location))
+  };
+
+  render () {
+    return (
+      <div>
+        <AsyncSelect
+          cacheOptions
+          loadOptions={this.loadOptions}
+          defaultOptions
+          onInputChange={this.handleInputChange}
+          placeholder="Address..."
+          onChange={choice => this.handleSelectedOne(choice, this.props.handleSearchClick)}
+        />
+      </div>
+    )
+  }
+}
+
+
+
+
+
+
+

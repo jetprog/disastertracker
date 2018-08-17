@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import MapGL, {NavigationControl} from 'react-map-gl'
+import MapGL, {NavigationControl, Layer} from 'react-map-gl'
 
 const navStyle = {
   position: 'absolute',

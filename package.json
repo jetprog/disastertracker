@@ -30,6 +30,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "immutable": "^3.8.2",
     "node": "^10.8.0",
     "ololog": "^1.1.111",
     "path": "^0.12.7",

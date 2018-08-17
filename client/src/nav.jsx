@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import Search from './components/Search.jsx'
 import Login from './components/Login.jsx'
-import Locations from './components/Locations.jsx'
 import Signup from './components/Signup.jsx'
 
 const paperStyle = {
@@ -40,7 +39,7 @@ export default class Nav extends React.Component {
         <AppBar position="static">
           <Grid container direction="row" justify="space-between" alignItems="center">
             <Grid item xs={6}>
-              <Typography variant="title" color="primary">
+              <Typography variant="title" color="inherit">
                 <Link to="/main">DisasterTracker</Link>
               </Typography>
             </Grid>
