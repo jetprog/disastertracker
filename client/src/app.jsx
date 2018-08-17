@@ -43,8 +43,12 @@ class App extends React.Component {
     this.setState({mapLocation: {latitude, longitude}})
   }
 
-  handleUserStatusChange (change, data) {
-    console.log('App user status change', change)
+  handleUserStatusChange (result) {
+    if (result) {
+      this.setState({userIsLoggedIn: true, userInfo: result.data})
+    } else {
+      console.log('App user status closed without login or signup ')
+    }
   }
   // setTimeout(() => {
   //   console.log(this.state.mapLocation);

@@ -18,7 +18,13 @@ export default class Body extends React.Component {
           render={() => this.props.userIsLoggedIn ? (<Redirect to="/main"/>) : (<Landing />)}
         />
         <Route path="/main" exact
-          render={(props) => <Main {...props} mapLocation={this.props.mapLocation} handleLocationClick={this.props.handleLocationClick} />}
+          render={(props) =>
+            <Main {...props}
+              mapLocation={this.props.mapLocation}
+              handleLocationClick={this.props.handleLocationClick}
+              userIsLoggedIn={this.props.userIsLoggedIn}
+              userInfo={this.props.userInfo}
+            />}
         />
         <Route path="/community" exact component={Community} />
       </Switch>
