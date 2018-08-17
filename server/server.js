@@ -26,28 +26,28 @@ app.get('/api/', function (req, res) {
   res.send('Server running')
 });
 
-app.get('/api/event', function(req, res) {
-  res.send('Server running')
-});
-
 app.post('/api/login', utils.login);
 
 app.post('/api/signup', utils.signup)
 
-app.get('/api/location', function(req, res) {
+app.get('/api/event', utils.checkLoggedIn, function(req, res) {
+  res.send('Server running')
+});
+
+app.get('/api/location', utils.checkLoggedIn, function(req, res) {
   res.send('Server running')
 });
 
 //include user location, array of locations.
-app.get('/api/user', function(req, res) {
+app.get('/api/user', utils.checkLoggedIn, function(req, res) {
   res.send('Server running')
 });
 
-app.post('/api/user', function(req, res) {
+app.post('/api/user', utils.checkLoggedIn, function(req, res) {
   res.send('Server running')
 });
 
-app.put('/api/user', function(req, res) {
+app.put('/api/user', utils.checkLoggedIn, function(req, res) {
   res.send('Server running')
 });
 
