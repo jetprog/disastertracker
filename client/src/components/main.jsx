@@ -1,7 +1,9 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Map from './Map.jsx'
-import Locations from './Locations.jsx'
+import LocationsSearch from './LocationsSearch.jsx'
+import AddLocation from './AddLocation.jsx'
+import AllLocations from './AllLocations.jsx'
 import NoLoggedInUser from './NoLoggedInUser.jsx'
 import { Button } from '@material-ui/core'
 import Modal from '@material-ui/core/Modal'
@@ -52,12 +54,9 @@ export default class Main extends React.Component {
         <Grid container alignItems="stretch" spacing={0}>
           <Grid item xs={3}>
             {/*this.props.userLoggedIn ? <Locations clickHandler={this.handleLocationClick}/> : <NoLoggedInUser />*/}
-            <Button color="inherit" onClick={() => this.setState({locationFormOpen: true})}>Add Location</Button>
-            <Modal style={modalStyle} open={this.state.locationFormOpen} onClose={() => this.setState({locationFormOpen: false})}>
-              <Paper style={paperStyle}>
-                <Locations />
-              </Paper>
-            </Modal>
+            <LocationsSearch handleSearchClick={this.props.handleSearchClick} />
+            <AllLocations />
+            <AddLocation />
           </Grid>
           <Grid item xs={9}>
             <Map mapCenter={this.state.mapLocation}/>

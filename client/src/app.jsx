@@ -23,7 +23,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Nav handleSearchClick={this.handleAppBarSearchClick}/>
-        <Body mapCenter={this.state.mapCenter}/>
+        <Body handleSearchClick={this.handleAppBarSearchClick} mapCenter={this.state.mapCenter}/>
       </React.Fragment>
     )
   }
