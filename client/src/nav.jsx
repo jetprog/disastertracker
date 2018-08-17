@@ -30,9 +30,12 @@ export default class Nav extends React.Component {
       loginFormOpen: false,
       signUpFormOpen: false
     }
+    this.handleFormCompletion = this.handleFormCompletion.bind(this)
     //
   }
+  handleFormCompletion () {
 
+  }
   render () {
     return (
       <React.Fragment>
@@ -50,7 +53,7 @@ export default class Nav extends React.Component {
               <Button color="inherit" onClick={() => this.setState({loginFormOpen: true})}>Login</Button>
               <Modal style={modalStyle} open={this.state.loginFormOpen} onClose={() => this.setState({loginFormOpen: false})}>
                 <Paper style={paperStyle}>
-                  <Login />
+                  <Login handleFormCompletion={this.handleFormCompletion} />
                 </Paper>
               </Modal>
               {/* <Link to="/login">Login</Link> */}
@@ -59,7 +62,7 @@ export default class Nav extends React.Component {
               <Button color="inherit" onClick={() => this.setState({signUpFormOpen: true})}>SignUp</Button>
               <Modal style={modalStyle} open={this.state.signUpFormOpen} onClose={() => this.setState({signUpFormOpen: false})}>
                 <Paper style={paperStyle}>
-                  <Signup />
+                  <Signup handleFormCompletion={this.handleFormCompletion}/>
                 </Paper>
               </Modal>
             </Grid>
