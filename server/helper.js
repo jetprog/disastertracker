@@ -47,6 +47,8 @@ const login = (req, res) =>{
   }
 }
 
+const logout = (req, res) => req.session.destroy(() => res.sendStatus(200));
+
 //Signup method for user
 const signup = (req, res) =>{
   db.saveUser(req.body)
@@ -66,5 +68,6 @@ const signup = (req, res) =>{
 const checkLoggedIn = (req, res, next) => (req.session.user ? next() : res.status(401).send('user not logged in'));
 
 exports.login = login;
+exports.logout = logout;
 exports.signup = signup;
 exports.checkLoggedIn = checkLoggedIn;
