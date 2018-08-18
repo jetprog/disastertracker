@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import Search from './Search.jsx'
+import axios from 'axios'
 
 export default class AddLocation extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class AddLocation extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleBoxChange = this.handleBoxChange.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.addNewLocation = this.addNewLocation.bind(this);
   }
 
 
@@ -34,6 +36,19 @@ export default class AddLocation extends React.Component {
     const {latitude, longitude} = location.displayPosition
     this.setState({mapLocation: {latitude, longitude}})
   };
+
+  addNewLocation () {
+    const location = {
+      loc_name: this.state.locationName,
+      lat: this.state.mapLocation.latitude,
+      long: this.state.mapLocation.longitude,
+      primary: this.state.primaryLocation
+    }
+
+    axios.post('/api/user', location)
+    .then(response => console.log('Post New Location',response.config.data, response.data))
+    .catch(error => console.log(error))
+  }
 
   render() {
     return(
@@ -64,8 +79,10 @@ export default class AddLocation extends React.Component {
           <Search handleSearchClick={this.handleSearchClick} />
         </div>
         <br></br>
-        <Button variant="contained" color="primary" onClick={this.props.handleLocationForm}>Add Location</Button>
+        <Button variant="contained" color="primary" onClick={this.addNewLocation}>Add Location</Button>
       </div>
     )
   }
 }
+
+//onClick={this.props.handleLocationForm} - how do I add in two click onClick functions
