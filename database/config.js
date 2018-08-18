@@ -6,7 +6,7 @@ var knex = require('knex')({
         host: process.env.HOST,
         user: process.env.USERNAME,
         password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        database: process.env.DATABASE,
     },
     userNullAsDefault: true,
 });
@@ -14,6 +14,17 @@ var knex = require('knex')({
 var db = require('bookshelf')(knex);
 
 db.plugin('registry');
+
+db.knex.schema.hasTable('friends_list').then(function(exists) {
+    if (!exists) {
+        db.knex.schema.createTable('friends_list', function(friend) {
+            friend.foreign('user_id').index().references('user_id').inTable('user');
+            friend.string('name')
+        }).then(function(table) {
+            console.log(`${table} created`)
+        })
+    }
+});
 
 db.knex.schema.hasTable('user').then(function(exists) {
     if (!exists) {
@@ -30,21 +41,43 @@ db.knex.schema.hasTable('user').then(function(exists) {
     }
 });
 
-db.knex.schema.hasTable('event').then(function(exists) {
+db.knex.schema.hasTable('watch_list').then(function (exists) {
+  if (!exists) {
+    db.knex.schema.createTable('watch_list', function (list) {
+      list.foreing('user_id').references('user_id').inTable('users');
+      list.foreign('event_id').references('event_id').inTable('event')
+    }).then(function (table) {
+      console.log(`${table} created`)
+    })
+  }
+})
+
+db.knex.schema.hasTable('event').then(function (exists) {
+  if (!exists) {
+    db.knex.schema.createTable('event', function (event) {
+      event.increments('event_id').primary()
+      event.string('severity', 20)
+      event.string('status', 20)
+      event.date('expires')
+      event.string('urgency', 20)
+      event.string('description', 100)
+      event.string('affected_zones', 100)
+      event.string('instructions', 100)
+      event.string('headline', 60)
+      event.integer('coordinates')
+    }).then(function (table) {
+      console.log(`${table} created`)
+    })
+  }
+})
+
+db.knex.schema.hasTable('contact_list').then(function(exists) {
     if (!exists) {
-        db.knex.schema.createTable('event', function(event) {
-            event.increments('event_id').primary();
-            event.string('severity', 20);
-            event.string('status', 20);
-            event.date('expires');
-            event.string('urgency', 20);
-            event.string('description', 100);
-            event.string('affected_zones', 100);
-            event.string('instructions', 100);
-            event.string('headline', 60);
-            event.integer('coordinates');
+        db.knex.schema.createTable('contact_list', function(contact) {
+            contact.integer('user_id')
+            contact.integer('contact_id')
         }).then(function(table) {
-            console.log(`${table} created`);
+            console.log(`${table} created`)
         })
     }
 });
@@ -76,16 +109,15 @@ db.knex.schema.hasTable('location').then(function(exists) {
     }
 });
 
-db.knex.schema.hasTable('location_watch').then(function(exists) {
-    if (!exists) {
-        db.knex.schema.createTable('location_watch', function(location) {
-            location.increments('location_watch_id').primary();
-            location.integer('user_id');
-            location.integer('location_id');
-        }).then(function(table) {
-            console.log(`${table} created`);
-        })
-    }
+db.knex.schema.hasTable('event_list').then(function(exists) {
+  if (!exists) {
+    db.knex.schema.createTable('event_list',     function(list) {
+      list.integer('event_id').unique();
+      list.integer('category_id').unique();
+    }).then(function(table) {
+      console.log(`${table} created`);
+    })
+  }
 });
 
 db.knex.schema.hasTable('category').then(function(exists) {

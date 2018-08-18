@@ -1,8 +1,8 @@
-const db = require('../config.js');
+const db = require('../config.js')
 
 var User = db.Model.extend({
-    tableName: 'user',
-    hasTimeStamps: true
-});
+  tableName: 'user',
+  hasTimeStamps: true
+})
 
-module.exports = db.model('User', User );
+module.exports = db.model('User', User )

@@ -61,5 +61,5 @@ describe('database models', () => {
       new Contact({location: [[[186121.000091283981273, 1192.01298329187987321]]]}).fetch().then(save => expect(save.attributes.contact).toEqual([[[186121.000091283981273, 1192.01298329187987321]]]));
     });
   });
-  
+
 });
