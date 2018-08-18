@@ -38,9 +38,12 @@ export default class Signup extends React.Component {
 
     this.postToServer(combinedUserData, (err, resp) => {
       if (err) {
-        console.log('post to server from signup gave error ->', err)
+        console.log('post to server from login gave error ->', err)
+        // handle failure with message to user
+        // if cancel was pressed this.props.handleFormCompletion(null)
+        // add listener for click outsidde of form and treat as cancel
       } else {
-        console.log('post to server from signup succeeded with this response ->', resp)
+        this.props.handleFormCompletion(resp)
       }
     })
   }

@@ -29,9 +29,6 @@ export default class Login extends React.Component {
         email,
         password}
     } if (source === 'google') {
-      err
-        ? console.log('google login failed ->', err)
-        : console.log('google login response ->', data)
       var combinedUserData = {
         first_name: data.profileObj.givenName,
         last_name: data.profileObj.familyName,
@@ -42,8 +39,11 @@ export default class Login extends React.Component {
     this.postToServer(combinedUserData, (err, resp) => {
       if (err) {
         console.log('post to server from login gave error ->', err)
+        // handle failure with message to user
+        // if cancel was pressed this.props.handleFormCompletion(null)
+        // add listener for click outsidde of form and treat as cancel
       } else {
-        console.log('post to server from login succeeded with this response ->', resp)
+        this.props.handleFormCompletion(resp)
       }
     })
   }
@@ -79,7 +79,7 @@ export default class Login extends React.Component {
           type="password"
           fullWidth
         />
-        <Grid container spacing={8} alignment="center" >
+        <Grid container spacing={8} padding={5} alignment="center" >
           <Grid item xs={3}>
             <Button onClick={() => this.handleLoginClick('local')} color="primary">
               Login
