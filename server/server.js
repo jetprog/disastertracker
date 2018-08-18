@@ -30,6 +30,8 @@ app.get('/api/', function (req, res) {
 
 app.post('/api/login', utils.login);
 
+app.get('/api/logout', utils.logout);
+
 app.post('/api/signup', utils.signup)
 
 app.get('/api/event', utils.checkLoggedIn, function(req, res) {
@@ -38,7 +40,7 @@ app.get('/api/event', utils.checkLoggedIn, function(req, res) {
 
 // app.get('/api/location', utils.checkLoggedIn, loc.saveLocation);
 
-app.post('/api/location', loc.saveLocation);
+app.post('/api/location', utils.checkLoggedIn, loc.saveLocation);
 
 //include user location, array of locations.
 // app.get('/api/user', utils.checkLoggedIn, user.userLoc);
