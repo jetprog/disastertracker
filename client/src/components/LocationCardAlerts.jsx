@@ -2,7 +2,7 @@ importReact, {Component} from 'react'
 import axios from 'axios'
 
 
-export default class LocationAlerts extends Component {
+export default class LocationCardAlerts extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -23,6 +23,7 @@ export default class LocationAlerts extends Component {
   getLocationAlerts () {
     params = {
       active: 1,
+      severity: 'severe',
       point = `${this.props.latitude},${this.props.longitude}`
      }
     axios.get('https://api.weather.gov/alerts', params)
@@ -30,12 +31,17 @@ export default class LocationAlerts extends Component {
     .catch(err => this.parseAlerts(null, result))
   }
 
-  parseAlerts(err, results){
-    //do something with the results to build an array then setstate with array
+  parseAlerts(err, alerts){
+    var alertArray;
+    if (!alerts.features) {
+      return this.state.alerts.length !== 0 && this.setState( {alerts: []} )
+    }
+    alertArray = alerts.features.map(alert => alert.properties);
+    alertArray = alertArray.filter(alert => alert.status !== 'Test' && alert.status !== 'Cancel')
   }
 
   render () {
     return this.state.alerts.length === 0 ? (<span>No active alerts at this time</span>) :
-    ( {alerts.map(alert => alert)})
+    ( {alerts.map(alert => (<div>{alert.event}</div>))})
   }
 }
