@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const db = require('./config.js');
 const Users = require('./collections/users.js');
 const User = require('./models/users.js');
@@ -9,22 +10,51 @@ const Locations = require('./collections/locations.js');
 const Location = require('./models/locations.js');
 const CurrentLocations = require('./collections/currentLocations.js');
 const CurrentLocation = require('./models/currentLocation.js');
+=======
+const db = require('./config.js')
+const Users = require('./collections/users.js')
+const User = require('./models/users.js')
+const Contacts = require('./collections/users.js')
+const Contact = require('./models/users.js')
+const Events = require('./collections/users.js')
+const Event = require('./models/users.js')
+const Locations = require('./collections/users.js')
+const Location = require('./models/users.js')
+const FacebookUsers = require('./collections/facebookUsers.js')
+const FacebookUser = require('./models/facebookUser.js')
+>>>>>>> linting changes
 
 //export saves user to database input fields are (username, password)
+
 exports.saveUser = user =>
   new Promise(function (resolve, reject) {
-    new User({ email: user.email }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
+    new User({ username: user.username }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
   });
 
+
+//fsave acebook user and export
+exports.saveFacebookUser = (user, cb) => {
+  new FacebookUser({id :user.id}).fetch().then(function (model) {
+    if (model) {
+      cb(null, model);
+    }
+    else{
+      FacebookUser.create(user).then(cb(null, user));
+    }
+  })
+  .catch(function (err) {
+    cb(err);
+  });
+}
 
 //Get all information of the user that is currently logged in without a password for security purposes.
 exports.getUser = (usernam) => {
     new Promise(resolve => new User({ username: usernam }).fetch().then(found => resolve(delete found.attributes.password && found.attributes)))
 }
 
-exports.getUserInfo = email =>
+exports.getUserInfo = username =>
   new Promise(function (resolve, reject) {
-    new User({ email: email })
+    new User({ username: username })
       .fetch()
       .then(found => (found ? resolve(found.attributes) : reject()));
   });
@@ -68,7 +98,14 @@ exports.saveCategory = category =>
 //     })
 
 //export saves coordinates to database (e.g - [[[12312.098109238210, 12932.100981239012]]])
+<<<<<<< HEAD
 // exports.saveLocation = location =>
 //     new Promise(function (resolve, reject) {
 //         new Location({contact: contact.location_coordinates }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)));
 //     })
+=======
+exports.saveLocation = location =>
+  new Promise(function (resolve, reject) {
+    new Location({ contact: contact.location_coordinates }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
+  })
+>>>>>>> linting changes
