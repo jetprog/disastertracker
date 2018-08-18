@@ -44,7 +44,7 @@ db.knex.schema.hasTable('user').then(function(exists) {
 db.knex.schema.hasTable('watch_list').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('watch_list', function (list) {
-      list.integer('user_id').references('user_id').inTable('users');
+      list.foreing('user_id').references('user_id').inTable('users');
       list.foreign('event_id').references('event_id').inTable('event')
     }).then(function (table) {
       console.log(`${table} created`)
