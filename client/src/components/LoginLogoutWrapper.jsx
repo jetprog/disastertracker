@@ -35,26 +35,27 @@ export default class LoginLogoutWrapper extends Component {
   }
 
   render () {
-    return (
-      <Grid container>
-        <Grid item >
-          <Button color="inherit" onClick={() => this.setState({loginFormOpen: true})}>Login</Button>
-          <Modal style={modalStyle} open={this.state.loginFormOpen} onClose={() => this.setState({loginFormOpen: false})}>
-            <Paper style={paperStyle}>
-              <Login handleFormCompletion={this.handleFormCompletion} />
-            </Paper>
-          </Modal>
-          {/* <Link to="/login">Login</Link> */}
+    return this.props.userIsLoggedIn
+      ? (<Button color="inherit" onClick={() => this.handleFormCompletion('logout')}>Logout</Button>)
+      : (
+        <Grid container>
+          <Grid item >
+            <Button color="inherit" onClick={() => this.setState({loginFormOpen: true})}>Login</Button>
+            <Modal style={modalStyle} open={this.state.loginFormOpen}>
+              <Paper style={paperStyle}>
+                <Login handleFormCompletion={this.handleFormCompletion} />
+              </Paper>
+            </Modal>
+          </Grid>
+          <Grid item >
+            <Button color="inherit" onClick={() => this.setState({signUpFormOpen: true})}>SignUp</Button>
+            <Modal style={modalStyle} open={this.state.signUpFormOpen} >
+              <Paper style={paperStyle}>
+                <Signup handleFormCompletion={this.handleFormCompletion}/>
+              </Paper>
+            </Modal>
+          </Grid>
         </Grid>
-        <Grid item >
-          <Button color="inherit" onClick={() => this.setState({signUpFormOpen: true})}>SignUp</Button>
-          <Modal style={modalStyle} open={this.state.signUpFormOpen} onClose={() => this.setState({signUpFormOpen: false})}>
-            <Paper style={paperStyle}>
-              <Signup handleFormCompletion={this.handleFormCompletion}/>
-            </Paper>
-          </Modal>
-        </Grid>
-      </Grid>
-    )
+      )
   }
 }

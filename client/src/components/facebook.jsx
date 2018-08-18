@@ -1,5 +1,6 @@
 import React from 'react'
-import FacebookLogin from 'react-facebook-login'
+import Button from '@material-ui/core/Button'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 export default class Facebook extends React.Component {
   responseFacebook (response) {
@@ -14,8 +15,11 @@ export default class Facebook extends React.Component {
         fields = "name,email"
         scope = "public_profile"
         callback={this.responseFacebook}
-        buttonText='Facebook Login'
+        render={renderProps => (
+          <Button variant="contained" onClick={renderProps.clickHandler} color="primary">Facebook Login</Button>
+        )}
       />
+
     )
   }
 }

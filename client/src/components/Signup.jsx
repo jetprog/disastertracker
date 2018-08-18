@@ -99,8 +99,11 @@ export default class Signup extends React.Component {
           type="password"
           fullWidth
         />
-        <Button onClick={() => this.handleLoginClick('local')} color="primary">
+        <Button variant="contained" onClick={() => this.handleLoginClick('local')} color="primary">
         Sign up
+        </Button>
+        <Button variant="contained" onClick={() => this.props.handleFormCompletion()} color="primary">
+        Cancel
         </Button>
       </div>
     )
