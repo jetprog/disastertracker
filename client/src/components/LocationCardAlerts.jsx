@@ -24,10 +24,10 @@ export default class LocationCardAlerts extends Component {
     let params = {
       active: 1,
       severity: 'severe',
-      point: `${this.props.latitude},${this.props.longitude}`
+      point: `${this.props.location.latitude},${this.props.location.longitude}`
     }
-    axios.get('https://api.weather.gov/alerts', params)
-      .then(result => callback(null, result))
+    axios.get('https://api.weather.gov/alerts', {params})
+      .then(results => callback(null, results.data))
       .catch(err => callback(err, null))
   }
 
@@ -39,7 +39,6 @@ export default class LocationCardAlerts extends Component {
     }
     alertArray = alerts.features.map(alert => alert.properties)
     // alertArray = alertArray.filter(alert => alert.status !== 'Test' && alert.status !== 'Cancel')
-    console.log('alerts array is ', alertArray)
     this.setState({alerts: alertArray})
   }
 

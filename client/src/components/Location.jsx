@@ -25,7 +25,7 @@ export default class Location extends Component {
             <Typography onClick={() => this.props.handleLocationClick({latitude: 35.3672579, longitude: -120.8463576})}>
             944 Market Street, San Francisco, CA 94102
             </Typography>
-            <LocationCardAlerts location={{latitude: 39.91, longitude: -74.15}} />
+            <LocationCardAlerts location={({latitude: 39.91, longitude: -74.15})} />
           </CardContent>
         </Card>
       </div>
