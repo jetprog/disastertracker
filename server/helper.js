@@ -1,5 +1,6 @@
 const db = require('../database/utils.js');
 
+//Create user login process
 const login = (req, res) =>{
   if(req.body.type && req.body.type === "social"){
     db.getUserInfo(req.body.email)
@@ -46,6 +47,7 @@ const login = (req, res) =>{
   }
 }
 
+//Signup method for user
 const signup = (req, res) =>{
   db.saveUser(req.body)
   .then((user) => {
@@ -60,7 +62,7 @@ const signup = (req, res) =>{
 
 }
 
-
+//Middleware make sure user is logged
 const checkLoggedIn = (req, res, next) => (req.session.user ? next() : res.status(401).send('user not logged in'));
 
 exports.login = login;
