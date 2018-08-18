@@ -31,6 +31,7 @@ export default class Main extends React.Component {
     }
     this.handleLocationForm = this.handleLocationForm.bind(this);
   }
+
   componentDidUpdate () {
     const {mapLocation} = this.props
     if (mapLocation.latitude !== this.state.mapLocation.latitude ||
