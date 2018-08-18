@@ -50,7 +50,7 @@ export default class Main extends React.Component {
         <Grid container alignItems="stretch" spacing={0}>
           <Grid item xs={3}>
             {/*this.props.userLoggedIn ? <Locations clickHandler={this.handleLocationClick}/> : <NoLoggedInUser />*/}
-            <AllLocations handleLocationClick={this.props.handleLocationClick} />
+            <AllLocations userInfo={this.props.userInfo} handleLocationClick={this.props.handleLocationClick} />
             <br></br>
             <Button variant="contained" color="primary" onClick={() => this.setState({addLocationForm: true})}>AddLocation</Button>
             <Modal style={modalStyle} open={this.state.addLocationForm} >
