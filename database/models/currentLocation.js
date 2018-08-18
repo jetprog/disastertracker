@@ -3,7 +3,7 @@ const User = require('../users.js');
 const Location = require('../locations.js');
 
 var CurrentLocation = db.Model.extend({
-    tableName: '',
+    tableName: 'location_watch',
     hasTimeStamps: true,
     userID: function() {
         return this.belongsTo(User, 'user_id');

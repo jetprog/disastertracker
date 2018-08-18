@@ -1,15 +1,12 @@
 const db = require('./config.js');
 const Users = require('./collections/users.js');
 const User = require('./models/users.js');
-const Contacts = require('./collections/users.js');
-const Contact = require('./models/users.js');
-const Events = require('./collections/users.js');
-const Event = require('./models/users.js');
-const Locations = require('./collections/users.js');
+const Contacts = require('./collections/contact.js');
+const Contact = require('./models/contact.js');
+const Events = require('./collections/events.js');
+const Event = require('./models/events.js');
+const Locations = require('./collections/locations.js');
 const Location = require('./models/users.js');
-const FacebookUsers = require('./collections/facebookUsers.js');
-const FacebookUser = require('./models/facebookUser.js');
-
 
 //export saves user to database input fields are (username, password)
 exports.saveUser = user =>
@@ -24,6 +21,13 @@ exports.getUser = (usernam) => {
 }
 
 exports.getUserInfo = email =>
+  new Promise(function (resolve, reject) {
+    new User({ email: email })
+      .fetch()
+      .then(found => (found ? resolve(found.attributes) : reject()));
+  });
+
+exports.getUserLoc = email =>
   new Promise(function (resolve, reject) {
     new User({ email: email })
       .fetch()

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const log = require('ololog')
 const utils = require('./helper.js')
+const user = require('./util/users.js')
 
 const app = express()
 
@@ -39,9 +40,7 @@ app.get('/api/location', utils.checkLoggedIn, function(req, res) {
 });
 
 //include user location, array of locations.
-app.get('/api/user', utils.checkLoggedIn, function(req, res) {
-  res.send('Server running')
-});
+// app.get('/api/user', utils.checkLoggedIn, user.userLoc);
 
 app.post('/api/user', utils.checkLoggedIn, function(req, res) {
   res.send('Server running')

@@ -66,7 +66,22 @@ db.knex.schema.hasTable('location').then(function(exists) {
     if (!exists) {
         db.knex.schema.createTable('location', function(location) {
             location.increments('location_id').primary();
-            location.string('location', 100);
+            location.string('loc_name', 100);
+            location.string('lat', 100);
+            location.string('long', 100);
+            location.string('type', 100);
+        }).then(function(table) {
+            console.log(`${table} created`);
+        })
+    }
+});
+
+db.knex.schema.hasTable('location_watch').then(function(exists) {
+    if (!exists) {
+        db.knex.schema.createTable('location_watch', function(location) {
+            location.increments('location_watch_id').primary();
+            location.integer('user_id');
+            location.integer('location_id');
         }).then(function(table) {
             console.log(`${table} created`);
         })
