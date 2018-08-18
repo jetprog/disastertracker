@@ -2,8 +2,8 @@ const db = require('../config.js')
 const Event = require('../event.js')
 const Location = require('../locations.js')
 
-var EventList = db.Model.extend({
-  tableName: 'category',
+var EventLocation = db.Model.extend({
+  tableName: 'event_location',
   hasTimeStamps: true,
   eventID: function () {
     return this.belongsTo(Event, 'event_id')
@@ -13,4 +13,4 @@ var EventList = db.Model.extend({
   }
 })
 
-module.exports = db.model('eventList', EventList)
+module.exports = db.model('eventList', EventLocation)
