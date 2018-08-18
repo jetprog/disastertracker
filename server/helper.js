@@ -16,7 +16,7 @@ const login = (req, res) =>{
           req.session.regenerate(() =>
             res
             .status(200)
-            .send(req.session.user = req.body))
+            .send(req.session.user = user))
         })
         .catch(function (err) {
           res.status(400).send({ serverMessage: "User alredy exists", error: err })
