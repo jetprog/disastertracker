@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-const db = require('./config.js');
-const Users = require('./collections/users.js');
-const User = require('./models/users.js');
-const Contacts = require('./collections/contacts.js');
-const Contact = require('./models/contacts.js');
-const Events = require('./collections/event.js');
-const Event = require('./models/event.js');
-const Locations = require('./collections/locations.js');
-const Location = require('./models/locations.js');
-const CurrentLocations = require('./collections/currentLocations.js');
-const CurrentLocation = require('./models/currentLocation.js');
-=======
 const db = require('./config.js')
 const Users = require('./collections/users.js')
 const User = require('./models/users.js')
@@ -20,9 +7,6 @@ const Events = require('./collections/users.js')
 const Event = require('./models/users.js')
 const Locations = require('./collections/users.js')
 const Location = require('./models/users.js')
-const FacebookUsers = require('./collections/facebookUsers.js')
-const FacebookUser = require('./models/facebookUser.js')
->>>>>>> linting changes
 
 //export saves user to database input fields are (username, password)
 
@@ -72,6 +56,14 @@ exports.saveEvent = event =>
         new Event({event_name: event.event_name }).fetch().then(save => (save ? reject() : Events.create(event).then(resolve)));
     })
 
+//export saves contact to database
+exports.saveContact = contact =>
+  new Promise(function (resolve, reject) {
+    new Contact({
+      contact: contact.contact_name
+    }).fetch().then(save => (save ? reject() : Contacts.create(contact).then(resolve)));
+  })
+
 //Save location
 exports.saveLocation = (location, userID, cb) => {
   new Location({})
@@ -91,21 +83,8 @@ exports.saveCategory = category =>
         new Category({event_name: event.event_name }).fetch().then(save => (save ? reject() : Categories.create(category).then(resolve)));
     })
 
-// //export saves contact to database
-// exports.saveContact = contact =>
-//     new Promise(function (resolve, reject) {
-//         new Contact({contact: contact.contact_name }).fetch().then(save => (save ? reject() : Contacts.create(contacts).then(resolve)));
-//     })
-
 //export saves coordinates to database (e.g - [[[12312.098109238210, 12932.100981239012]]])
-<<<<<<< HEAD
-// exports.saveLocation = location =>
-//     new Promise(function (resolve, reject) {
-//         new Location({contact: contact.location_coordinates }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)));
-//     })
-=======
 exports.saveLocation = location =>
   new Promise(function (resolve, reject) {
     new Location({ contact: contact.location_coordinates }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
   })
->>>>>>> linting changes
