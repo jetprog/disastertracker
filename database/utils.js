@@ -47,14 +47,6 @@ exports.saveLocation = (location, userID, cb) => {
   new Location({})
   .save(location, {method: 'insert'})
   .then(function(model) {
-    new CurrentLocation({})
-      .save({user_id: userID, location_id: model.id}, {method: 'insert'})
-      .then(function(locWatch) {
-        // cb(model)
-      })
-      .catch(function(error){
-        // console.log(error);
-      })
     cb(model)
   })
   .catch(function(error){

@@ -1,11 +1,12 @@
 const db = require('../../database/utils.js');
 
-// const userLoc = (req, res)=> {
-//   db.getUserLoc(req.session.user.id)
-//     .then((location) => {
-
-//     })
-//     .catch(function (err) {
-//       res.status(400).send({ serverMessage: "Wrong username", error: err })
-//     });
-// }
+exports.userLocation = (req, res)=> {
+  let userID = req.session.user.id
+  db.getUserLoc(userID, function(loc){
+    if(loc){
+      res.status(200).send(loc);
+    }else{
+      res.status(400).send("can't save location");
+    }
+  })
+}
