@@ -14,6 +14,10 @@ import LoginLogoutWrapper from './components/LoginLogoutWrapper.jsx'
 export default class Nav extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      loginFormOpen: false,
+      signUpFormOpen: false
+    }
   }
 
   render () {

@@ -26,8 +26,10 @@ export default class Main extends React.Component {
     this.state = {
       mapLocation: {
         latitude: 37.785164,
-        longitude: -100}
+        longitude: -100},
+      addLocationForm: false
     }
+    this.handleLocationForm = this.handleLocationForm.bind(this);
   }
   componentDidUpdate () {
     const {mapLocation} = this.props
@@ -37,6 +39,10 @@ export default class Main extends React.Component {
     }
   }
 
+  handleLocationForm() {
+    this.setState({addLocationForm: false})
+  };
+
   render () {
     return (
       <div>
@@ -44,7 +50,13 @@ export default class Main extends React.Component {
           <Grid item xs={3}>
             {/*this.props.userLoggedIn ? <Locations clickHandler={this.handleLocationClick}/> : <NoLoggedInUser />*/}
             <AllLocations handleLocationClick={this.props.handleLocationClick} />
-            <AddLocation />
+            <br></br>
+            <Button variant="contained" color="primary" onClick={() => this.setState({addLocationForm: true})}>AddLocation</Button>
+            <Modal style={modalStyle} open={this.state.addLocationForm} >
+              <Paper style={paperStyle}>
+                <AddLocation handleLocationForm={this.handleLocationForm} />
+              </Paper>
+            </Modal>
           </Grid>
           <Grid item xs={9}>
             <Map mapLocation={this.state.mapLocation}/>
