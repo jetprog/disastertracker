@@ -15,11 +15,10 @@ export default class LocationCardAlerts extends Component {
 
   componentDidMount () {
     this.getLocationAlerts(this.parseAlerts)
-    // const locationAlertInterval = setInterval(this.getLocationAlerts,  10 * 60 * 1000)
+    this.locationAlertInterval = setInterval(this.getLocationAlerts, 10 * 60 * 1000)
   }
   componentWillUnmount () {
-    // clearInterval(locationAlertInterval)
-
+    clearInterval(this.locationAlertInterval)
   }
   getLocationAlerts (callback) {
     let params = {
