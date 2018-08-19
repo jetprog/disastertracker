@@ -19,9 +19,14 @@ class App extends React.Component {
     this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this)
     this.handleLocationClick = this.handleLocationClick.bind(this)
     this.handleUserStatusChange = this.handleUserStatusChange.bind(this)
+    this.getUserFromSession = this.getUserFromSession.bind(this)
   }
 
   componentDidMount () {
+    this.getUserFromSession()
+  }
+
+  getUserFromSession () {
     axios.get('/api/user')
       .then(res => {
         console.log('App call to /api/user returned ', res)
@@ -70,6 +75,7 @@ class App extends React.Component {
           handleLocationClick={this.handleLocationClick}
           userIsLoggedIn={this.state.userIsLoggedIn}
           userInfo={this.state.userInfo}
+          getLocations={this.getUserFromSession}
         />
       </React.Fragment>
     )

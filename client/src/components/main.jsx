@@ -55,7 +55,7 @@ export default class Main extends React.Component {
             <Button variant="contained" color="primary" onClick={() => this.setState({addLocationForm: true})}>AddLocation</Button>
             <Modal style={modalStyle} open={this.state.addLocationForm} >
               <Paper style={paperStyle}>
-                <AddLocation handleLocationForm={this.handleLocationForm} />
+                <AddLocation handleLocationForm={this.handleLocationForm} getLocations={this.props.getLocations} />
               </Paper>
             </Modal>
           </Grid>
