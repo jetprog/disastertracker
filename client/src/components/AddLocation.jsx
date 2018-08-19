@@ -45,9 +45,12 @@ export default class AddLocation extends React.Component {
       primary: this.state.primaryLocation
     }
 
-    axios.post('/api/user', location)
-    .then(response => console.log('Post New Location',response.config.data, response.data))
+    axios.post('/api/location', location)
+    .then(response => this.props.getLocations())
     .catch(error => console.log(error))
+
+    this.props.handleLocationForm();
+    //console.log('Post New Location', response.data)
   }
 
   render() {
@@ -84,5 +87,3 @@ export default class AddLocation extends React.Component {
     )
   }
 }
-
-//onClick={this.props.handleLocationForm} - how do I add in two click onClick functions

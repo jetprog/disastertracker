@@ -15,7 +15,7 @@ export default class AllLocations extends React.Component {
   render() {
     return(
       <div>
-      <h1>All Locations List</h1>
+      <h1>{this.props.userInfo === null ? 'Locations List' : `${this.props.userInfo.first_name}'s Locations`}</h1>
       <Location handleLocationClick={this.props.handleLocationClick} />
       </div>
     )
