@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import AsyncSelect from 'react-select/lib/Async'
 import axios from 'axios'
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
+import LocationCardAlerts from './LocationCardAlerts.jsx'
 
 export default class Location extends Component {
   constructor (props) {
@@ -13,23 +14,21 @@ export default class Location extends Component {
     }
   }
 
-  render() {
-    return(
+  render () {
+    return (
       <div>
         <Card>
           <CardContent>
             <Typography>
               Sample Data
             </Typography>
-            <Typography onClick={() => this.props.handleLocationClick({latitude:35.3672579, longitude:-120.8463576})}>
+            <Typography onClick={() => this.props.handleLocationClick({latitude: 35.3672579, longitude: -120.8463576})}>
             944 Market Street, San Francisco, CA 94102
             </Typography>
-            <Typography>
-              No alerts at this time
-            </Typography>
+            <LocationCardAlerts location={({latitude: 39.91, longitude: -74.15})} />
           </CardContent>
         </Card>
       </div>
-      )
+    )
   }
 }
