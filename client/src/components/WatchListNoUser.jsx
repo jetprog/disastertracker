@@ -1,11 +1,9 @@
 import React from 'react'
 
-export default class NoLoggedInUser extends React.Component {
+export default class WatchListNoUser extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-
-    }
+    this.state = {}
   }
 
   render () {

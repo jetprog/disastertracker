@@ -3,8 +3,8 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
-import Google from './Google.jsx'
-import Facebook from './Facebook.jsx'
+import LoginGoogle from './LoginGoogle.jsx'
+import LoginFacebook from './LoginFacebook.jsx'
 import axios from 'axios'
 
 export default class Login extends React.Component {
@@ -19,18 +19,20 @@ export default class Login extends React.Component {
     this.handleLoginClick = this.handleLoginClick.bind(this)
   }
   handleChange (e) {
-    this.setState({[e.target.name]: e.target.value, error: ' '})
+    this.setState({ [e.target.name]: e.target.value, error: ' ' })
   }
 
   handleLoginClick (source, data, err) {
-    var {firstname, lastname, email, password} = this.state
+    var { firstname, lastname, email, password } = this.state
     if (source === 'local') {
       var combinedUserData = {
         first_name: firstname,
         last_name: lastname,
         email,
-        password}
-    } if (source === 'google') {
+        password
+      }
+    }
+    if (source === 'google') {
       var combinedUserData = {
         first_name: data.profileObj.givenName,
         last_name: data.profileObj.familyName,
@@ -40,7 +42,7 @@ export default class Login extends React.Component {
     }
     this.postToServer(combinedUserData, (err, resp) => {
       if (err) {
-        this.setState({error: 'Incorrect username or password!'})
+        this.setState({ error: 'Incorrect username or password!' })
       } else {
         this.props.handleFormCompletion(resp)
       }
@@ -49,7 +51,8 @@ export default class Login extends React.Component {
 
   postToServer (data, callback) {
     console.log('login PostToServer data ->', data)
-    axios.post('/api/login', data)
+    axios
+      .post('/api/login', data)
       .then(response => callback(null, response))
       .catch(err => callback(err, null))
   }
@@ -57,11 +60,11 @@ export default class Login extends React.Component {
     return (
       <div>
         <h2>Please log in</h2>
-        <Typography color='error' gutterBottom>
+        <Typography color="error" gutterBottom>
           {this.state.error}
         </Typography>
-        <Grid container spacing={8} padding={5} justify="center" >
-          <Grid item xs={10} >
+        <Grid container spacing={8} padding={5} justify="center">
+          <Grid item xs={10}>
             <TextField
               autoFocus
               value={this.state.email}
@@ -74,7 +77,7 @@ export default class Login extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item xs={10} >
+          <Grid item xs={10}>
             <TextField
               value={this.state.password}
               onChange={this.handleChange}
@@ -88,23 +91,30 @@ export default class Login extends React.Component {
           </Grid>
 
           <Grid item xs={3}>
-            <Button variant="contained" onClick={() => this.handleLoginClick('local')} color="primary">
+            <Button
+              variant="contained"
+              onClick={() => this.handleLoginClick('local')}
+              color="primary"
+            >
               Login
             </Button>
           </Grid>
           <Grid item xs={3}>
-            <Google clickHandler={this.handleLoginClick} />
+            <LoginGoogle clickHandler={this.handleLoginClick} />
           </Grid>
           <Grid item xs={3}>
-            <Facebook clickHandler={this.handleLoginClick} />
+            <LoginFacebook clickHandler={this.handleLoginClick} />
           </Grid>
           <Grid item xs={3}>
-            <Button variant="contained" onClick={() => this.props.handleFormCompletion()} color="primary">
+            <Button
+              variant="contained"
+              onClick={() => this.props.handleFormCompletion()}
+              color="primary"
+            >
               Cancel
             </Button>
           </Grid>
         </Grid>
-
       </div>
     )
   }
