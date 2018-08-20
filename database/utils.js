@@ -30,7 +30,7 @@ exports.getUser = (username) => {
 exports.getUserInfo = email =>
   new Promise(function (resolve, reject) {
     new User({
-      username: username })
+      'email': email })
       .fetch()
       .then(found => (found ? resolve(found.attributes) : reject()));
   });
@@ -91,9 +91,9 @@ exports.saveCategory = category =>
     })
 
 //export saves coordinates to database (e.g - [[[12312.098109238210, 12932.100981239012]]])
-exports.saveLocation = location =>
-  new Promise(function (resolve, reject) {
-    new Location({
-      location: location.location_coordinates,
-      }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
-  })
+// exports.saveLocation = location =>
+//   new Promise(function (resolve, reject) {
+//     new Location({
+//       location: location.location_coordinates,
+//       }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
+//   })
