@@ -1,51 +1,51 @@
-const path = require('path');
+const path = require('path')
 
 var knex = require('knex')({
-    client:'mysql',
-    connection: process.env.DATABASE_URL || {
-        host: process.env.HOST,
-        user: process.env.USERNAME,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE,
-    },
-    userNullAsDefault: true,
-});
+  client: 'mysql',
+  connection: process.env.DATABASE_URL || {
+    host: process.env.HOST,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
+  },
+  userNullAsDefault: true
+})
 
-var db = require('bookshelf')(knex);
+var db = require('bookshelf')(knex)
 
 db.plugin('registry');
 
-db.knex.schema.hasTable('friends_list').then(function(exists) {
-    if (!exists) {
-        db.knex.schema.createTable('friends_list', function(friend) {
-            friend.foreign('user_id').index().references('user_id').inTable('user');
-            friend.string('name')
-        }).then(function(table) {
-            console.log(`${table} created`)
-        })
-    }
-});
+db.knex.schema.hasTable('friends_list').then(function (exists) {
+  if (!exists) {
+    db.knex.schema.createTable('friends_list', function (friend) {
+      friend.integer('user_id_one')
+      friend.integer('user_id_two')
+    }).then(function (table) {
+      console.log(`${table} created`)
+    })
+  }
+})
 
-db.knex.schema.hasTable('user').then(function(exists) {
-    if (!exists) {
-        db.knex.schema.createTable('user', function(user) {
-            user.increments('user_id').primary();
-            user.string('email', 30).unique();
-            user.string('password', 30);
-            user.string('first_name', 20);
-            user.string('last_name', 20);
-            user.bool('E-personnel');
-        }).then(function(table) {
-            console.log(`${table} created`);
-        })
-    }
-});
+db.knex.schema.hasTable('user').then(function (exists) {
+  if (!exists) {
+    db.knex.schema.createTable('user', function (user) {
+      user.increments('user_id').primary()
+      user.string('email', 30).unique()
+      user.string('password', 30)
+      user.string('first_name', 20)
+      user.string('last_name', 20)
+      user.bool('E-personnel')
+    }).then(function (table) {
+      console.log(`${table} created`)
+    })
+  }
+})
 
 db.knex.schema.hasTable('watch_list').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('watch_list', function (list) {
-      list.foreing('user_id').references('user_id').inTable('users');
-      list.foreign('event_id').references('event_id').inTable('event')
+      list.integer('user_id')
+      list.integer('event_id')
     }).then(function (table) {
       console.log(`${table} created`)
     })
@@ -64,7 +64,8 @@ db.knex.schema.hasTable('event').then(function (exists) {
       event.string('affected_zones', 100)
       event.string('instructions', 100)
       event.string('headline', 60)
-      event.integer('coordinates')
+      event.float('latitude', 20, 20)
+      event.float('longitude', 20, 20)
     }).then(function (table) {
       console.log(`${table} created`)
     })
@@ -112,8 +113,8 @@ db.knex.schema.hasTable('location').then(function(exists) {
 db.knex.schema.hasTable('event_list').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('event_list',     function(list) {
-      list.integer('event_id').unique();
-      list.integer('category_id').unique();
+      list.integer('event_id')
+      list.integer('category_id')
     }).then(function(table) {
       console.log(`${table} created`);
     })
