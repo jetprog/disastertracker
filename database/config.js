@@ -99,6 +99,7 @@ db.knex.schema.hasTable('location').then(function(exists) {
     if (!exists) {
         db.knex.schema.createTable('location', function(location) {
             location.increments('location_id').primary();
+            location.integer('user_id');
             location.string('loc_name', 100);
             location.float('lat', 18, 10);
             location.float('long', 18, 10);

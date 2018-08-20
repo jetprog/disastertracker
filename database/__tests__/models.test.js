@@ -13,9 +13,9 @@ const Location = require('../models/locations.js');
 describe('database models', () => {
 
   test('should save the user to user table', async() => {
-    db.saveUser({ username: 'JDoe', password: 'admin', firstName: 'John', lastName: 'Doe' })
+    db.saveUser({ email: 'JDoe@hotmail.com', password: 'admin', firstName: 'John', lastName: 'Doe' })
       .then(() => {
-        new User({ username: user.username }).fetch().then(found => expect(found).toEqual({ username: 'JDoe' }));
+        new User({ email: user.email }).fetch().then(found => expect(found).toEqual({ username: 'JDoe' }));
       })
       .catch(() => expect(1).toEqual(2));
   });
