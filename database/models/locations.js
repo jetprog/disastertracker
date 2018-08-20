@@ -8,4 +8,4 @@ var Location = db.Model.extend({
   }
 })
 
-module.exports = db.model('Locations', Location)
+module.exports = db.model('Location', Location)
