@@ -1,7 +1,6 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
 import axios from 'axios'
+import { Typography, Grid, Button, TextField } from '@material-ui/core'
 
 export default class Signup extends React.Component {
   constructor (props) {
@@ -10,24 +9,54 @@ export default class Signup extends React.Component {
       firstname: '',
       lastname: '',
       email: '',
-      password: ''
+      password: '',
+      passwordConf: '',
+      error: ' '
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleLoginClick = this.handleLoginClick.bind(this)
+    this.signupClick = this.signupClick.bind(this)
   }
   handleChange (e) {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value, error: ' ' })
   }
 
-  handleLoginClick (source, data) {
-    var {firstname, lastname, email, password} = this.state
+  signupClick (source, data) {
+    if (this.state.password !== this.state.passwordConf) {
+      return this.setState({
+        error: 'Confirmation password did not match password'
+      })
+    }
+    if (this.state.firstname === '') {
+      return this.setState({
+        error: 'First Name field is required'
+      })
+    }
+    if (this.state.lasttname === '') {
+      return this.setState({
+        error: 'Last Name field is required'
+      })
+    }
+    if (this.state.email === '') {
+      return this.setState({
+        error: 'Email field is required'
+      })
+    }
+    if (this.state.password === '') {
+      return this.setState({
+        error: 'Password field is required'
+      })
+    }
+
+    var { firstname, lastname, email, password } = this.state
     if (source === 'local') {
       var combinedUserData = {
         first_name: firstname,
         last_name: lastname,
         email,
-        password}
-    } if (source === 'google') {
+        password
+      }
+    }
+    if (source === 'google') {
       var combinedUserData = {
         first_name: data.profileobj.givenName,
         last_name: data.profileobj.familyName,
@@ -38,10 +67,9 @@ export default class Signup extends React.Component {
 
     this.postToServer(combinedUserData, (err, resp) => {
       if (err) {
-        console.log('post to server from login gave error ->', err)
-        // handle failure with message to user
-        // if cancel was pressed this.props.handleFormCompletion(null)
-        // add listener for click outsidde of form and treat as cancel
+        return this.setState({
+          error: 'That email is already in use'
+        })
       } else {
         this.props.handleFormCompletion(resp)
       }
@@ -49,63 +77,93 @@ export default class Signup extends React.Component {
   }
 
   postToServer (data, callback) {
-    axios.post('/api/signup', data)
+    axios
+      .post('/api/signup', data)
       .then(response => callback(null, response))
       .catch(err => callback(err, null))
   }
 
   render () {
     return (
-      <div>
-        <h2>Sign up</h2>
-        <TextField
-          autoFocus
-          value={this.state.firstname}
-          name="firstname"
-          margin="none"
-          id="firstname"
-          label="First Name"
-          type="text"
-          fullWidth
-          onChange={this.handleChange}
-        />
-        <TextField
-          value={this.state.lastname}
-          onChange={this.handleChange}
-          name="lastname"
-          margin="none"
-          id="lastname"
-          label="Last Name"
-          type="text"
-          fullWidth
-        />
-        <TextField
-          value={this.state.email}
-          onChange={this.handleChange}
-          name="email"
-          margin="none"
-          id="email"
-          label="Email Address"
-          type="email"
-          fullWidth
-        />
-        <TextField
-          value={this.state.password}
-          onChange={this.handleChange}
-          name="password"
-          margin="none"
-          id="password"
-          label="Password"
-          type="password"
-          fullWidth
-        />
-        <Button variant="contained" onClick={() => this.handleLoginClick('local')} color="primary">
-        Sign up
-        </Button>
-        <Button variant="contained" onClick={() => this.props.handleFormCompletion()} color="primary">
-        Cancel
-        </Button>
-      </div>
+      <Grid container spacing={8} justify="center">
+        <Grid item xs={10}>
+          <Typography variant="title">New User Sign Up</Typography>
+        </Grid>
+        <Grid item xs={10}>
+          <Typography color="error" align="center" paragraph>
+            {this.state.error}
+          </Typography>
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            autoFocus
+            value={this.state.firstname}
+            name="firstname"
+            label="First Name"
+            type="text"
+            fullWidth
+            onChange={this.handleChange}
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            value={this.state.lastname}
+            onChange={this.handleChange}
+            name="lastname"
+            label="Last Name"
+            type="text"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            value={this.state.email}
+            onChange={this.handleChange}
+            name="email"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            value={this.state.password}
+            onChange={this.handleChange}
+            name="password"
+            label="Password"
+            type="password"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            value={this.state.passwordConf}
+            onChange={this.handleChange}
+            name="passwordConf"
+            label="Confirm Password"
+            type="password"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <Button
+            variant="contained"
+            onClick={() => this.signupClick('local')}
+            color="primary"
+          >
+          Sign up
+          </Button>
+        </Grid>
+        <Grid item xs={3}>
+          <Button
+            variant="contained"
+            onClick={() => this.props.handleFormCompletion()}
+            color="primary"
+          >
+          Cancel
+          </Button>
+        </Grid>
+      </Grid>
     )
   }
 }
