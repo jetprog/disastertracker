@@ -18,8 +18,8 @@ db.plugin('registry');
 db.knex.schema.hasTable('friends_list').then(function(exists) {
     if (!exists) {
         db.knex.schema.createTable('friends_list', function(friend) {
-            friend.foreign('user_id').index().references('user_id').inTable('user');
-            friend.string('name')
+            friend.integer('user_id_one')
+            friend.integer('user_id_two')
         }).then(function(table) {
             console.log(`${table} created`)
         })
@@ -44,8 +44,8 @@ db.knex.schema.hasTable('user').then(function(exists) {
 db.knex.schema.hasTable('watch_list').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('watch_list', function (list) {
-      list.foreing('user_id').references('user_id').inTable('users');
-      list.foreign('event_id').references('event_id').inTable('event')
+      list.integer('user_id')
+      list.integer('event_id')
     }).then(function (table) {
       console.log(`${table} created`)
     })
