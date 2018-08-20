@@ -50,7 +50,7 @@ exports.saveContact = contact =>
 
 //Save location
 exports.saveLocation = (location, userID, cb) => {
-  location['user_id'] = UserID;
+  location['user_id'] = userID;
   new Location({})
   .save(location, {method: 'insert'})
   .then(function(model) {
