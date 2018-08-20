@@ -1,8 +1,5 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid'
+import {Button, Typography, TextField, Grid} from '@material-ui/core'
 import LoginGoogle from './LoginGoogle.jsx'
 import LoginFacebook from './LoginFacebook.jsx'
 import axios from 'axios'
@@ -58,64 +55,62 @@ export default class Login extends React.Component {
   }
   render () {
     return (
-      <div>
-        <h2>Please log in</h2>
-        <Typography color="error" gutterBottom>
-          {this.state.error}
-        </Typography>
-        <Grid container spacing={8} padding={5} justify="center">
-          <Grid item xs={10}>
-            <TextField
-              autoFocus
-              value={this.state.email}
-              onChange={this.handleChange}
-              name="email"
-              margin="none"
-              id="email"
-              label="Email Address"
-              type="email"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={10}>
-            <TextField
-              value={this.state.password}
-              onChange={this.handleChange}
-              name="password"
-              margin="none"
-              id="password"
-              label="Password"
-              type="password"
-              fullWidth
-            />
-          </Grid>
-
-          <Grid item xs={3}>
-            <Button
-              variant="contained"
-              onClick={() => this.handleLoginClick('local')}
-              color="primary"
-            >
-              Login
-            </Button>
-          </Grid>
-          <Grid item xs={3}>
-            <LoginGoogle clickHandler={this.handleLoginClick} />
-          </Grid>
-          <Grid item xs={3}>
-            <LoginFacebook clickHandler={this.handleLoginClick} />
-          </Grid>
-          <Grid item xs={3}>
-            <Button
-              variant="contained"
-              onClick={() => this.props.handleFormCompletion()}
-              color="primary"
-            >
-              Cancel
-            </Button>
-          </Grid>
+      <Grid container spacing={8} justify="center">
+        <Grid item xs={10}>
+          <Typography variant="title">Please Log In</Typography>
         </Grid>
-      </div>
+        <Grid item xs={10}>
+          <Typography color="error" align="center" paragraph>
+            {this.state.error}
+          </Typography>
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            autoFocus
+            value={this.state.email}
+            onChange={this.handleChange}
+            name="email"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            value={this.state.password}
+            onChange={this.handleChange}
+            name="password"
+            label="Password"
+            type="password"
+            fullWidth
+          />
+        </Grid>
+
+        <Grid item xs={3}>
+          <Button
+            variant="contained"
+            onClick={() => this.handleLoginClick('local')}
+            color="primary"
+          >
+            Login
+          </Button>
+        </Grid>
+        <Grid item xs={3}>
+          <LoginGoogle clickHandler={this.handleLoginClick} />
+        </Grid>
+        <Grid item xs={3}>
+          <LoginFacebook clickHandler={this.handleLoginClick} />
+        </Grid>
+        <Grid item xs={3}>
+          <Button
+            variant="contained"
+            onClick={() => this.props.handleFormCompletion()}
+            color="primary"
+          >
+            Cancel
+          </Button>
+        </Grid>
+      </Grid>
     )
   }
 }
