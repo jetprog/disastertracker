@@ -5,8 +5,8 @@ const Contacts = require('./collections/users.js')
 const Contact = require('./models/users.js')
 const Events = require('./collections/users.js')
 const Event = require('./models/users.js')
-const Locations = require('./collections/users.js')
-const Location = require('./models/users.js')
+const Locations = require('./collections/locations.js')
+const Location = require('./models/locations.js')
 
 //export saves user to database input fields are (username, password)
 
