@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -6,9 +6,9 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Search from './Search.jsx'
 import axios from 'axios'
 
-export default class AddLocation extends React.Component {
-  constructor(props) {
-    super(props);
+export default class WatchListAddLocation extends React.Component {
+  constructor (props) {
+    super(props)
     this.state = {
       primaryLocation: false,
       locationName: '',
@@ -17,25 +17,24 @@ export default class AddLocation extends React.Component {
         longitude: ''
       }
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleBoxChange = this.handleBoxChange.bind(this);
-    this.handleSearchClick = this.handleSearchClick.bind(this);
-    this.addNewLocation = this.addNewLocation.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleBoxChange = this.handleBoxChange.bind(this)
+    this.handleSearchClick = this.handleSearchClick.bind(this)
+    this.addNewLocation = this.addNewLocation.bind(this)
   }
 
-
   handleChange (e) {
-    this.setState({[e.target.name]: e.target.value});
-  };
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
   handleBoxChange (e) {
-    this.setState({[e.target.value]: e.target.checked});
-  };
+    this.setState({ [e.target.value]: e.target.checked })
+  }
 
   handleSearchClick (location) {
-    const {latitude, longitude} = location.displayPosition
-    this.setState({mapLocation: {latitude, longitude}})
-  };
+    const { latitude, longitude } = location.displayPosition
+    this.setState({ mapLocation: { latitude, longitude } })
+  }
 
   addNewLocation () {
     const location = {
@@ -45,16 +44,17 @@ export default class AddLocation extends React.Component {
       primary: this.state.primaryLocation
     }
 
-    axios.post('/api/location', location)
-    .then(response => this.props.getLocations())
-    .catch(error => console.log(error))
+    axios
+      .post('/api/location', location)
+      .then(response => this.props.getLocations())
+      .catch(error => console.log(error))
 
-    this.props.handleLocationForm();
+    this.props.handleLocationForm()
     //console.log('Post New Location', response.data)
   }
 
-  render() {
-    return(
+  render () {
+    return (
       <div>
         <div>
           <FormControlLabel
@@ -81,8 +81,14 @@ export default class AddLocation extends React.Component {
           />
           <Search handleSearchClick={this.handleSearchClick} />
         </div>
-        <br></br>
-        <Button variant="contained" color="primary" onClick={this.addNewLocation}>Add Location</Button>
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.addNewLocation}
+        >
+          Add Location
+        </Button>
       </div>
     )
   }
