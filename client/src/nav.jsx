@@ -36,6 +36,7 @@ export default class Nav extends React.Component {
               userIsLoggedIn={this.props.userIsLoggedIn}
               userInfo={this.props.userInfo}
               handleUserStatusChange={this.props.handleUserStatusChange}
+              getUserFromSession={this.props.getUserFromSession}
             />
           </Grid>
         </Grid>

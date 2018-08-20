@@ -42,6 +42,7 @@ export default class Login extends React.Component {
         this.setState({ error: 'Incorrect username or password!' })
       } else {
         this.props.handleFormCompletion(resp)
+        console.log('post to server', resp)
       }
     })
   }
