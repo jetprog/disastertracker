@@ -47,7 +47,6 @@ export default class Login extends React.Component {
   }
 
   postToServer (data, callback) {
-    console.log('login PostToServer data ->', data)
     axios
       .post('/api/login', data)
       .then(response => callback(null, response))
