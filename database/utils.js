@@ -12,33 +12,17 @@ const Location = require('./models/users.js')
 
 exports.saveUser = user =>
   new Promise(function (resolve, reject) {
-    new User({ username: user.username }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
+    new User({ 'email': user.email }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
   });
-
-
-//fsave acebook user and export
-exports.saveFacebookUser = (user, cb) => {
-  new FacebookUser({id :user.id}).fetch().then(function (model) {
-    if (model) {
-      cb(null, model);
-    }
-    else{
-      FacebookUser.create(user).then(cb(null, user));
-    }
-  })
-  .catch(function (err) {
-    cb(err);
-  });
-}
 
 //Get all information of the user that is currently logged in without a password for security purposes.
 exports.getUser = (usernam) => {
     new Promise(resolve => new User({ username: usernam }).fetch().then(found => resolve(delete found.attributes.password && found.attributes)))
 }
 
-exports.getUserInfo = username =>
+exports.getUserInfo = email =>
   new Promise(function (resolve, reject) {
-    new User({ username: username })
+    new User({ 'email': email })
       .fetch()
       .then(found => (found ? resolve(found.attributes) : reject()));
   });
@@ -66,7 +50,7 @@ exports.saveContact = contact =>
 
 //Save location
 exports.saveLocation = (location, userID, cb) => {
-  location['user_id']  = UserID;
+  location['user_id'] = UserID;
   new Location({})
   .save(location, {method: 'insert'})
   .then(function(model) {
@@ -85,7 +69,7 @@ exports.saveCategory = category =>
     })
 
 //export saves coordinates to database (e.g - [[[12312.098109238210, 12932.100981239012]]])
-exports.saveLocation = location =>
-  new Promise(function (resolve, reject) {
-    new Location({ contact: contact.location_coordinates }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
-  })
+// exports.saveLocation = location =>
+//   new Promise(function (resolve, reject) {
+//     new Location({ contact: contact.location_coordinates }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
+//   })
