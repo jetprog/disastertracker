@@ -12,17 +12,13 @@ const Location = require('./models/users.js')
 
 exports.saveUser = user =>
   new Promise(function (resolve, reject) {
-<<<<<<< HEAD
-    new User({ 'email': user.email }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
-=======
     new User({
-      username: user.username,
+      email: user.email,
       password: user.password,
       first_name: user.first_name,
       last_name: user.last_name,
       e_personnel: user.e_personnel
      }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
->>>>>>> changes to database
   });
 
 //Get all information of the user that is currently logged in without a password for security purposes.
@@ -33,12 +29,8 @@ exports.getUser = (username) => {
 
 exports.getUserInfo = email =>
   new Promise(function (resolve, reject) {
-<<<<<<< HEAD
-    new User({ 'email': email })
-=======
     new User({
       username: username })
->>>>>>> changes to database
       .fetch()
       .then(found => (found ? resolve(found.attributes) : reject()));
   });
@@ -99,16 +91,9 @@ exports.saveCategory = category =>
     })
 
 //export saves coordinates to database (e.g - [[[12312.098109238210, 12932.100981239012]]])
-<<<<<<< HEAD
-// exports.saveLocation = location =>
-//   new Promise(function (resolve, reject) {
-//     new Location({ contact: contact.location_coordinates }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
-//   })
-=======
 exports.saveLocation = location =>
   new Promise(function (resolve, reject) {
     new Location({
       location: location.location_coordinates,
       }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
   })
->>>>>>> changes to database
