@@ -24,7 +24,6 @@ export default class Body extends React.Component {
               handleLocationClick={this.props.handleLocationClick}
               userIsLoggedIn={this.props.userIsLoggedIn}
               userInfo={this.props.userInfo}
-              getLocations={this.props.getLocations}
             />}
         />
         <Route path="/community" exact component={Community} />
