@@ -41,7 +41,8 @@ export default class WatchListAddLocation extends React.Component {
       loc_name: this.state.locationName,
       lat: this.state.mapLocation.latitude,
       long: this.state.mapLocation.longitude,
-      primary: this.state.primaryLocation
+      primary: this.state.primaryLocation,
+      user_id: this.props.userInfo.user_id
     }
 
     axios
@@ -50,7 +51,6 @@ export default class WatchListAddLocation extends React.Component {
       .catch(error => console.log(error))
 
     this.props.handleLocationForm()
-    this.props.getLocations()
   }
 
   render () {

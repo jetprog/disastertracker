@@ -56,9 +56,8 @@ class App extends React.Component {
       axios.post('/api/logout')
         .then(result => console.log('response from logout call was ', result))
     } else if (result) {
-      // this.setState({userIsLoggedIn: true, userInfo: result.data})
-      // console.log('handleUserStatusChange', result.data)
-      this.getUserFromSession()
+      this.setState({userIsLoggedIn: true, userInfo: result.data})
+      console.log('handleUserStatusChange', result.data)
     } else {
       console.log('App user status closed without login or signup ')
     }
@@ -78,7 +77,6 @@ class App extends React.Component {
           handleLocationClick={this.handleLocationClick}
           userIsLoggedIn={this.state.userIsLoggedIn}
           userInfo={this.state.userInfo}
-          getLocations={this.getUserFromSession}
         />
       </React.Fragment>
     )
