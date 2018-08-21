@@ -23,7 +23,7 @@ exports.getUser = (id, cb) => {
     .fetch()
     .then(function (model) {
       let userData = model.attributes
-      // console.log(`getUserInfo for email ${email} returned `, userData)
+      // console.log(`getUserInfo for email ${id} returned `, userData)
       Location.query(query => query.where('user_id', '=', userData.user_id))
         .fetchAll()
         .then(locations => {

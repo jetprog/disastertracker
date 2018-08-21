@@ -29,10 +29,9 @@ class App extends React.Component {
   getUserFromSession () {
     axios.get('/api/user')
       .then(res => {
-        console.log('App call to /api/user returned ', res)
-        console.log('App received Logged in user is ', res.data.user)
-        this.setState({userIsLoggedIn: true, userInfo: res.data.user})
-        console.log('getUserFromSession()', res.data.user)
+        // console.log('App call to /api/user returned ', res)
+        // console.log('App received Logged in user is ', res.data)
+        this.setState({userIsLoggedIn: true, userInfo: res.data})
       })
       .catch(() => {
         console.log('App verified that there is no user logged in')
