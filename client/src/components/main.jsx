@@ -11,13 +11,12 @@ import Paper from '@material-ui/core/Paper'
 const paperStyle = {
   position: 'absolute',
   width: '50%',
-  height: '50%',
   backgroundColor: 'white',
   border: '3px solid',
   padding: 10
 }
 
-const modalStyle = { top: '25%', left: '25%' }
+const modalStyle = { top: '20%', left: '25%' }
 
 export default class Main extends React.Component {
   constructor (props) {

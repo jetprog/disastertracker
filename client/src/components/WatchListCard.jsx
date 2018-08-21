@@ -15,17 +15,14 @@ export default class WatchListCard extends Component {
   render () {
     return (
       <div>
-        <Card>
-          <CardContent>
-            <Typography>Sample Data</Typography>
-            <Typography
-              onClick={() =>
+        <Card onClick={() =>
                 this.props.handleLocationClick({
                   latitude: 35.3672579,
                   longitude: -120.8463576
-                })
-              }
-            >
+                })}>
+          <CardContent>
+            <Typography variant="headline" component="h2">Sample Data</Typography>
+            <Typography color="textSecondary">
               944 Market Street, San Francisco, CA 94102
             </Typography>
             <WatchListCardAlert
