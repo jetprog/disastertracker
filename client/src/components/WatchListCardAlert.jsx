@@ -41,10 +41,12 @@ export default class WatchListCardAlert extends Component {
       return this.state.alerts.length !== 0 && this.setState({ alerts: [] })
     }
     alertArray = alerts.features.map(alert => alert.properties)
-    alertArray = alertArray.filter(
-      alert => alert.status !== 'Test' && alert.status !== 'Cancel'
-    )
-    // need to add alert filter to remove expired alerts
+    alertArray = alertArray.filter( alert =>
+      if (alert.status === 'Test') {return false}
+      if (alert.status === 'Cancel') {return false}
+      let expires = new Date(alert.expires)
+      if (expires < TIME_NOW) { return false }
+      return true)
     this.setState({ alerts: alertArray })
   }
 
