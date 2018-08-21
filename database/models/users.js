@@ -5,7 +5,7 @@ var User = db.Model.extend({
   tableName: 'user',
   hasTimeStamps: true,
   location: function () {
-    return this.hasMany(Location);
+    return this.hasMany(Location)
   }
 })
 
