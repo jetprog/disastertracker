@@ -38,6 +38,7 @@ export default class Login extends React.Component {
       }
     }
     this.postToServer(combinedUserData, (err, resp) => {
+      // console.log(combinedUserData);
       if (err) {
         this.setState({ error: 'Incorrect username or password!' })
       } else {
