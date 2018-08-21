@@ -28,22 +28,19 @@ const login = (req, res) =>{
     });
   }
   else{
-    db.getUserInfo(req.body.email)
-    .then((user) => {
-      if(req.body.password === user.password) {
-        delete user.password;
+    db.getUserInfo(req.body.email, function(model){
+      console.log(model);
+      if(model && model.password === req.body.password){
+        delete model.password;
         req.session.regenerate(() =>
           res
           .status(200)
-          .send(req.session.user = user))
+          .send(req.session.user = model))
       }
       else{
         res.status(400).send('Wrong password');
       }
     })
-    .catch(function (err) {
-      res.status(400).send({ serverMessage: "Wrong username", error: err })
-    });
   }
 }
 

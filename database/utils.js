@@ -21,13 +21,17 @@ exports.getUser = (username) => {
       username: username }).fetch().then(found => resolve(delete found.attributes.password && found.attributes)))
 }
 
-exports.getUserInfo = email =>
-  new Promise(function (resolve, reject) {
-    new User({
-      'email': email })
-      .fetch()
-      .then(found => (found ? resolve(found.attributes) : reject()));
+exports.getUserInfo = (email, cb) => {
+  new User({'email': email})
+  .fetch()
+  .then(function(model) {
+    cb(model.attributes);
+  })
+  .catch(function(error){
+    console.log("we got an error: ", error);
   });
+}
+
 
 //By default bookshelf use promises
 exports.getUserLoc = (id, cb) => {
