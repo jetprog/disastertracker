@@ -90,7 +90,18 @@ exports.saveLocation = (location, userID, cb) => {
   new Location({})
   .save(location, {method: 'insert'})
   .then(function(model) {
-    cb(model)
+    Location
+    .query(function(query){
+      query
+        .where('user_id', '=', userID)
+    })
+    .fetchAll()
+    .then(function(result){
+      cb(result);
+    })
+    .catch(function(error){
+      console.log(error);
+    })
   })
   .catch(function(error){
     console.log(error);
