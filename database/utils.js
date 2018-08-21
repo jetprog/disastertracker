@@ -36,9 +36,22 @@ exports.getUserInfo = (email, cb) => {
 //By default bookshelf use promises
 exports.getUserLoc = (id, cb) => {
   new User({'user_id': id})
-  .fetch({withRelated: ['location']})
+  .fetch()
   .then(function(model) {
-    cb(model.related('location').toJSON());
+    model.location = [];
+    Location
+    .query(function(query){
+      query
+        .where('user_id', '=', id)
+    })
+    .fetchAll()
+    .then(function(result){
+      model.location.push(result);
+      cb(model);
+    })
+    .catch(function(error){
+      console.log(error);
+    })
   })
   .catch(function(error){
     console.log("we got an error: ", error);
