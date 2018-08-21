@@ -1,10 +1,7 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Search from './Search.jsx'
 import axios from 'axios'
+import { Typography, Grid, Button, TextField, FormControlLabel, Checkbox } from '@material-ui/core'
 
 export default class WatchListAddLocation extends React.Component {
   constructor (props) {
@@ -55,8 +52,11 @@ export default class WatchListAddLocation extends React.Component {
 
   render () {
     return (
-      <div>
-        <div>
+      <Grid container spacing={8} justify="center">
+        <Grid item xs={10}>
+          <Typography variant="title">Add New Location</Typography>
+        </Grid>
+        <Grid item xs={10}>
           <FormControlLabel
             control={
               <Checkbox
@@ -68,6 +68,8 @@ export default class WatchListAddLocation extends React.Component {
             }
             label="Primary Location"
           />
+        </Grid>
+        <Grid item xs={10}>
           <TextField
             autoFocus
             value={this.state.locationName}
@@ -79,17 +81,29 @@ export default class WatchListAddLocation extends React.Component {
             type="locationName"
             fullWidth
           />
+        </Grid>
+        <Grid item xs={10}>
           <Search handleSearchClick={this.handleSearchClick} />
-        </div>
-        <br />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.addNewLocation}
-        >
+        </Grid>
+        <Grid item xs={10}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.addNewLocation}
+          >
           Add Location
-        </Button>
-      </div>
+          </Button>
+        </Grid>
+        <Grid item xs={10}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.props.handleLocationForm()}
+          >
+          Cancel
+          </Button>
+        </Grid>
+      </Grid>
     )
   }
 }
