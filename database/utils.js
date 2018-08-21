@@ -5,8 +5,8 @@ const Contacts = require('./collections/users.js')
 const Contact = require('./models/users.js')
 const Events = require('./collections/users.js')
 const Event = require('./models/users.js')
-const Locations = require('./collections/users.js')
-const Location = require('./models/users.js')
+const Locations = require('./collections/locations.js')
+const Location = require('./models/locations.js')
 
 //export saves user to database input fields are (username, password)
 
@@ -30,18 +30,22 @@ exports.getUser = (username) => {
 exports.getUserInfo = email =>
   new Promise(function (resolve, reject) {
     new User({
-      username: username })
+      'email': email })
       .fetch()
       .then(found => (found ? resolve(found.attributes) : reject()));
   });
 
 //By default bookshelf use promises
-exports.getUserLoc = id =>
-  new Promise(function (resolve, reject) {
-    new User({ user_id: id })
-      .fetch({ withRelated: ['location'] })
-      .then(found => (found ? resolve(found.related('location')) : reject()));
+exports.getUserLoc = (id, cb) => {
+  new User({'user_id': id})
+  .fetch({withRelated: ['location']})
+  .then(function(model) {
+    cb(model.related('location').toJSON());
+  })
+  .catch(function(error){
+    console.log("we got an error: ", error);
   });
+}
 
 //export saves event to database input fields are (event_name: event_name)
 exports.saveEvent = event =>
@@ -91,9 +95,9 @@ exports.saveCategory = category =>
     })
 
 //export saves coordinates to database (e.g - [[[12312.098109238210, 12932.100981239012]]])
-exports.saveLocation = location =>
-  new Promise(function (resolve, reject) {
-    new Location({
-      location: location.location_coordinates,
-      }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
-  })
+// exports.saveLocation = location =>
+//   new Promise(function (resolve, reject) {
+//     new Location({
+//       location: location.location_coordinates,
+//       }).fetch().then(save => (save ? reject() : Locations.create(location).then(resolve)))
+//   })

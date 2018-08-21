@@ -32,6 +32,7 @@ class App extends React.Component {
         console.log('App call to /api/user returned ', res)
         console.log('App received Logged in user is ', res.data.user)
         this.setState({userIsLoggedIn: true, userInfo: res.data.user})
+        console.log('getUserFromSession()', res.data.user)
       })
       .catch(() => {
         console.log('App verified that there is no user logged in')
@@ -55,7 +56,9 @@ class App extends React.Component {
       axios.post('/api/logout')
         .then(result => console.log('response from logout call was ', result))
     } else if (result) {
-      this.setState({userIsLoggedIn: true, userInfo: result.data})
+      // this.setState({userIsLoggedIn: true, userInfo: result.data})
+      // console.log('handleUserStatusChange', result.data)
+      this.getUserFromSession()
     } else {
       console.log('App user status closed without login or signup ')
     }

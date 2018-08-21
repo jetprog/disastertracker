@@ -1,5 +1,5 @@
-const db = require('../config.js')
-const User = require('./users.js')
+const db = require('../config.js');
+const User = require('./users.js');
 
 var Location = db.Model.extend({
   tableName: 'location',
