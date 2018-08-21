@@ -12,13 +12,7 @@ const Location = require('./models/locations.js')
 
 exports.saveUser = user =>
   new Promise(function (resolve, reject) {
-    new User({
-      email: user.email,
-      password: user.password,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      e_personnel: user.e_personnel
-     }).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
+    new User({email: user['email']}).fetch().then(save => (save ? reject() : Users.create(user).then(resolve)));
   });
 
 //Get all information of the user that is currently logged in without a password for security purposes.
