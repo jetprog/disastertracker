@@ -43,7 +43,7 @@ app.get('/api/event', utils.checkLoggedIn, function(req, res) {
 app.post('/api/location', utils.checkLoggedIn, loc.saveLocation);
 
 //include user location, array of locations.
-app.get('/api/user', user.userLocation);
+app.get('/api/user', utils.checkLoggedIn, user.userLocation);
 
 app.post('/api/user', utils.checkLoggedIn, function(req, res) {
   res.send('Server running')

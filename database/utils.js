@@ -38,7 +38,6 @@ exports.getUserLoc = (id, cb) => {
   new User({'user_id': id})
   .fetch()
   .then(function(model) {
-    model.location = [];
     Location
     .query(function(query){
       query
@@ -46,7 +45,7 @@ exports.getUserLoc = (id, cb) => {
     })
     .fetchAll()
     .then(function(result){
-      model.location.push(result);
+      model.location = result;
       cb(model);
     })
     .catch(function(error){
