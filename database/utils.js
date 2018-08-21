@@ -36,12 +36,16 @@ exports.getUserInfo = email =>
   });
 
 //By default bookshelf use promises
-exports.getUserLoc = id =>
-  new Promise(function (resolve, reject) {
-    new User({ user_id: id })
-      .fetch({ withRelated: ['location'] })
-      .then(found => (found ? resolve(found.related('location')) : reject()));
+exports.getUserLoc = (id, cb) => {
+  new User({'user_id': id})
+  .fetch({withRelated: ['location']})
+  .then(function(model) {
+    cb(model.related('location').toJSON());
+  })
+  .catch(function(error){
+    console.log("we got an error: ", error);
   });
+}
 
 //export saves event to database input fields are (event_name: event_name)
 exports.saveEvent = event =>
