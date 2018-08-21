@@ -1,11 +1,11 @@
 const db = require('../config.js')
-const Location = require('../location.js')
+const Location = require('./locations.js')
 
 var User = db.Model.extend({
   tableName: 'user',
   hasTimeStamps: true,
-  locations: function () {
-    return this.hasMany(Location, 'user_id')
+  location: function () {
+    return this.hasMany(Location)
   }
 })
 

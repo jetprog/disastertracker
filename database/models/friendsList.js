@@ -1,4 +1,5 @@
-const db = require('../config.js');
+const db = require('../config.js')
+const User = require('../users.js')
 
 var FriendsList = db.Model.extend({
   tableName: 'friendsList',
