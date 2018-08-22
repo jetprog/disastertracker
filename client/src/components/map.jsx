@@ -21,6 +21,9 @@ export default class Map extends Component {
       }
     }
   }
+  // static getDerivedStateFromProps (nextProps, prevState) {
+
+  // }
 
   componentDidUpdate (prevProps) {
     if (prevProps.mapLocation.longitude !== this.props.mapLocation.longitude ||
