@@ -68,6 +68,7 @@ export default class Main extends React.Component {
                 <WatchListAddLocation
                   handleLocationForm={this.handleLocationForm}
                   userInfo={this.props.userInfo}
+                  addLocation={this.props.addLocation}
                 />
               </Paper>
             </Modal>

@@ -7,7 +7,6 @@ export default class WatchList extends React.Component {
     this.state = {}
   }
 
-  // MAP THROUGH ALL LOCATIONS COMPONENT
 
   render () {
     return (
@@ -17,8 +16,13 @@ export default class WatchList extends React.Component {
             ? 'Locations List'
             : `${this.props.userInfo.first_name}'s Locations`}
         </h1>
-        <WatchListCard handleLocationClick={this.props.handleLocationClick} />
+        <div>
+          {this.props.userInfo !== null ? this.props.userInfo.locations.map((location, i) =>
+          <WatchListCard location={location} handleLocationClick={this.props.handleLocationClick} key={i} /> ) : ''}
+        </div>
       </div>
     )
   }
 }
+
+
