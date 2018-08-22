@@ -3,20 +3,33 @@ import axios from 'axios'
 import Typography from '@material-ui/core/Typography'
 import WatchListCardAlertInfo from './WatchListCardAlertInfo.jsx'
 
+const parseAlerts = function (alerts) {
+  if (!alerts.features || !alerts.features.length === 0) { return [] }
+  var alertArray = alerts.features.map(alert => alert)
+  alertArray = alertArray.filter(alert => {
+    if (alert.properties.status === 'Test' || alert.properties.status === 'Cancel') { return false }
+    let expires = new Date(alert.properties.expires)
+    let TIME_NOW = Date.now()
+    if (expires < TIME_NOW) { return false }
+    return true
+  })
+  return alertArray
+}
+
 export default class WatchListCardAlert extends Component {
   constructor (props) {
     super(props)
     this.state = {
       alerts: []
     }
-    this.parseAlerts = this.parseAlerts.bind(this)
+    this.handleAlertResponse = this.handleAlertResponse.bind(this)
     this.getLocationAlerts = this.getLocationAlerts.bind(this)
   }
 
   componentDidMount () {
-    this.getLocationAlerts(this.parseAlerts)
+    this.getLocationAlerts(this.handleAlertResponse)
     this.locationAlertInterval = setInterval(() =>
-      this.getLocationAlerts(this.parseAlerts), 10 * 60 * 1000)
+      this.getLocationAlerts(this.handleAlertResponse), 10 * 60 * 1000)
   }
   componentWillUnmount () {
     clearInterval(this.locationAlertInterval)
@@ -29,25 +42,16 @@ export default class WatchListCardAlert extends Component {
     }
     axios
       .get('https://api.weather.gov/alerts', { params })
-      .then(results => callback(null, results.data))
+      .then(results => callback(null, parseAlerts(results.data)))
       .catch(err => callback(err, null))
   }
 
-  parseAlerts (err, alerts) {
-    if (err) {
-    }
-    var alertArray
-    if (!alerts.features) {
+  handleAlertResponse (err, alertResponse) {
+    if (alertResponse.length === 0) {
       return this.state.alerts.length !== 0 && this.setState({ alerts: [] })
     }
-    alertArray = alerts.features.map(alert => alert.properties)
-    alertArray = alertArray.filter( alert =>
-      if (alert.status === 'Test') {return false}
-      if (alert.status === 'Cancel') {return false}
-      let expires = new Date(alert.expires)
-      if (expires < TIME_NOW) { return false }
-      return true)
-    this.setState({ alerts: alertArray })
+    let alerts = alertResponse.map(alert => alert.properties)
+    this.setState(alerts)
   }
 
   render () {
