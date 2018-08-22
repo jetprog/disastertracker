@@ -20,6 +20,7 @@ class App extends React.Component {
     this.handleLocationClick = this.handleLocationClick.bind(this)
     this.handleUserStatusChange = this.handleUserStatusChange.bind(this)
     this.getUserFromSession = this.getUserFromSession.bind(this)
+    this.addLocationClick = this.addLocationClick.bind(this)
   }
 
   componentDidMount () {
@@ -62,6 +63,13 @@ class App extends React.Component {
     }
   }
 
+  addLocationClick (location) {
+    axios
+      .post('/api/location', location)
+      .then(response => this.setState({userInfo: response.data}))
+      .catch(error => console.log(error))
+  }
+
   render () {
     return (
       <React.Fragment>
@@ -76,6 +84,7 @@ class App extends React.Component {
           handleLocationClick={this.handleLocationClick}
           userIsLoggedIn={this.state.userIsLoggedIn}
           userInfo={this.state.userInfo}
+          addLocation={this.addLocationClick}
         />
       </React.Fragment>
     )

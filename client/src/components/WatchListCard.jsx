@@ -17,19 +17,18 @@ export default class WatchListCard extends Component {
       <div>
         <Card onClick={() =>
                 this.props.handleLocationClick({
-                  latitude: 35.3672579,
-                  longitude: -120.8463576
+                  latitude: this.props.location.lat,
+                  longitude: this.props.location.long
                 })}>
           <CardContent>
-            <Typography variant="headline" component="h2">Sample Data</Typography>
-            <Typography color="textSecondary">
-              944 Market Street, San Francisco, CA 94102
+            <Typography variant="headline" component="h2">{this.props.location.loc_name}
             </Typography>
             <WatchListCardAlert
-              location={{ latitude: 35.21, longitude: -94.7 }}
+              location={{ latitude: this.props.location.lat, longitude: this.props.location.long }}
             />
           </CardContent>
         </Card>
+        <br />
       </div>
     )
   }
