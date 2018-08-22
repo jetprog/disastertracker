@@ -7,6 +7,7 @@ import WatchListNoUser from './WatchListNoUser.jsx'
 import { Button } from '@material-ui/core'
 import Modal from '@material-ui/core/Modal'
 import Paper from '@material-ui/core/Paper'
+import Map2 from './map2.jsx'
 
 const paperStyle = {
   position: 'absolute',
@@ -74,7 +75,7 @@ export default class Main extends React.Component {
             </Modal>
           </Grid>
           <Grid item xs={9}>
-            <Map mapLocation={this.state.mapLocation} />
+            <Map2 mapLocation={this.state.mapLocation} />
           </Grid>
         </Grid>
       </div>
