@@ -15,10 +15,8 @@ export default class WatchListCardAlert extends Component {
 
   componentDidMount () {
     this.getLocationAlerts(this.parseAlerts)
-    this.locationAlertInterval = setInterval(
-      this.getLocationAlerts,
-      10 * 60 * 1000
-    )
+    this.locationAlertInterval = setInterval(() =>
+      this.getLocationAlerts(this.parseAlerts), 10 * 60 * 1000)
   }
   componentWillUnmount () {
     clearInterval(this.locationAlertInterval)

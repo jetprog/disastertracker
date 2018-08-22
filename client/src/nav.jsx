@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
@@ -25,7 +25,7 @@ export default class Nav extends React.Component {
         <Grid container direction="row" justify="space-between" alignItems="center">
           <Grid item xs={6}>
             <Typography variant="title" color="inherit">
-              <Link to="/main">DisasterTracker</Link>
+              {/* <Link to="/main">DisasterTracker</Link> */}
             </Typography>
           </Grid>
           <Grid item xs={4} color="primary">
