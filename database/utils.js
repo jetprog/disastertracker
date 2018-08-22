@@ -23,12 +23,10 @@ exports.getUser = (id, cb) => {
     .fetch()
     .then(function (model) {
       let userData = model.attributes
-      // console.log(`getUserInfo for email ${id} returned `, userData)
       Location.query(query => query.where('user_id', '=', userData.user_id))
         .fetchAll()
         .then(locations => {
           let locationArray = locations.map(location => location.attributes)
-          // console.log(`getUserInfo fetchall locations returned `, locationArray)
           userData.locations = locationArray
           cb(userData)
         })
