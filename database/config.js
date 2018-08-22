@@ -31,7 +31,7 @@ db.knex.schema.hasTable('user').then(function(exists) {
         db.knex.schema.createTable('user', function(user) {
             user.increments('user_id').primary();
             user.string('email', 30).unique();
-            user.string('password', 30);
+            user.string('password', 250);
             user.string('first_name', 20);
             user.string('last_name', 20);
             user.bool('E-personnel');
