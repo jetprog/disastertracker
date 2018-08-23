@@ -51,7 +51,7 @@ class App extends React.Component {
 
   handleLocationClick (location) {
     const {latitude, longitude} = location
-    console.log('locationClick has ', latitude)
+    console.log('locationClick has ', latitude, longitude)
     this.setState({mapLocation: {latitude, longitude}})
   }
 

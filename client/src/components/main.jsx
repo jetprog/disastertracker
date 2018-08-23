@@ -1,6 +1,5 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import Map from './Map.jsx'
 import WatchListAddLocation from './WatchListAddLocation.jsx'
 import WatchList from './WatchList.jsx'
 import WatchListNoUser from './WatchListNoUser.jsx'
@@ -24,8 +23,8 @@ export default class Main extends React.Component {
     super(props)
     this.state = {
       mapLocation: {
-        latitude: 37.785164,
-        longitude: -100
+        latitude: 38.9173,
+        longitude: -86.3712
       },
       addLocationForm: false
     }
