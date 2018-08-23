@@ -3,13 +3,18 @@ import mapboxgl from 'mapbox-gl'
 
  mapboxgl.accessToken = process.env.MAPKEY;
 
+const style = {
+  position: 'absolute',
+  height: '100%',
+  width: '100%'
+}
 export default class Map2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: -100,
-      lat: 37.785164,
-      zoom: 3
+      lng: -86.3712,
+      lat: 38.9173,
+      zoom: 3.5
     };
   }
 
@@ -20,7 +25,7 @@ export default class Map2 extends React.Component {
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
       center: [lng, lat],
-      zoom
+      zoom: zoom
     });
 
     map.on('move', () => {
@@ -82,10 +87,11 @@ export default class Map2 extends React.Component {
       this.setState({
           lng: this.props.mapLocation.longitude,
           lat: this.props.mapLocation.latitude,
-          zoom: 8
+          zoom: 3.5
       })
     }
   }
+
 
 
 
@@ -93,10 +99,10 @@ export default class Map2 extends React.Component {
     const { lng, lat, zoom } = this.state;
     return (
       <div>
-        <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
+        <div>
           <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
         </div>
-        <div ref={el => this.mapContainer = el} />
+        <div style={style} ref={el => this.mapContainer = el} />
       </div>
     );
   }
