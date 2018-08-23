@@ -32,7 +32,17 @@ export default class Main extends React.Component {
     this.handleLocationForm = this.handleLocationForm.bind(this)
     this.listenForAlerts = this.listenForAlerts.bind(this)
   }
-
+  /** 5 min Interval for removing epired alerts
+   *    NOT tested yet.  Once we know alers are working this should be tested and implemented
+  *
+  * componentDidMount() {
+  *   this.checkExpiredAlerts = setInterval(()=>this.listenForAlerts([]), 1000 * 60 * 5)
+  * }
+  * componentWillUnmount () {
+  *   clearInterval(this.checkExpiredAlerts)
+  * }
+  *
+  */
   componentDidUpdate () {
     const { mapLocation } = this.props
     if (
@@ -55,8 +65,17 @@ export default class Main extends React.Component {
         if (alert.geometry) {
           alerts[alert.properties.id] = {
             event: alert.properties.event,
+            status: alert.properties.status,
+            effective: alert.properties.effective,
+            ends: alert.properties.ends || alert.properties.expires,
             geometry: alert.geometry.coordinates
           }
+        }
+      }
+      // remove expired or cancelled alerts
+      for (alert in alerts) {
+        if (Date.parse(alert.ends) < Date.now() || alert.status === 'Cancel') {
+          delete alerts[alert]
         }
       }
       return { alerts }
@@ -66,7 +85,7 @@ export default class Main extends React.Component {
   render () {
     return (
       <div>
-        <Grid container alignItems="stretch" spacing={0}>
+        <Grid container alignItems="stretch" spacing={0} color="black">
           <Grid item xs={3}>
             {/* this.props.userLoggedIn ? <Locations clickHandler={this.handleLocationClick}/> : <WatchListNoUser /> */}
             <WatchList

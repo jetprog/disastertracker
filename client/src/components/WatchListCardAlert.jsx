@@ -9,20 +9,7 @@ const parseAlerts = function (alerts) {
     return []
   }
   var alertArray = alerts.features.map(alert => alert)
-  alertArray = alertArray.filter(alert => {
-    if (
-      alert.properties.status === 'Test' ||
-      alert.properties.status === 'Cancel'
-    ) {
-      return false
-    }
-    let expires = new Date(alert.properties.expires)
-    let TIME_NOW = Date.now()
-    if (expires < TIME_NOW) {
-      return false
-    }
-    return true
-  })
+  alertArray = alertArray.filter(alert => alert.properties.status !== 'Test')
   // console.log('Alert Parser output ', alertArray)
   return alertArray
 }
@@ -47,6 +34,14 @@ export default class WatchListCardAlert extends Component {
   componentWillUnmount () {
     clearInterval(this.locationAlertInterval)
   }
+
+  /**
+   * Description: Handles API Call to weather.gov specifically for the events that
+   * impact the location that this card refers to.  Results are returned through
+   * the callback function after being parsed to remove any Test alerts. this is needed
+   * because the weather service has very frequent test messages that come through.
+   * @param {*} callback
+   */
   getLocationAlerts (callback) {
     let params = {
       active: 1,
@@ -58,14 +53,27 @@ export default class WatchListCardAlert extends Component {
       .then(results => callback(null, parseAlerts(results.data)))
       .catch(err => callback(err, null))
   }
-
+  /**
+   * Description: Used as the callback function to the getLocationAlerts function.
+   * If no alerts were returned, the setState is called to clear prior alerts.
+   * Responses are filtered to remove expired and Cancelled alerts before they
+   * are stored in state. The unfiltered alerts are also returned to Main through
+   * the listenForAlerts function.
+   *
+   * @param {*} err
+   * @param {array} alertResponse
+   */
   handleAlertResponse (err, alertResponse) {
+    console.log('alerts response ', alertResponse)
     if (err) {
-
+      // ignoring errors - will not update card until next interval
     } else if (alertResponse.length === 0) {
       return this.setState({ 'alerts': [] })
     } else {
       let alerts = alertResponse.map(alert => alert.properties)
+      alerts = alerts.filter(alert => {
+        return Date.parse(alert.ends || alert.expires) > Date.now() && alert.status !== 'Cancel'
+      })
       this.setState({ alerts })
       this.props.listenForAlerts(alertResponse)
     }
