@@ -7,7 +7,6 @@ export default class WatchList extends React.Component {
     this.state = {}
   }
 
-
   render () {
     return (
       <div>
@@ -17,12 +16,18 @@ export default class WatchList extends React.Component {
             : `${this.props.userInfo.first_name}'s Locations`}
         </h1>
         <div>
-          {this.props.userInfo !== null ? this.props.userInfo.locations.map((location, i) =>
-          <WatchListCard location={location} handleLocationClick={this.props.handleLocationClick} key={i} /> ) : ''}
+          {this.props.userInfo !== null
+            ? this.props.userInfo.locations.map((location, i) => (
+              <WatchListCard
+                location={location}
+                handleLocationClick={this.props.handleLocationClick}
+                listenForAlerts={this.props.listenForAlerts}
+                key={i}
+              />
+            ))
+            : ''}
         </div>
       </div>
     )
   }
 }
-
-
