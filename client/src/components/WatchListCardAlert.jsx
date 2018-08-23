@@ -4,15 +4,26 @@ import Typography from '@material-ui/core/Typography'
 import WatchListCardAlertInfo from './WatchListCardAlertInfo.jsx'
 
 const parseAlerts = function (alerts) {
-  if (!alerts.features || !alerts.features.length === 0) { return [] }
+  // console.log('Alert Parser input ', alerts)
+  if (!alerts.features || alerts.features.length === 0) {
+    return []
+  }
   var alertArray = alerts.features.map(alert => alert)
   alertArray = alertArray.filter(alert => {
-    if (alert.properties.status === 'Test' || alert.properties.status === 'Cancel') { return false }
+    if (
+      alert.properties.status === 'Test' ||
+      alert.properties.status === 'Cancel'
+    ) {
+      return false
+    }
     let expires = new Date(alert.properties.expires)
     let TIME_NOW = Date.now()
-    if (expires < TIME_NOW) { return false }
+    if (expires < TIME_NOW) {
+      return false
+    }
     return true
   })
+  // console.log('Alert Parser output ', alertArray)
   return alertArray
 }
 
@@ -28,8 +39,10 @@ export default class WatchListCardAlert extends Component {
 
   componentDidMount () {
     this.getLocationAlerts(this.handleAlertResponse)
-    this.locationAlertInterval = setInterval(() =>
-      this.getLocationAlerts(this.handleAlertResponse), 10 * 60 * 1000)
+    this.locationAlertInterval = setInterval(
+      () => this.getLocationAlerts(this.handleAlertResponse),
+      10 * 60 * 1000
+    )
   }
   componentWillUnmount () {
     clearInterval(this.locationAlertInterval)
@@ -47,16 +60,17 @@ export default class WatchListCardAlert extends Component {
   }
 
   handleAlertResponse (err, alertResponse) {
+    if (err) { }
     if (alertResponse.length === 0) {
       return this.state.alerts.length !== 0 && this.setState({ alerts: [] })
     }
     let alerts = alertResponse.map(alert => alert.properties)
-    this.setState(alerts)
+    this.setState({ alerts })
+    this.props.listenForAlerts(alertResponse)
   }
 
   render () {
     let { alerts } = this.state
-    console.log(alerts)
     if (alerts.length === 0) {
       return <Typography>No active alerts at this time</Typography>
     }

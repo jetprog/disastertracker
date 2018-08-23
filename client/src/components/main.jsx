@@ -30,6 +30,7 @@ export default class Main extends React.Component {
       addLocationForm: false
     }
     this.handleLocationForm = this.handleLocationForm.bind(this)
+    this.listenForAlerts = this.listenForAlerts.bind(this)
   }
 
   componentDidUpdate () {
@@ -46,6 +47,10 @@ export default class Main extends React.Component {
     this.setState({ addLocationForm: false })
   }
 
+  listenForAlerts (alerts) {
+    console.log('Main received the following alerts from the listener', alerts)
+  }
+
   render () {
     return (
       <div>
@@ -55,6 +60,7 @@ export default class Main extends React.Component {
             <WatchList
               userInfo={this.props.userInfo}
               handleLocationClick={this.props.handleLocationClick}
+              listenForAlerts={this.listenForAlerts}
             />
             <br />
             <Button
