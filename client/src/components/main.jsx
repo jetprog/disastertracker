@@ -26,7 +26,8 @@ export default class Main extends React.Component {
         latitude: 38.9173,
         longitude: -86.3712
       },
-      addLocationForm: false
+      addLocationForm: false,
+      alerts: {}
     }
     this.handleLocationForm = this.handleLocationForm.bind(this)
     this.listenForAlerts = this.listenForAlerts.bind(this)
@@ -46,8 +47,20 @@ export default class Main extends React.Component {
     this.setState({ addLocationForm: false })
   }
 
-  listenForAlerts (alerts) {
-    console.log('Main received the following alerts from the listener', alerts)
+  listenForAlerts (alertData) {
+    console.log('Main received the following alerts from the listener', alertData)
+    let {alerts} = this.state
+    for (var i = 0; i < alertData.length; i++) {
+      let alert = alertData[i]
+      if (alert.geometry) {
+        alerts[alert.properties.id] = {
+          event: alert.properties.event,
+          geometry: alerts.geometry.coordinates
+        }
+      }
+    }
+    console.log('Main will add the following alerts ', alerts)
+    this.setState({ alerts })
   }
 
   render () {

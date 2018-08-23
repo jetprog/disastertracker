@@ -60,22 +60,25 @@ export default class WatchListCardAlert extends Component {
   }
 
   handleAlertResponse (err, alertResponse) {
-    if (err) { }
-    if (alertResponse.length === 0) {
-      return this.state.alerts.length !== 0 && this.setState({ alerts: [] })
+    if (err) {
+
+    } else if (alertResponse.length === 0) {
+      return this.setState({ 'alerts': [] })
+    } else {
+      let alerts = alertResponse.map(alert => alert.properties)
+      this.setState({ alerts })
+      this.props.listenForAlerts(alertResponse)
     }
-    let alerts = alertResponse.map(alert => alert.properties)
-    this.setState({ alerts })
-    this.props.listenForAlerts(alertResponse)
   }
 
   render () {
     let { alerts } = this.state
     if (alerts.length === 0) {
       return <Typography>No active alerts at this time</Typography>
+    } else {
+      return alerts.map(alert => (
+        <WatchListCardAlertInfo alert={alert} key={alert.id} />
+      ))
     }
-    return alerts.map(alert => (
-      <WatchListCardAlertInfo alert={alert} key={alert.id} />
-    ))
   }
 }
