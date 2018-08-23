@@ -48,19 +48,19 @@ export default class Main extends React.Component {
   }
 
   listenForAlerts (alertData) {
-    console.log('Main received the following alerts from the listener', alertData)
-    let {alerts} = this.state
-    for (var i = 0; i < alertData.length; i++) {
-      let alert = alertData[i]
-      if (alert.geometry) {
-        alerts[alert.properties.id] = {
-          event: alert.properties.event,
-          geometry: alerts.geometry.coordinates
+    this.setState((prevState) => {
+      let {alerts} = prevState
+      for (var i = 0; i < alertData.length; i++) {
+        let alert = alertData[i]
+        if (alert.geometry) {
+          alerts[alert.properties.id] = {
+            event: alert.properties.event,
+            geometry: alert.geometry.coordinates
+          }
         }
       }
-    }
-    console.log('Main will add the following alerts ', alerts)
-    this.setState({ alerts })
+      return { alerts }
+    })
   }
 
   render () {
