@@ -9,7 +9,7 @@ export default class Map2 extends React.Component {
     this.state = {
       lng: -100,
       lat: 37.785164,
-      zoom: 3,
+      zoom: 3
     };
   }
 
@@ -33,18 +33,18 @@ export default class Map2 extends React.Component {
       });
     });
 
-    map.on('load', function () {
+    map.on('load', () => {
 
-    map.addLayer({
+      map.addLayer({
         'id': 'maine',
         'type': 'fill',
         'source': {
-            'type': 'geojson',
-            'data': {
-                'type': 'Feature',
-                'geometry': {
-                    'type': 'Polygon',
-                    'coordinates': [[[-67.13734351262877, 45.137451890638886],
+          'type': 'geojson',
+          'data': {
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Polygon',
+              'coordinates': [[[-67.13734351262877, 45.137451890638886],
                         [-66.96466, 44.8097],
                         [-68.03252, 44.3252],
                         [-69.06, 43.98],
@@ -64,28 +64,39 @@ export default class Map2 extends React.Component {
                         [-67.79035274928509, 47.066248887716995],
                         [-67.79141211614706, 45.702585354182816],
                         [-67.13734351262877, 45.137451890638886]]]
-                }
             }
+          }
         },
         'layout': {},
         'paint': {
-            'fill-color': '#088',
-            'fill-opacity': 0.8
+          'fill-color': '#088',
+          'fill-opacity': 0.8
         }
+      });
     });
-});
-}
+  }
+
+   componentDidUpdate (prevProps) {
+    if (prevProps.mapLocation.longitude !== this.props.mapLocation.longitude ||
+      prevProps.mapLocation.latitude !== this.props.mapLocation.latitude) {
+      this.setState({
+          lng: this.props.mapLocation.longitude,
+          lat: this.props.mapLocation.latitude,
+          zoom: 8
+      })
+    }
+  }
+
 
 
   render() {
     const { lng, lat, zoom } = this.state;
-
     return (
       <div>
         <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
           <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
         </div>
-        <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
+        <div ref={el => this.mapContainer = el} />
       </div>
     );
   }
