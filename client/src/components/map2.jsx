@@ -43,7 +43,8 @@ export default class Map2 extends React.Component {
 
       if (Object.keys(alerts).length !== 0) {
         for (alert in alerts) {
-          // console.log(alerts[alert].geometry)
+           console.log('coordinates', alerts[alert].geometry.coordinates)
+           console.log('type', alerts[alert].geometry.type)
           this.map.addLayer({
             'id': alert,
             'type': 'fill',
@@ -52,8 +53,8 @@ export default class Map2 extends React.Component {
               'data': {
                 'type': 'Feature',
                 'geometry': {
-                  'type': 'Polygon',
-                  'coordinates': alerts[alert].geometry
+                  'type': alerts[alert].geometry.type,
+                  'coordinates': alerts[alert].geometry.coordinates
                 }
               }
             },
@@ -66,6 +67,7 @@ export default class Map2 extends React.Component {
         }
       }
     })
+    console.log(`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`)
   }
 
   componentDidUpdate (prevProps) {
@@ -83,9 +85,6 @@ export default class Map2 extends React.Component {
     const { lng, lat, zoom } = this.state
     return (
       <div>
-        <div>
-          <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
-        </div>
         <div style={style} ref={el => this.mapContainer = el} />
       </div>
     )
