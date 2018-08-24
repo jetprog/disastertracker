@@ -14,8 +14,6 @@ class App extends React.Component {
       mapLocation: {
         latitude: null,
         longitude: null
-        // latitude: 37.785164,
-        // longitude: -100
       }
     }
     this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this)
