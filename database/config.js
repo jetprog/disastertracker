@@ -102,7 +102,7 @@ db.knex.schema.hasTable('location').then(function(exists) {
             location.integer("user_id").unsigned().notNullable().references("user_id").inTable("user");
             location.string('loc_name', 100);
             location.decimal('lat', 10, 8);
-            location.decimal('long', 10, 11);
+            location.decimal('long', 11, 8);
             location.string('primary', 100);
         }).then(function(table) {
             console.log(`${table} created`);
