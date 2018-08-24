@@ -42,6 +42,10 @@ app.get('/api/event', utils.checkLoggedIn, function(req, res) {
 
 app.post('/api/location', utils.checkLoggedIn, loc.saveLocation);
 
+app.put('/api/location', utils.checkLoggedIn, loc.updateLocation);
+
+app.delete('/api/location', utils.checkLoggedIn, loc.deleteLocation);
+
 //include user location, array of locations.
 app.get('/api/user', utils.checkLoggedIn, user.userLocation);
 

@@ -101,8 +101,8 @@ db.knex.schema.hasTable('location').then(function(exists) {
             location.increments('location_id').primary();
             location.integer("user_id").unsigned().notNullable().references("user_id").inTable("user");
             location.string('loc_name', 100);
-            location.float('lat', 18, 10);
-            location.float('long', 18, 10);
+            location.decimal('lat', 10, 8);
+            location.decimal('long', 11, 8);
             location.string('primary', 100);
         }).then(function(table) {
             console.log(`${table} created`);

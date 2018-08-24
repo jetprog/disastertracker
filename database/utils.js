@@ -118,6 +118,26 @@ exports.saveLocation = (location, userID, cb) => {
     .catch(error => console.log(error))
 }
 
+//Update a location
+exports.updateLocation = (location, userID, cb) => {
+  Location
+  .where({location_id: location['location_id']})
+  .save(location,{patch:true})
+  .then((model) => {
+    exports.getUser(userID, cb);
+  });
+}
+
+//Delete location
+exports.deleteLocation = (locID, userID, cb) => {
+  Location.query(function (query) {
+        query.where('location_id', '=', locID)
+  })
+  .destroy()
+  .then(() => exports.getUser(userID, cb))
+  .catch(error => console.log(error))
+}
+
 // export saves category to database input fields are (event_name: event_name),
 // this table holds the different categories of events, it does not hold the event information just the event itself
 exports.saveCategory = category =>
