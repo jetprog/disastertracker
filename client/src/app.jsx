@@ -49,17 +49,17 @@ class App extends React.Component {
 
   handleLocationClick (location) {
     const {latitude, longitude} = location
-    console.log('locationClick has ', latitude, longitude)
     this.setState({mapLocation: {latitude, longitude}})
   }
 
   handleUserStatusChange (result) {
     if (result) {
       if (result !== 'logout') {
-        this.setState({userIsLoggedIn: true, userInfo: result.data})
         if (result.data.locations.length > 0) {
-          this.handleLocationClick(result.data.locations[0])
+          let {lat, long} = result.data.locations[0]
+          this.setState({userIsLoggedIn: true, userInfo: result.data, mapLocation: {latitude: lat, longitude: long}})
         } else {
+          this.setState({userIsLoggedIn: true, userInfo: result.data})
           navigator.geolocation.getCurrentPosition(position => this.handleLocationClick(position.coords))
         }
       } else {

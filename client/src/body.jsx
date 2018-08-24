@@ -13,8 +13,8 @@ export default class Body extends React.Component {
     if (props.userIsLoggedIn || props.mapLocation.latitude || props.mapLocation.longitude) {
       let {mapLocation} = this.props
       if (!mapLocation.latitude || !mapLocation.longitude) {
-        mapLocation.latitude = 36.6099
-        mapLocation.longitude = -89.6212
+        mapLocation.latitude = 36.3328
+        mapLocation.longitude = -85.4581
       }
       return (<Main {...props}
         mapLocation={mapLocation}
@@ -31,4 +31,3 @@ export default class Body extends React.Component {
     return this.pageSelector(this.props)
   }
 }
-

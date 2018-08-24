@@ -68,7 +68,6 @@ export default class WatchListCardAlert extends Component {
    * @param {array} alertResponse
    */
   handleAlertResponse (err, alertResponse) {
-    console.log('alerts response ', alertResponse)
     if (err) {
       // ignoring errors - will not update card until next interval
     } else if (alertResponse.length === 0) {
