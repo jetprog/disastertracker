@@ -27,7 +27,7 @@ exports.deleteLocation = (req, res) => {
 
 exports.updateLocation = (req, res) => {
   let userID = req.session.user;
-  db.updateLocation(req.query, userID, (user) => {
+  db.updateLocation(req.body, userID, (user) => {
     if (user) {
       delete user['password'];
       res.status(200).send(user);
