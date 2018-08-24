@@ -14,81 +14,70 @@ export default class Map2 extends React.Component {
     this.state = {
       lng: -86.3712,
       lat: 38.9173,
-      zoom: 3.5
+      zoom: 3.5,
+      geometry: ''
     };
   }
 
   componentDidMount() {
-    const { lng, lat, zoom } = this.state;
 
-    const map = new mapboxgl.Map({
+    const { lng, lat, zoom } = this.state;
+    this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
       center: [lng, lat],
       zoom: zoom
     });
 
-    map.on('move', () => {
-      const { lng, lat } = map.getCenter();
+    this.map.on('move', () => {
 
+      const { lng, lat } = this.map.getCenter();
       this.setState({
         lng: lng.toFixed(4),
         lat: lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
+        zoom: this.map.getZoom().toFixed(2)
       });
     });
 
-    map.on('load', () => {
+     this.map.on('load', () => {
 
-      map.addLayer({
-        'id': 'maine',
-        'type': 'fill',
-        'source': {
-          'type': 'geojson',
-          'data': {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Polygon',
-              'coordinates': [[[-67.13734351262877, 45.137451890638886],
-                        [-66.96466, 44.8097],
-                        [-68.03252, 44.3252],
-                        [-69.06, 43.98],
-                        [-70.11617, 43.68405],
-                        [-70.64573401557249, 43.090083319667144],
-                        [-70.75102474636725, 43.08003225358635],
-                        [-70.79761105007827, 43.21973948828747],
-                        [-70.98176001655037, 43.36789581966826],
-                        [-70.94416541205806, 43.46633942318431],
-                        [-71.08482, 45.3052400000002],
-                        [-70.6600225491012, 45.46022288673396],
-                        [-70.30495378282376, 45.914794623389355],
-                        [-70.00014034695016, 46.69317088478567],
-                        [-69.23708614772835, 47.44777598732787],
-                        [-68.90478084987546, 47.184794623394396],
-                        [-68.23430497910454, 47.35462921812177],
-                        [-67.79035274928509, 47.066248887716995],
-                        [-67.79141211614706, 45.702585354182816],
-                        [-67.13734351262877, 45.137451890638886]]]
+    const {alerts} = this.props
+
+      if (Object.keys(alerts).length !== 0) {
+        for (alert in alerts) {
+          //console.log(alerts[alert].geometry)
+          this.map.addLayer({
+            'id': alert,
+            'type': 'fill',
+            'source': {
+              'type': 'geojson',
+              'data': {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Polygon',
+                  'coordinates': alerts[alert].geometry
+                }
+              }
+            },
+            'layout': {},
+            'paint': {
+              'fill-color': '#088',
+              'fill-opacity': 0.8
             }
-          }
-        },
-        'layout': {},
-        'paint': {
-          'fill-color': '#088',
-          'fill-opacity': 0.8
+          });
         }
-      });
+      }
     });
   }
 
-   componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps) {
     if (prevProps.mapLocation.longitude !== this.props.mapLocation.longitude ||
       prevProps.mapLocation.latitude !== this.props.mapLocation.latitude) {
       this.setState({
-          lng: this.props.mapLocation.longitude,
-          lat: this.props.mapLocation.latitude,
-          zoom: 3.5
-      })
+        lng: this.props.mapLocation.longitude,
+        lat: this.props.mapLocation.latitude,
+        zoom: 4
+      }, () => this.map.flyTo({center: [this.state.lng, this.state.lat], zoom: this.state.zoom}))
     }
   }
 
