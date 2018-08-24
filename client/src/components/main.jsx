@@ -23,8 +23,8 @@ export default class Main extends React.Component {
     super(props)
     this.state = {
       mapLocation: {
-        latitude: 38.9173,
-        longitude: -86.3712
+        latitude: props.mapLocation.latitude,
+        longitude: props.mapLocation.longitude
       },
       addLocationForm: false,
       alerts: {}
@@ -72,7 +72,7 @@ export default class Main extends React.Component {
           }
         }
       }
-      //remove expired or cancelled alerts
+      // remove expired or cancelled alerts
       for (alert in alerts) {
         if (Date.parse(alert.ends) < Date.now() || alert.status === 'Cancel') {
           delete alerts[alert]
