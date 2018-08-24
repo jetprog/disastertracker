@@ -5,15 +5,19 @@ import WatchListCardAlertInfo from './WatchListCardAlertInfo.jsx'
 
 const parseAlerts = function (alerts) {
   // console.log('Alert Parser input ', alerts)
-  if (!alerts.features || alerts.features.length === 0) {
-    return []
-  }
+  if (!alerts.features || alerts.features.length === 0) { return [] }
   var alertArray = alerts.features.map(alert => alert)
   alertArray = alertArray.filter(alert => alert.properties.status !== 'Test')
   // console.log('Alert Parser output ', alertArray)
   return alertArray
 }
 
+/**
+ * Desription: Maintains a list of alerts for each loaction that is the currently logged
+ * in user has on their watchlist.  Each card has a lat and lon and does it's own API
+ * calls when the card is initially mounted and every 10 miinuted. Alerts are maintained
+ * in state for the card so that the async updated to the card alerts are handled by react
+ */
 export default class WatchListCardAlert extends Component {
   constructor (props) {
     super(props)
@@ -36,7 +40,7 @@ export default class WatchListCardAlert extends Component {
   }
 
   /**
-   * Description: Handles API Call to weather.gov specifically for the events that
+   * @Description Handles API Call to weather.gov specifically for the events that
    * impact the location that this card refers to.  Results are returned through
    * the callback function after being parsed to remove any Test alerts. this is needed
    * because the weather service has very frequent test messages that come through.
