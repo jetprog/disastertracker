@@ -85,7 +85,7 @@ export default class WatchListCardAlert extends Component {
   render () {
     let { alerts } = this.state
     if (alerts.length === 0) {
-      return <Typography>No active alerts at this time</Typography>
+      return <Typography color="textSecondary">No active alerts at this time</Typography>
     } else {
       return alerts.map(alert => (
         <WatchListCardAlertInfo alert={alert} key={alert.id} />

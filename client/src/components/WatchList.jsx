@@ -10,11 +10,12 @@ export default class WatchList extends React.Component {
   render () {
     return (
       <div>
-        <h1>
+        {/*<h1>
           {this.props.userInfo === null
-            ? 'Locations List'
+            ? ''
             : `${this.props.userInfo.first_name}'s Locations`}
-        </h1>
+        </h1>*/}
+        <br />
         <div>
           {this.props.userInfo !== null
             ? this.props.userInfo.locations.map((location, i) => (

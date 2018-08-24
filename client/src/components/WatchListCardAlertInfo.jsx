@@ -20,7 +20,7 @@ export default class WatchListCardAlertInfo extends Component {
     return (
       <React.Fragment>
         <Tooltip TransitionComponent={Zoom} title={this.tooltipText} placement="top-end">
-          <Typography>{`${this.props.alert.event}  `}
+          <Typography color="textSecondary">{`${this.props.alert.event}  `}
             <ButtonBase onClick={this.alertPop}><InfoIcon /></ButtonBase>
           </Typography>
         </Tooltip>

@@ -17,7 +17,7 @@ export default class WatchListCard extends Component {
             longitude: this.props.location.long
           })}>
           <CardContent>
-            <Typography variant="headline" component="h2">{this.props.location.loc_name}
+            <Typography component="h2">{this.props.location.loc_name}
             </Typography>
             <WatchListCardAlert
               location={{ latitude: this.props.location.lat, longitude: this.props.location.long }}
