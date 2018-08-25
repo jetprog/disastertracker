@@ -13,7 +13,7 @@ exports.saveLocation = (req, res) => {
 }
 
 exports.deleteLocation = (req, res) => {
-  let locationID = req.body.location_id;
+  let locationID = req.query.location_id;
   let userID = req.session.user;
   db.deleteLocation(locationID, userID, function (user) {
     if (user) {

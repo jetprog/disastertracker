@@ -24,6 +24,7 @@ export default class WatchList extends React.Component {
                 handleLocationClick={this.props.handleLocationClick}
                 listenForAlerts={this.props.listenForAlerts}
                 key={i}
+                deleteLocation={this.props.deleteLocation}
               />
             ))
             : ''}

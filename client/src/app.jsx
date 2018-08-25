@@ -21,6 +21,7 @@ class App extends React.Component {
     this.handleUserStatusChange = this.handleUserStatusChange.bind(this)
     this.getUserFromSession = this.getUserFromSession.bind(this)
     this.addLocationClick = this.addLocationClick.bind(this)
+    this.deleteLocationClick = this.deleteLocationClick.bind(this)
   }
 
   componentDidMount () {
@@ -75,6 +76,15 @@ class App extends React.Component {
       .catch(error => console.log(error))
   }
 
+  deleteLocationClick (locationID) {
+    axios
+      .delete('/api/location', {params: { location_id: locationID } })
+      .then(response => this.setState({userInfo: response.data}))
+      .catch(error => console.log(error))
+
+      console.log('deleteLocationClick function')
+  }
+
   render () {
     return (
       <React.Fragment>
@@ -90,6 +100,7 @@ class App extends React.Component {
           userIsLoggedIn={this.state.userIsLoggedIn}
           userInfo={this.state.userInfo}
           addLocation={this.addLocationClick}
+          deleteLocation={this.deleteLocationClick}
         />
       </React.Fragment>
     )
