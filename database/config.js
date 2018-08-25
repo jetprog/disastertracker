@@ -52,25 +52,6 @@ db.knex.schema.hasTable('user').then(function(exists) {
 //   }
 // })
 
-db.knex.schema.hasTable('event').then(function (exists) {
-  if (!exists) {
-    db.knex.schema.createTable('event', function (event) {
-      event.increments('event_id').primary()
-      event.string('severity', 20)
-      event.string('status', 20)
-      event.date('expires')
-      event.string('urgency', 20)
-      event.string('description', 100)
-      event.string('affected_zones', 100)
-      event.string('instructions', 100)
-      event.string('headline', 60)
-      event.integer('coordinates')
-    }).then(function (table) {
-      console.log(`${table} created`)
-    })
-  }
-})
-
 db.knex.schema.hasTable('contact_list').then(function(exists) {
     if (!exists) {
         db.knex.schema.createTable('contact_list', function(contact) {
@@ -110,16 +91,83 @@ db.knex.schema.hasTable('location').then(function(exists) {
     }
 });
 
-db.knex.schema.hasTable('event_list').then(function(exists) {
+db.knex.schema.hasTable('event').then(function (exists) {
   if (!exists) {
-    db.knex.schema.createTable('event_list',     function(list) {
-      list.integer('event_id').unique();
-      list.integer('category_id').unique();
-    }).then(function(table) {
+    db.knex.schema.createTable('event', function (event) {
+      event.increments('id').primary()
+      event.string('severity', 40);
+      event.integer('multi_polygon_id', 20).unsigned().notNullable().references("id").inTable("multi_polygon");
+      event.date('expires');
+      event.string('event_type', 100);
+      event.string('status', 30);
+      event.string('description', 100);
+      event.string('instructions', 100);
+      event.string('headline', 60);
+    }).then(function (table) {
       console.log(`${table} created`);
     })
   }
+})
+
+
+db.knex.schema.hasTable('location_event').then(function(exists) {
+  if (!exists) {
+    db.knex.schema.createTable('location_event', function(location_event) {
+        location_event.increments('id').primary();
+        location_event.integer('location_id').unsigned().notNullable().references("location_id").inTable("location");
+        location_event.integer('event_id').unsigned().notNullable().references("id").inTable("event");
+        location_event.bool('was_user_notified');
+    }).then(function(table) {
+        console.log(`${table} created`);
+    })
+  }
 });
+
+
+db.knex.schema.hasTable('coordinates').then(function(exists) {
+  if (!exists) {
+    db.knex.schema.createTable('coordinates', function(coordinates) {
+      coordinates.increments('id').primary();
+      coordinates.integer("polygon_id").unsigned().notNullable().references("id").inTable("polygon");
+      coordinates.decimal('latitude', 10, 8);
+      coordinates.decimal('longitude', 11, 8);
+      // coordinates.increments('sequence');
+    }).then(function(table) {
+        console.log(`${table} created`);
+    })
+  }
+});
+
+db.knex.schema.hasTable('polygon').then(function(exists){
+  if (!exists) {
+    db.knex.schema.createTable('polygon', function(polygon) {
+      polygon.increments('id').primary();
+      polygon.decimal('max_latitude', 10, 8);
+      polygon.decimal('max_longitude', 11, 8);
+      polygon.decimal('min_latitude', 10, 8);
+      polygon.decimal('min_longitude', 11, 8);
+      polygon.integer("multi_polygon_id").unsigned().notNullable().references("id").inTable("multi_polygon");
+    }).then(function(table) {
+        console.log(`${table} created`);
+    })
+  }
+});
+
+db.knex.schema.hasTable('multi_polygon').then(function(exists){
+  if (!exists) {
+    db.knex.schema.createTable('multi_polygon', function(multi_polygon) {
+      multi_polygon.increments('id').primary();
+      multi_polygon.decimal('max_latitude', 10, 8);
+      multi_polygon.decimal('max_longitude', 11, 8);
+      multi_polygon.decimal('min_latitude', 10, 8);
+      multi_polygon.decimal('min_longitude', 11, 8);
+    }).then(function(table) {
+        console.log(`${table} created`);
+    })
+  }
+});
+
+
 
 db.knex.schema.hasTable('category').then(function(exists) {
     if (!exists) {

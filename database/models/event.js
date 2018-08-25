@@ -1,8 +1,12 @@
 const db = require('../config.js');
+const MultiPolygon = require('./multiPolygon.js');
 
-var Event = db.Model.extend({
+const Event = db.Model.extend({
     tableName: 'event',
     hasTimeStamps: true,
+    multiPolygon: function () {
+      return this.belongsTo(MultiPolygon);
+    }
 });
 
 
