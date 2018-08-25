@@ -1,7 +1,7 @@
 const db = require('../config.js');
 
 const LocationEvent = db.Model.extend({
-  tableName: 'locationEvent',
+  tableName: 'location_event',
   hasTimeStamps: true,
 });
 

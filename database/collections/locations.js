@@ -3,6 +3,6 @@ var Location = require('../models/locations.js');
 
 var Locations = new db.Collection();
 
-Locations.model = Locations;
+Locations.model = Location;
 
 module.exports = Locations;

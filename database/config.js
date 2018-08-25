@@ -96,7 +96,7 @@ db.knex.schema.hasTable('event').then(function (exists) {
     db.knex.schema.createTable('event', function (event) {
       event.increments('id').primary()
       event.string('severity', 40);
-      event.integer('multiPolygon_id', 20).unsigned().notNullable().references("id").inTable("multiPolygon");
+      event.integer('multi_polygon_id', 20).unsigned().notNullable().references("id").inTable("multi_polygon");
       event.date('expires');
       event.string('event_type', 100);
       event.string('status', 30);
@@ -110,13 +110,13 @@ db.knex.schema.hasTable('event').then(function (exists) {
 })
 
 
-db.knex.schema.hasTable('locationEvent').then(function(exists) {
+db.knex.schema.hasTable('location_event').then(function(exists) {
   if (!exists) {
-    db.knex.schema.createTable('location', function(locationEvent) {
-        locationEvent.increments('id').primary();
-        locationEvent.integer('location_id').unsigned().notNullable().references("location_id").inTable("location");
-        locationEvent.integer('event_id').unsigned().notNullable().references("id").inTable("event");
-        locationEvent.bool('was_user_notified');
+    db.knex.schema.createTable('location_event', function(location_event) {
+        location_event.increments('id').primary();
+        location_event.integer('location_id').unsigned().notNullable().references("location_id").inTable("location");
+        location_event.integer('event_id').unsigned().notNullable().references("id").inTable("event");
+        location_event.bool('was_user_notified');
     }).then(function(table) {
         console.log(`${table} created`);
     })
@@ -140,28 +140,27 @@ db.knex.schema.hasTable('coordinates').then(function(exists) {
 
 db.knex.schema.hasTable('polygon').then(function(exists){
   if (!exists) {
-    db.knex.createTable('polygon', function(polygon) {
+    db.knex.schema.createTable('polygon', function(polygon) {
       polygon.increments('id').primary();
       polygon.decimal('max_latitude', 10, 8);
       polygon.decimal('max_longitude', 11, 8);
       polygon.decimal('min_latitude', 10, 8);
       polygon.decimal('min_longitude', 11, 8);
-      polygon.integer("multi_polygon_id").unsigned().notNullable().references("id").inTable("multiPolygon");
+      polygon.integer("multi_polygon_id").unsigned().notNullable().references("id").inTable("multi_polygon");
     }).then(function(table) {
         console.log(`${table} created`);
     })
   }
 });
 
-db.knex.schema.hasTable('multiPolygon').then(function(exists){
+db.knex.schema.hasTable('multi_polygon').then(function(exists){
   if (!exists) {
-    db.knex.createTable('multiPolygon', function(multiPolygon) {
-      multiPolygon.increments('id').primary();
-      multiPolygon.decimal('max_latitude', 10, 8);
-      multiPolygon.decimal('max_longitude', 11, 8);
-      multiPolygon.decimal('min_latitude', 10, 8);
-      multiPolygon.decimal('min_longitude', 11, 8);
-      multiPolygon.integer("event_id").unsigned().notNullable().references("id").inTable("event");
+    db.knex.schema.createTable('multi_polygon', function(multi_polygon) {
+      multi_polygon.increments('id').primary();
+      multi_polygon.decimal('max_latitude', 10, 8);
+      multi_polygon.decimal('max_longitude', 11, 8);
+      multi_polygon.decimal('min_latitude', 10, 8);
+      multi_polygon.decimal('min_longitude', 11, 8);
     }).then(function(table) {
         console.log(`${table} created`);
     })
