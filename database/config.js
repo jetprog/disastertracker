@@ -131,7 +131,7 @@ db.knex.schema.hasTable('coordinates').then(function(exists) {
       coordinates.integer("polygon_id").unsigned().notNullable().references("id").inTable("polygon");
       coordinates.decimal('latitude', 10, 8);
       coordinates.decimal('longitude', 11, 8);
-      coordinates.increments('sequence');
+      // coordinates.increments('sequence');
     }).then(function(table) {
         console.log(`${table} created`);
     })
