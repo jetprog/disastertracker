@@ -4,11 +4,9 @@ import Typography from '@material-ui/core/Typography'
 import WatchListCardAlertInfo from './WatchListCardAlertInfo.jsx'
 
 const parseAlerts = function (alerts) {
-  // console.log('Alert Parser input ', alerts)
   if (!alerts.features || alerts.features.length === 0) { return [] }
   var alertArray = alerts.features.map(alert => alert)
   alertArray = alertArray.filter(alert => alert.properties.status !== 'Test')
-  // console.log('Alert Parser output ', alertArray)
   return alertArray
 }
 
@@ -26,6 +24,7 @@ export default class WatchListCardAlert extends Component {
     }
     this.handleAlertResponse = this.handleAlertResponse.bind(this)
     this.getLocationAlerts = this.getLocationAlerts.bind(this)
+    this.collectUCGdescriptions = this.collectUCGdescriptions.bind(this)
   }
 
   componentDidMount () {
@@ -78,8 +77,25 @@ export default class WatchListCardAlert extends Component {
         return Date.parse(alert.ends || alert.expires) > Date.now() && alert.status !== 'Cancel'
       })
       this.setState({ alerts })
-      this.props.listenForAlerts(alertResponse)
+      if (alertResponse.some(alert => alert.geometry === null)) {
+        this.collectUCGdescriptions(alertResponse, this.props.listenForAlerts)
+      } else {
+        this.props.listenForAlerts(alertResponse)
+      }
     }
+  }
+
+  collectUCGdescriptions (alertResponse, callback) {
+    let promises = alertResponse.map(alert =>
+      alert.geometry ? Promise.resolve(alert)
+        : axios
+          .get(alert.properties.affectedZones[0])
+          .then(results => {
+            alert.geometry = results.data.geometry
+            return alert
+          })
+    )
+    Promise.all(promises).then(result => callback(result))
   }
 
   render () {
