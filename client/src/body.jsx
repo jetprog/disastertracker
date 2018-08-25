@@ -21,7 +21,8 @@ export default class Body extends React.Component {
         handleLocationClick={this.props.handleLocationClick}
         userIsLoggedIn={this.props.userIsLoggedIn}
         userInfo={this.props.userInfo}
-        addLocation={this.props.addLocation} />)
+        addLocation={this.props.addLocation}
+        deleteLocation={this.props.deleteLocation} />)
     } else {
       return (<Landing />)
     }

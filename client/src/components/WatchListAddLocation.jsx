@@ -44,10 +44,6 @@ export default class WatchListAddLocation extends React.Component {
 
     this.props.handleLocationForm();
     this.props.addLocation(location);
-    // axios
-    //   .post('/api/location', location)
-    //   .then(response => console.log('Post New Location', response.data))
-    //   .catch(error => console.log(error))
   }
 
   render () {

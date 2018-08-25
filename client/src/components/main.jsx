@@ -12,7 +12,7 @@ const paperStyle = {
   position: 'absolute',
   width: '50%',
   backgroundColor: 'white',
-  border: '3px solid',
+  border: '1px solid',
   padding: 10
 }
 
@@ -92,6 +92,7 @@ export default class Main extends React.Component {
               userInfo={this.props.userInfo}
               handleLocationClick={this.props.handleLocationClick}
               listenForAlerts={this.listenForAlerts}
+              deleteLocation={this.props.deleteLocation}
             />
             <br />
             <Button
