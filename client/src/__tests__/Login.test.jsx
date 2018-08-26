@@ -3,9 +3,28 @@ import Login from '../components/Login.jsx'
 import { shallow, mount } from 'enzyme'
 
 describe('Login Component', () => {
-  it('Login email field should be empty when form is loaded', () => {
+  it('Should have an email field', () => {
     var wrapper = shallow(<Login />)
-    var emailField = wrapper.find('.loginEmailField')
-    expect(emailField.exists()).toEqual(true)
+    expect(wrapper.find('.loginEmailField').exists()).toEqual(true)
+  })
+  it('Should have a password field', () => {
+    var wrapper = shallow(<Login />)
+    expect(wrapper.find('.loginPasswordField').exists()).toEqual(true)
+  })
+  it('Should have a login button', () => {
+    var wrapper = shallow(<Login />)
+    expect(wrapper.find('.loginLoginButton').exists()).toEqual(true)
+  })
+  it('Should have a cancel button', () => {
+    var wrapper = shallow(<Login />)
+    expect(wrapper.find('.loginCancelButton').exists()).toEqual(true)
+  })
+  it('Should have a Google login button', () => {
+    var wrapper = shallow(<Login />)
+    expect(wrapper.find('.loginGoogleButton').exists()).toEqual(true)
+  })
+  it('Should have a Facebook login button', () => {
+    var wrapper = shallow(<Login />)
+    expect(wrapper.find('.loginFacebookButton').exists()).toEqual(true)
   })
 })
