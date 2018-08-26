@@ -55,17 +55,18 @@ export default class Login extends React.Component {
   }
   render () {
     return (
-      <Grid container spacing={8} justify="center">
+      <Grid container spacing={8} justify="center" className="loginForm">
         <Grid item xs={10}>
           <Typography variant="title">Please Log In</Typography>
         </Grid>
         <Grid item xs={10}>
-          <Typography color="error" align="center" paragraph>
-            {this.state.error}
+          <Typography color="error" align="center" paragraph >
+            <span className="loginErrorMessage">{this.state.error}</span>
           </Typography>
         </Grid>
         <Grid item xs={10}>
           <TextField
+            className="loginEmailField"
             autoFocus
             value={this.state.email}
             onChange={this.handleChange}
@@ -77,6 +78,7 @@ export default class Login extends React.Component {
         </Grid>
         <Grid item xs={10}>
           <TextField
+            className="loginPasswordField"
             value={this.state.password}
             onChange={this.handleChange}
             name="password"
@@ -88,6 +90,7 @@ export default class Login extends React.Component {
 
         <Grid item xs={3}>
           <Button
+            className="loginLoginButton"
             variant="contained"
             onClick={() => this.handleLoginClick('local')}
             color="primary"
@@ -96,13 +99,14 @@ export default class Login extends React.Component {
           </Button>
         </Grid>
         <Grid item xs={3}>
-          <LoginGoogle clickHandler={this.handleLoginClick} />
+          <LoginGoogle clickHandler={this.handleLoginClick} className="loginGoogleButton"/>
         </Grid>
         <Grid item xs={3}>
-          <LoginFacebook clickHandler={this.handleLoginClick} />
+          <LoginFacebook clickHandler={this.handleLoginClick} className="loginFacebookButton"/>
         </Grid>
         <Grid item xs={3}>
           <Button
+            className="loginCancelButton"
             variant="contained"
             onClick={() => this.props.handleFormCompletion()}
             color="primary"

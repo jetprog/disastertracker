@@ -32,6 +32,7 @@ export default class LoginLogoutWrapper extends Component {
   render () {
     return this.props.userIsLoggedIn ? (
       <Button
+        className="logoutButton"
         color="inherit"
         onClick={() => this.handleFormCompletion('logout')}
       >
@@ -41,6 +42,7 @@ export default class LoginLogoutWrapper extends Component {
       <Grid container>
         <Grid item>
           <Button
+            className="loginButton"
             color="inherit"
             onClick={() => this.setState({ loginFormOpen: true })}
           >
@@ -54,6 +56,7 @@ export default class LoginLogoutWrapper extends Component {
         </Grid>
         <Grid item>
           <Button
+            className="signupButton"
             color="inherit"
             onClick={() => this.setState({ signUpFormOpen: true })}
           >
