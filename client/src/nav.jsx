@@ -19,8 +19,8 @@ export default class Nav extends React.Component {
         <Toolbar>
           <Grid container direction="row" justify="space-between" alignItems="center">
             <Grid item xs={6}>
-              <Typography variant="title" color="inherit">
-                Disaster Tracker
+              <Typography variant="title" color="inherit" >
+                <span className="appBarTitle">Disaster Tracker</span>
               </Typography>
             </Grid>
             <Grid item xs={4} color="primary">

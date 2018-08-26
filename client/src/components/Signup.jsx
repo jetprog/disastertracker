@@ -85,7 +85,7 @@ export default class Signup extends React.Component {
 
   render () {
     return (
-      <Grid container spacing={8} justify="center">
+      <Grid container spacing={8} justify="center" className="signupForm">
         <Grid item xs={10}>
           <Typography variant="title">New User Sign Up</Typography>
         </Grid>
