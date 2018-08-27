@@ -14,79 +14,79 @@ export default class Map2 extends React.Component {
     this.state = {
       lng: props.mapLocation.longitude,
       lat: props.mapLocation.latitude,
-      zoom: 3,
+      zoom: 3.5,
       geometry: ''
     }
+    this.mapContainer = React.createRef()
   }
 
   componentDidMount () {
     let { lng, lat, zoom } = this.state
-    if (lat !== 36.3328 || lng !== -85.4581) { zoom = 8 }
+    if (lat !== 36.3328 || lng !== -85.4581) {
+      zoom = 8
+    }
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
       center: [lng, lat],
       zoom: zoom
     })
-
-    this.map.on('move', () => {
+    this.map.on('moveend', () => {
       const { lng, lat } = this.map.getCenter()
       this.setState({
-        lng: lng.toFixed(4),
-        lat: lat.toFixed(4),
-        zoom: this.map.getZoom().toFixed(2)
+        lng: lng,
+        lat: lat,
+        zoom: this.map.getZoom()
       })
     })
-
-    this.map.on('load', () => {
-      const {alerts} = this.props
-
-      if (Object.keys(alerts).length !== 0) {
-        for (alert in alerts) {
-           console.log('coordinates', alerts[alert].geometry.coordinates)
-           console.log('type', alerts[alert].geometry.type)
-          this.map.addLayer({
-            'id': alert,
-            'type': 'fill',
-            'source': {
-              'type': 'geojson',
-              'data': {
-                'type': 'Feature',
-                'geometry': {
-                  'type': alerts[alert].geometry.type,
-                  'coordinates': alerts[alert].geometry.coordinates
-                }
-              }
-            },
-            'layout': {},
-            'paint': {
-              'fill-color': '#088',
-              'fill-opacity': 0.6
-            }
-          })
-        }
-      }
-    })
-    console.log(`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`)
+    this.paintMapLayers(null, this.props.alerts)
   }
 
   componentDidUpdate (prevProps) {
     if (prevProps.mapLocation.longitude !== this.props.mapLocation.longitude ||
       prevProps.mapLocation.latitude !== this.props.mapLocation.latitude) {
-      this.setState({
-        lng: this.props.mapLocation.longitude,
-        lat: this.props.mapLocation.latitude,
-        zoom: 8
-      }, () => this.map.jumpTo({center: [this.state.lng, this.state.lat], zoom: this.state.zoom}))
+      this.map.jumpTo({
+        center: [this.props.mapLocation.longitude, this.props.mapLocation.latitude],
+        zoom: 8})
+    }
+    this.paintMapLayers(prevProps.alerts, this.props.alerts)
+  }
+
+  paintMapLayers (prevAlerts, alerts) {
+    // console.log('paintlayr got layer', alerts)
+    for (let alert in alerts) {
+      this.map.on('load', () => {
+        if (this.map.getLayer(`${alert}-0`) === undefined) {
+          // console.log('drawing layer', alerts[alert])
+          alerts[alert].geometry.forEach((element, ind) => {
+            let id = `${alert}-${ind}`
+            this.map.addLayer({
+              id: id,
+              type: 'fill',
+              source: {
+                type: 'geojson',
+                data: {
+                  type: 'Feature',
+                  geometry: alerts[alert].geometry[ind]
+                }
+              },
+              layout: {},
+              paint: {
+                'fill-color': '#088',
+                'fill-opacity': 0.6
+              }
+            })
+          })
+        }
+      })
+      // this.forceUpdate()
     }
   }
 
   render () {
     const { lng, lat, zoom } = this.state
     return (
-      <div>
-        <div style={style} ref={el => this.mapContainer = el} />
-      </div>
+      <div style={style} ref={el => this.mapContainer = el} />
     )
   }
 }

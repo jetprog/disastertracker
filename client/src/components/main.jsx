@@ -58,11 +58,14 @@ export default class Main extends React.Component {
   }
 
   listenForAlerts (alertData) {
+    // console.log('Listen for alerts received ', alertData)
     this.setState((prevState) => {
       let {alerts} = prevState
+      // console.log('prevstate ', alerts)
       for (var i = 0; i < alertData.length; i++) {
         let alert = alertData[i]
         if (alert.geometry) {
+          if (!Array.isArray(alert.geometry)) { alert.geometry = [alert.geometry] }
           alerts[alert.properties.id] = {
             event: alert.properties.event,
             status: alert.properties.status,
@@ -78,7 +81,7 @@ export default class Main extends React.Component {
           delete alerts[alert]
         }
       }
-      return { alerts }
+      return ({ alerts: alerts })
     })
   }
 

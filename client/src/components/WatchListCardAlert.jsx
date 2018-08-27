@@ -77,25 +77,24 @@ export default class WatchListCardAlert extends Component {
         return Date.parse(alert.ends || alert.expires) > Date.now() && alert.status !== 'Cancel'
       })
       this.setState({ alerts })
-      if (alertResponse.some(alert => alert.geometry === null)) {
-        this.collectUCGdescriptions(alertResponse, this.props.listenForAlerts)
-      } else {
-        this.props.listenForAlerts(alertResponse)
-      }
+      this.props.listenForAlerts(alertResponse.filter(alert => alert.geometry !== null))
+      this.collectUCGdescriptions(alertResponse.filter(alert => alert.geometry === null), this.props.listenForAlerts)
     }
   }
 
   collectUCGdescriptions (alertResponse, callback) {
-    let promises = alertResponse.map(alert =>
-      alert.geometry ? Promise.resolve(alert)
-        : axios
-          .get(alert.properties.affectedZones[0])
-          .then(results => {
-            alert.geometry = results.data.geometry
-            return alert
-          })
-    )
-    Promise.all(promises).then(result => callback(result))
+    alertResponse.forEach((alrt, ind, arr) => {
+      Promise.all(
+        alrt.properties.affectedZones.map(ugc =>
+          axios
+            .get(ugc)
+            .then(results => results.data.geometry)
+        ))
+        .then(result => {
+          arr[ind].geometry = result
+          return callback(arr[ind])
+        })
+    })
   }
 
   render () {
