@@ -1,12 +1,12 @@
-# Disaster Tracking App
+# Disaster Tracker
 
-> Pithy project description
+> Track natural disasters and severe weather to alert users when a loved one is n danger.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Ashleigh Kessel
+  - __Scrum Master__: Andy Riesenbach
+  - __Development Team Members__: Josiah Liciaga , Seth-Jethro Joseph
 
 ## Table of Contents
 
@@ -20,15 +20,15 @@
 
 ## Usage
 
-> Some usage instructions
+>
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 10.8
+- React 16.4
+- MySQL
+- Knex 0.15
+- Bookshelf 0.13
 
 ## Development
 
@@ -37,16 +37,14 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/hrr32team-aajs/disastertracker/issues)
 
 
 ## Contributing
 
-See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
