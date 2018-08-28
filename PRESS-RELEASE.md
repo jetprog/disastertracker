@@ -1,16 +1,16 @@
-# Disaster Tracker App #
+# Disaster Tracker  #
 
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Application to alert users when a natural disaster or severe weather event occurs.
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > An app for everyone that has someone that they care about.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Simply add the locations of your loved ones and Disaster Tracker will update you of any events happening in that location.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Staying up to date on any events happening in tracked locations.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
