@@ -77,7 +77,10 @@ export default class WatchListCardAlert extends Component {
         return Date.parse(alert.ends || alert.expires) > Date.now() && alert.status !== 'Cancel'
       })
       this.setState({ alerts })
-      this.props.listenForAlerts(alertResponse.filter(alert => alert.geometry !== null))
+      let alertsWithGeometry = alertResponse.filter(alert => alert.geometry !== null)
+      if (alertsWithGeometry.length > 0) {
+        this.props.listenForAlerts(alertsWithGeometry)
+      }
       this.collectUCGdescriptions(alertResponse.filter(alert => alert.geometry === null), this.props.listenForAlerts)
     }
   }

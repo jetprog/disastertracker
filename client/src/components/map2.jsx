@@ -15,11 +15,10 @@ export default class Map2 extends React.Component {
       lng: props.mapLocation.longitude,
       lat: props.mapLocation.latitude,
       geometry: '',
-      zoom: 3.5,
-      allIDs: [],
-      currentID: ''
+      zoom: 3.5
     }
     this.mapContainer = React.createRef()
+    this.paintMapLayers = this.paintMapLayers.bind(this)
   }
 
   componentDidMount () {
@@ -51,27 +50,14 @@ export default class Map2 extends React.Component {
         center: [this.props.mapLocation.longitude, this.props.mapLocation.latitude],
         zoom: 8})
     }
-    this.paintMapLayers(prevProps.alerts, this.props.alerts)
-
-    if (prevProps.currentID !== this.state.currentID) {
-      const {alerts} = this.props
-      this.state.allIDs.forEach(id => {
-        this.map.on('click', id, (e) => {
-          new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML(alerts[id].headline)
-            .addTo(this.map)
-            .closeButton(true)
-        });
-      })
-    }
+    // if (prevProps.alerts.length !== this.props.alerts.length) {
+     this.paintMapLayers(prevProps.alerts, this.props.alerts)
+    //}
   }
 
   paintMapLayers (prevAlerts, alerts) {
     // console.log('paintlayr got layer', alerts)
-    const IDs = [];
     for (let alert in alerts) {
-      IDs.push(alert)
       this.map.on('load', () => {
         if (this.map.getLayer(`${alert}-0`) === undefined) {
           // console.log('drawing layer', alerts[alert])
@@ -93,8 +79,14 @@ export default class Map2 extends React.Component {
                 'fill-opacity': 0.6
               }
             })
+            let headline = alerts[alert].headline
+            this.map.on('click', id, (e) => {
+            new mapboxgl.Popup()
+              .setLngLat(e.lngLat)
+              .setHTML(headline)
+              .addTo(this.map)
+            })
           })
-          this.setState({allIDs: IDs, currentID: alert})
         }
       })
     }
