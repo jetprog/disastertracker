@@ -71,7 +71,8 @@ export default class Main extends React.Component {
             status: alert.properties.status,
             effective: alert.properties.effective,
             ends: alert.properties.ends || alert.properties.expires,
-            geometry: alert.geometry
+            geometry: alert.geometry,
+            headline: alert.properties.headline
           }
         }
       }

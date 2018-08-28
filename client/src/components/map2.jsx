@@ -14,8 +14,10 @@ export default class Map2 extends React.Component {
     this.state = {
       lng: props.mapLocation.longitude,
       lat: props.mapLocation.latitude,
+      geometry: '',
       zoom: 3.5,
-      geometry: ''
+      allIDs: [],
+      currentID: ''
     }
     this.mapContainer = React.createRef()
   }
@@ -29,7 +31,7 @@ export default class Map2 extends React.Component {
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
       center: [lng, lat],
-      zoom: zoom
+      zoom: zoom,
     })
     this.map.on('moveend', () => {
       const { lng, lat } = this.map.getCenter()
@@ -50,11 +52,26 @@ export default class Map2 extends React.Component {
         zoom: 8})
     }
     this.paintMapLayers(prevProps.alerts, this.props.alerts)
+
+    if (prevProps.currentID !== this.state.currentID) {
+      const {alerts} = this.props
+      this.state.allIDs.forEach(id => {
+        this.map.on('click', id, (e) => {
+          new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(alerts[id].headline)
+            .addTo(this.map)
+            .closeButton(true)
+        });
+      })
+    }
   }
 
   paintMapLayers (prevAlerts, alerts) {
     // console.log('paintlayr got layer', alerts)
+    const IDs = [];
     for (let alert in alerts) {
+      IDs.push(alert)
       this.map.on('load', () => {
         if (this.map.getLayer(`${alert}-0`) === undefined) {
           // console.log('drawing layer', alerts[alert])
@@ -77,9 +94,9 @@ export default class Map2 extends React.Component {
               }
             })
           })
+          this.setState({allIDs: IDs, currentID: alert})
         }
       })
-      // this.forceUpdate()
     }
   }
 
