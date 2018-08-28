@@ -58,7 +58,7 @@ export default class Main extends React.Component {
   }
 
   listenForAlerts (alertData) {
-    // console.log('Listen for alerts received ', alertData)
+     //console.log('Listen for alerts received ', alertData)
     this.setState((prevState) => {
       let {alerts} = prevState
       // console.log('prevstate ', alerts)
@@ -71,7 +71,8 @@ export default class Main extends React.Component {
             status: alert.properties.status,
             effective: alert.properties.effective,
             ends: alert.properties.ends || alert.properties.expires,
-            geometry: alert.geometry
+            geometry: alert.geometry,
+            headline: alert.properties.headline
           }
         }
       }
@@ -82,7 +83,7 @@ export default class Main extends React.Component {
         }
       }
       return ({ alerts: alerts })
-    })
+    }, () => console.log('state in main', this.state))
   }
 
   render () {

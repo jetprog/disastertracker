@@ -14,10 +14,11 @@ export default class Map2 extends React.Component {
     this.state = {
       lng: props.mapLocation.longitude,
       lat: props.mapLocation.latitude,
-      zoom: 3.5,
-      geometry: ''
+      geometry: '',
+      zoom: 3.5
     }
     this.mapContainer = React.createRef()
+    this.paintMapLayers = this.paintMapLayers.bind(this)
   }
 
   componentDidMount () {
@@ -29,7 +30,7 @@ export default class Map2 extends React.Component {
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
       center: [lng, lat],
-      zoom: zoom
+      zoom: zoom,
     })
     this.map.on('moveend', () => {
       const { lng, lat } = this.map.getCenter()
@@ -49,7 +50,9 @@ export default class Map2 extends React.Component {
         center: [this.props.mapLocation.longitude, this.props.mapLocation.latitude],
         zoom: 8})
     }
-    this.paintMapLayers(prevProps.alerts, this.props.alerts)
+    // if (prevProps.alerts.length !== this.props.alerts.length) {
+     this.paintMapLayers(prevProps.alerts, this.props.alerts)
+    //}
   }
 
   paintMapLayers (prevAlerts, alerts) {
@@ -76,10 +79,16 @@ export default class Map2 extends React.Component {
                 'fill-opacity': 0.6
               }
             })
+            let headline = alerts[alert].headline
+            this.map.on('click', id, (e) => {
+            new mapboxgl.Popup()
+              .setLngLat(e.lngLat)
+              .setHTML(headline)
+              .addTo(this.map)
+            })
           })
         }
       })
-      // this.forceUpdate()
     }
   }
 
