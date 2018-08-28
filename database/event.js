@@ -28,7 +28,7 @@ exports.saveMultiPolygon = (multiPolygon) => {
     .then((saveMultipolygon) => {
       // console.log(saveMultipolygon);
       //get id from multipolygon pass to polygon and event
-      //call savePolygone
+      //call savePolygon
     })
     .catch(error => console.log(error))
 }
