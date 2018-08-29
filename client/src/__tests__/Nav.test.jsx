@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from '../nav.jsx'
+import Nav from '../Nav.jsx'
 import {shallow} from 'enzyme'
 
 describe('Nav bar', () => {
