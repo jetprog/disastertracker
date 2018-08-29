@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios'
 import Nav from './Nav.jsx'
 import Body from './Body.jsx'
