@@ -1,8 +1,5 @@
 {
   "name": "disastertracker",
-  "engines": {
-    "node": "10.8.0"
-  },
   "version": "1.0.0",
   "description": "> Pithy project description",
   "main": "server.js",
@@ -35,6 +32,7 @@
     "express-session": "^1.15.6",
     "immutable": "^3.8.2",
     "mapbox-gl": "^0.48.0",
+    "node": "8.11.2",
     "ololog": "^1.1.111",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
