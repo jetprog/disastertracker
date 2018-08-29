@@ -1,8 +1,6 @@
 import React from 'react'
-// import { Switch, Route, Redirect } from 'react-router-dom'
 import Landing from './components/Landing.jsx'
 import Main from './components/Main.jsx'
-// import Community from './components/Community.jsx'
 
 export default class Body extends React.Component {
   constructor (props) {
