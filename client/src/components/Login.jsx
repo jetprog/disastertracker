@@ -1,7 +1,6 @@
 import React from 'react'
 import {Button, Typography, TextField, Grid} from '@material-ui/core'
 import LoginGoogle from './LoginGoogle.jsx'
-import LoginFacebook from './LoginFacebook.jsx'
 import axios from 'axios'
 
 export default class Login extends React.Component {
@@ -98,11 +97,8 @@ export default class Login extends React.Component {
             Login
           </Button>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={5}>
           <LoginGoogle clickHandler={this.handleLoginClick} className="loginGoogleButton"/>
-        </Grid>
-        <Grid item xs={3}>
-          <LoginFacebook clickHandler={this.handleLoginClick} className="loginFacebookButton"/>
         </Grid>
         <Grid item xs={3}>
           <Button
