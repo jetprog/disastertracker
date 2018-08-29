@@ -1,5 +1,4 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
 import { AppBar, Typography, Button, Toolbar, Modal, Paper, Grid } from '@material-ui/core'
 import Search from './components/Search.jsx'
 import LoginLogoutWrapper from './components/LoginLogoutWrapper.jsx'

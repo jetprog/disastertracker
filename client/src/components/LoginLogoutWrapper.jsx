@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { Typography, Button, Modal, Paper, Grid } from '@material-ui/core'
 import Login from './Login.jsx'
 import Signup from './Signup.jsx'
