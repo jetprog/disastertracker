@@ -1,0 +1,48 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,800);
+
+body {
+  padding: 0;
+  margin: 0;
+  font: 300 1em/1.5 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+#hero-image {
+  width: 100%;
+  height: auto;
+}
+
+#hero-content {
+    position: absolute;
+    top: 23%;
+    left: 34%;
+    color: white;
+    font-size: 1.5em;
+}
+
+#about {
+  padding: 10px;
+}
+
+#feature-list {
+  padding: 10px;
+}
+
+.sticky-footer {
+  background: #e5e5e5;
+  position: static;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+  z-index: 10;
+  transform: translateZ(0);
+}
+#example {
+  float:left;
+  max-width: 30em;
+  max-height: 30em;
+  margin-right: 10px;
+  position:static;
+}

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import Nav from './Nav.jsx'
 import Body from './Body.jsx'
+import './components/style.css'
 
 class App extends React.Component {
   constructor (props) {
