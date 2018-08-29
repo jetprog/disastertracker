@@ -39,7 +39,7 @@ export default class Search extends Component {
       app_id: process.env.HERE_APP_ID
     }
     axios
-      .get('http://autocomplete.geocoder.api.here.com/6.2/suggest.json', { params })
+      .get('https://autocomplete.geocoder.api.here.com/6.2/suggest.json', { params })
       .then(response => callback(parseSuggestions(response.data)))
   };
 
@@ -52,7 +52,7 @@ export default class Search extends Component {
       app_id: process.env.HERE_APP_ID
     }
     axios
-      .get('http://geocoder.api.here.com/6.2/geocode.json', { params })
+      .get('https://geocoder.api.here.com/6.2/geocode.json', { params })
       .then(response => callback(response.data.response.view[0].result[0].location))
   };
 
