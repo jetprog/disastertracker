@@ -1,6 +1,6 @@
-const db = require('../config.js')
+const db = require('../config.js');
 const MultiPolygon = require('./multiPolygon.js');
-const Coordinates = require('./coordinates.js')
+const Coordinates = require('./coordinates.js');
 
 var Polygon = db.Model.extend({
   tableName: 'polygon',

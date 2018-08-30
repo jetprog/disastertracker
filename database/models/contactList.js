@@ -1,6 +1,6 @@
-const db = require('../config.js')
-const User = require('../users.js')
-const Contact = require('../contacts.js')
+const db = require('../config.js');
+const User = require('../users.js');
+const Contact = require('../contacts.js');
 
 var ContactList = db.Model.extend({
   tableName: 'contactList',
@@ -11,6 +11,6 @@ var ContactList = db.Model.extend({
   contactID: function () {
     return this.belongsTo(Contact, 'contact_id')
   }
-})
+});
 
-module.exports = db.model('contactList', ContactList)
+module.exports = db.model('contactList', ContactList);

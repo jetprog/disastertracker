@@ -1,12 +1,12 @@
-const db = require('./config.js')
-const Users = require('./collections/users.js')
-const User = require('./models/users.js')
-const Contacts = require('./collections/users.js')
-const Contact = require('./models/users.js')
-const Events = require('./collections/users.js')
-const Event = require('./models/users.js')
-const Locations = require('./collections/locations.js')
-const Location = require('./models/locations.js')
+const db = require('./config.js');
+const Users = require('./collections/users.js');
+const User = require('./models/users.js');
+const Contacts = require('./collections/users.js');
+const Contact = require('./models/users.js');
+const Events = require('./collections/users.js');
+const Event = require('./models/users.js');
+const Locations = require('./collections/locations.js');
+const Location = require('./models/locations.js');
 
 // export saves user to database input fields are (username, password)
 
@@ -15,7 +15,7 @@ exports.saveUser = user =>
     new User({ email: user['email'] })
       .fetch()
       .then(save => (save ? reject() : Users.create(user).then(resolve)))
-  })
+  });
 
 // Get all information of the user that is currently logged in without a password for security purposes.
 exports.getUser = (id, cb) => {

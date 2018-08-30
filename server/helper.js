@@ -14,7 +14,7 @@ const decrypt = (password, hashPass, cb) => {
 }
 
 // Create user login process
-const login = (req, res) => {
+exports.login = (req, res) => {
   if (req.body.type && req.body.type === 'social') {
     db.getUserInfo(req.body.email)
       .then(user => {
@@ -55,10 +55,10 @@ const login = (req, res) => {
   }
 }
 
-const logout = (req, res) => req.session.destroy(() => res.sendStatus(200))
+exports.logout = (req, res) => req.session.destroy(() => res.sendStatus(200))
 
 // Signup method for user
-const signup = (req, res) => {
+exports.signup = (req, res) => {
   hashPass(req.body.password, (password)=>{
     req.body.password = password;
     db.saveUser(req.body)
@@ -74,10 +74,6 @@ const signup = (req, res) => {
 }
 
 // Middleware make sure user is logged
-const checkLoggedIn = (req, res, next) =>
+exports.checkLoggedIn = (req, res, next) =>
   req.session.user ? next() : res.status(401).send('user not logged in')
 
-exports.login = login
-exports.logout = logout
-exports.signup = signup
-exports.checkLoggedIn = checkLoggedIn

@@ -1,13 +1,13 @@
-const express = require('express')
-const session = require('express-session')
-const bodyParser = require('body-parser')
-const path = require('path')
-const log = require('ololog')
-const utils = require('./helper.js')
-const user = require('./util/users.js')
-const loc = require('./util/location.js')
+const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const path = require('path');
+const log = require('ololog');
+const helpers = require('./helper.js');
+const user = require('./util/users.js');
+const loc = require('./util/location.js');
 
-const app = express()
+const app = express();
 
 app.use(
   require('express-session')({
@@ -17,8 +17,8 @@ app.use(
   })
 );
 
-app.use(bodyParser.json())
-app.use(express.static(`${__dirname}/../client/dist`))
+app.use(bodyParser.json());
+app.use(express.static(`${__dirname}/../client/dist`));
 
 app.get('/', function(req, res) {
   res.redirect('/');
@@ -28,39 +28,39 @@ app.get('/api/', function (req, res) {
   res.send('Server running')
 });
 
-app.post('/api/login', utils.login);
+app.post('/api/login', helpers.login);
 
-app.get('/api/logout', utils.logout);
+app.get('/api/logout', helpers.logout);
 
-app.post('/api/signup', utils.signup)
+app.post('/api/signup', helpers.signup);
 
-app.get('/api/event', utils.checkLoggedIn, function(req, res) {
-  res.send('Server running')
+app.get('/api/event', helpers.checkLoggedIn, function(req, res) {
+  res.send('Server running');
 });
 
-// app.get('/api/location', utils.checkLoggedIn, user.userLocation);
+// app.get('/api/location', helpers.checkLoggedIn, user.userLocation);
 
-app.post('/api/location', utils.checkLoggedIn, loc.saveLocation);
+app.post('/api/location', helpers.checkLoggedIn, loc.saveLocation);
 
-app.put('/api/location', utils.checkLoggedIn, loc.updateLocation);
+app.put('/api/location', helpers.checkLoggedIn, loc.updateLocation);
 
-app.delete('/api/location', utils.checkLoggedIn, loc.deleteLocation);
+app.delete('/api/location', helpers.checkLoggedIn, loc.deleteLocation);
 
 //include user location, array of locations.
-app.get('/api/user', utils.checkLoggedIn, user.userLocation);
+app.get('/api/user', helpers.checkLoggedIn, user.userLocation);
 
-app.post('/api/user', utils.checkLoggedIn, function(req, res) {
-  res.send('Server running')
+app.post('/api/user', helpers.checkLoggedIn, function(req, res) {
+  res.send('Server running');
 });
 
-app.put('/api/user', utils.checkLoggedIn, function(req, res) {
-  res.send('Server running')
+app.put('/api/user', helpers.checkLoggedIn, function(req, res) {
+  res.send('Server running');
 });
 
 app.delete('/api/user');
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 app.listen(port, function() {
-  log(`Application listening on port ${port}`)
+  log(`Application listening on port ${port}`);
 })
