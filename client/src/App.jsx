@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import axios from 'axios'
-import Nav from './Nav.jsx'
-import Body from './Body.jsx'
-import './components/style.css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
+import Nav from './Nav.jsx';
+import Body from './Body.jsx';
+import './components/style.css';
 
 class App extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       userIsLoggedIn: false,
       userInfo: null,
@@ -15,86 +15,92 @@ class App extends React.Component {
         latitude: null,
         longitude: null
       }
-    }
-    this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this)
-    this.handleLocationClick = this.handleLocationClick.bind(this)
-    this.handleUserStatusChange = this.handleUserStatusChange.bind(this)
-    this.getUserFromSession = this.getUserFromSession.bind(this)
-    this.addLocationClick = this.addLocationClick.bind(this)
-    this.deleteLocationClick = this.deleteLocationClick.bind(this)
+    };
+    this.handleAppBarSearchClick = this.handleAppBarSearchClick.bind(this);
+    this.handleLocationClick = this.handleLocationClick.bind(this);
+    this.handleUserStatusChange = this.handleUserStatusChange.bind(this);
+    this.getUserFromSession = this.getUserFromSession.bind(this);
+    this.addLocationClick = this.addLocationClick.bind(this);
+    this.deleteLocationClick = this.deleteLocationClick.bind(this);
   }
 
-  componentDidMount () {
-    this.getUserFromSession()
+  componentDidMount() {
+    this.getUserFromSession();
   }
 
-  getUserFromSession () {
-    axios.get('/api/user')
+  getUserFromSession() {
+    axios
+      .get('/api/user')
       .then(res => {
-        this.setState({userIsLoggedIn: true, userInfo: res.data})
+        this.setState({ userIsLoggedIn: true, userInfo: res.data });
         if (res.data.locations.length > 0) {
-          this.handleLocationClick(res.data.locations[0])
+          this.handleLocationClick(res.data.locations[0]);
         } else {
-          navigator.geolocation.getCurrentPosition(position => this.handleLocationClick(position.coords))
+          navigator.geolocation.getCurrentPosition(position =>
+            this.handleLocationClick(position.coords)
+          );
         }
       })
       .catch(() => {
-        this.setState({isLoggedIn: false})
-      })
+        this.setState({ isLoggedIn: false });
+      });
   }
 
-  handleAppBarSearchClick (location) {
-    const {latitude, longitude} = location.displayPosition
-    this.setState({mapLocation: {latitude, longitude}})
+  handleAppBarSearchClick(location) {
+    const { latitude, longitude } = location.displayPosition;
+    this.setState({ mapLocation: { latitude, longitude } });
   }
 
-  handleLocationClick (location) {
-    const {latitude, longitude} = location
-    this.setState({mapLocation: {latitude, longitude}})
+  handleLocationClick(location) {
+    const { latitude, longitude } = location;
+    this.setState({ mapLocation: { latitude, longitude } });
   }
 
-  handleUserStatusChange (result) {
+  handleUserStatusChange(result) {
     if (result) {
       if (result !== 'logout') {
         if (result.data.locations.length > 0) {
-          let {lat, long} = result.data.locations[0]
-          this.setState({userIsLoggedIn: true, userInfo: result.data, mapLocation: {latitude: lat, longitude: long}})
+          let { lat, long } = result.data.locations[0];
+          this.setState({
+            userIsLoggedIn: true,
+            userInfo: result.data,
+            mapLocation: { latitude: lat, longitude: long }
+          });
         } else {
-          this.setState({userIsLoggedIn: true, userInfo: result.data})
-          navigator.geolocation.getCurrentPosition(position => this.handleLocationClick(position.coords))
+          this.setState({ userIsLoggedIn: true, userInfo: result.data });
+          navigator.geolocation.getCurrentPosition(position =>
+            this.handleLocationClick(position.coords)
+          );
         }
       } else {
-        axios.get('/api/logout')
-          .then(res =>
-            this.setState({
-              userIsLoggedIn: false,
-              userInfo: null,
-              mapLocation: {
-                latitude: null,
-                longitude: null
-              }
-            })
-          )
+        axios.get('/api/logout').then(() =>
+          this.setState({
+            userIsLoggedIn: false,
+            userInfo: null,
+            mapLocation: {
+              latitude: null,
+              longitude: null
+            }
+          })
+        );
       }
     }
   }
-  addLocationClick (location) {
+  addLocationClick(location) {
     axios
       .post('/api/location', location)
-      .then(response => this.setState({userInfo: response.data}))
-      .catch(error => console.log(error))
+      .then(response => this.setState({ userInfo: response.data }))
+      .catch(error => console.log(error));
   }
 
-  deleteLocationClick (locationID) {
+  deleteLocationClick(locationID) {
     axios
-      .delete('/api/location', {params: { location_id: locationID } })
-      .then(response => this.setState({userInfo: response.data}))
-      .catch(error => console.log(error))
-
-    console.log('deleteLocationClick function')
+      .delete('/api/location', { params: { location_id: locationID } })
+      .then(response => this.setState({ userInfo: response.data }))
+      .catch(error => console.log(error));
   }
 
-  render () {
+  render() {
     return (
       <React.Fragment>
         <Nav
@@ -112,12 +118,8 @@ class App extends React.Component {
           deleteLocation={this.deleteLocationClick}
         />
       </React.Fragment>
-    )
+    );
   }
 }
 
-ReactDOM.render((
-  // <BrowserRouter>
-  <App />
-  // </BrowserRouter>
-), document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'));

@@ -1,29 +1,34 @@
-import React from 'react'
-import { AppBar, Typography, Button, Toolbar, Modal, Paper, Grid } from '@material-ui/core'
-import Search from './components/Search.jsx'
-import LoginLogoutWrapper from './components/LoginLogoutWrapper.jsx'
+import React from 'react';
+import { AppBar, Typography, Toolbar, Grid } from '@material-ui/core';
+import Search from './components/Search.jsx';
+import LoginLogoutWrapper from './components/LoginLogoutWrapper.jsx';
 
 export default class Nav extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       loginFormOpen: false,
       signUpFormOpen: false
-    }
+    };
   }
 
-  render () {
+  render() {
     return (
       <AppBar position="static">
         <Toolbar>
-          <Grid container direction="row" justify="space-between" alignItems="center">
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+          >
             <Grid item xs={6}>
-              <Typography variant="title" color="inherit" >
+              <Typography variant="title" color="inherit">
                 <span className="appBarTitle">Disaster Tracker</span>
               </Typography>
             </Grid>
-            <Grid item xs={4} color="primary">
-              <Search handleSearchClick={this.props.handleSearchClick}/>
+            <Grid item xs={4} >
+              <Search handleSearchClick={this.props.handleSearchClick} />
             </Grid>
             <Grid item xs={2}>
               <LoginLogoutWrapper
@@ -36,6 +41,6 @@ export default class Nav extends React.Component {
           </Grid>
         </Toolbar>
       </AppBar>
-    )
+    );
   }
 }

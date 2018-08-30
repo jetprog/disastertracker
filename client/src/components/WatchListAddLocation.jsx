@@ -1,11 +1,17 @@
-import React from 'react'
-import Search from './Search.jsx'
-import axios from 'axios'
-import { Typography, Grid, Button, TextField, FormControlLabel, Checkbox } from '@material-ui/core'
+import React from 'react';
+import Search from './Search.jsx';
+import {
+  Typography,
+  Grid,
+  Button,
+  TextField,
+  FormControlLabel,
+  Checkbox
+} from '@material-ui/core';
 
 export default class WatchListAddLocation extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       primaryLocation: false,
       locationName: '',
@@ -13,40 +19,40 @@ export default class WatchListAddLocation extends React.Component {
         latitude: '',
         longitude: ''
       }
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBoxChange = this.handleBoxChange.bind(this)
-    this.handleSearchClick = this.handleSearchClick.bind(this)
-    this.addNewLocation = this.addNewLocation.bind(this)
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleBoxChange = this.handleBoxChange.bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.addNewLocation = this.addNewLocation.bind(this);
   }
 
-  handleChange (e) {
-    this.setState({ [e.target.name]: e.target.value })
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleBoxChange (e) {
-    this.setState({ [e.target.value]: e.target.checked })
+  handleBoxChange(e) {
+    this.setState({ [e.target.value]: e.target.checked });
   }
 
-  handleSearchClick (location) {
-    const { latitude, longitude } = location.displayPosition
-    this.setState({ mapLocation: { latitude, longitude } })
+  handleSearchClick(location) {
+    const { latitude, longitude } = location.displayPosition;
+    this.setState({ mapLocation: { latitude, longitude } });
   }
 
-  addNewLocation () {
+  addNewLocation() {
     const location = {
       loc_name: this.state.locationName,
       lat: this.state.mapLocation.latitude,
       long: this.state.mapLocation.longitude,
       primary: this.state.primaryLocation,
       user_id: this.props.userInfo.user_id
-    }
+    };
 
     this.props.handleLocationForm();
     this.props.addLocation(location);
   }
 
-  render () {
+  render() {
     return (
       <Grid container spacing={8} justify="center">
         <Grid item xs={10}>
@@ -87,7 +93,7 @@ export default class WatchListAddLocation extends React.Component {
             color="primary"
             onClick={this.addNewLocation}
           >
-          Add Location
+            Add Location
           </Button>
         </Grid>
         <Grid item xs={10}>
@@ -96,10 +102,10 @@ export default class WatchListAddLocation extends React.Component {
             color="primary"
             onClick={() => this.props.handleLocationForm()}
           >
-          Cancel
+            Cancel
           </Button>
         </Grid>
       </Grid>
-    )
+    );
   }
 }
