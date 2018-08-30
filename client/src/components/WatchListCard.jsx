@@ -17,13 +17,19 @@ const styles = {
   cardHeader: {
     color: '#3f51b5',
     backgroundColor: 'white',
-    padding: '10px 10px 5px 10px'
+    padding: '10px 10px 5px 15px'
   },
   cardContent: {
     color: '#3f51b5',
     backgroundColor: 'white',
     fontSize: '.95rem',
-    padding: '0px 10px 5px 10px'
+    padding: '0px 10px 5px 15px'
+  },
+  deleteStyle: {
+    color: '#9e9e9e',
+    backgroundColor: 'white',
+    fontSize: '.65rem',
+    padding: '0px 0px 5px -10px'
   },
   paperStyle: {
     position: 'absolute',
@@ -69,7 +75,7 @@ export default class WatchListCard extends Component {
           </Grid>
           <Modal style={styles.modalStyle} open={this.state.deleteLocationForm}>
             <Paper style={styles.paperStyle}>
-              <WatchListDeleteLocation handleLocationForm={this.handleLocationForm} deleteLocation={this.props.deleteLocation} location={this.props.location}/>
+              <WatchListDeleteLocation style={styles.deleteStyle} handleLocationForm={this.handleLocationForm} deleteLocation={this.props.deleteLocation} location={this.props.location}/>
             </Paper>
           </Modal>
         </CardContent>

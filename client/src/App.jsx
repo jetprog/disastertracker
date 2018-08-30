@@ -64,8 +64,17 @@ class App extends React.Component {
           navigator.geolocation.getCurrentPosition(position => this.handleLocationClick(position.coords))
         }
       } else {
-        this.setState({userIsLoggedIn: false, userInfo: null})
-        axios.post('/api/logout')
+        axios.get('/api/logout')
+          .then(res =>
+            this.setState({
+              userIsLoggedIn: false,
+              userInfo: null,
+              mapLocation: {
+                latitude: null,
+                longitude: null
+              }
+            })
+          )
       }
     }
   }
@@ -82,7 +91,7 @@ class App extends React.Component {
       .then(response => this.setState({userInfo: response.data}))
       .catch(error => console.log(error))
 
-      console.log('deleteLocationClick function')
+    console.log('deleteLocationClick function')
   }
 
   render () {

@@ -62,7 +62,7 @@ export default class Search extends Component {
         <AsyncSelect
           cacheOptions
           loadOptions={this.loadOptions}
-//          defaultOptions
+          //          defaultOptions
           onInputChange={this.handleInputChange}
           placeholder="Address..."
           onChange={choice => this.handleSelectedOne(choice, this.props.handleSearchClick)}
