@@ -65,7 +65,7 @@ class App extends React.Component {
         }
       } else {
         axios.get('/api/logout')
-          .then(res =>
+          .then(() =>
             this.setState({
               userIsLoggedIn: false,
               userInfo: null,
