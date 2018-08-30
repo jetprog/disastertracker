@@ -48,8 +48,9 @@ export default class Signup extends React.Component {
     }
 
     var { firstname, lastname, email, password } = this.state
+    var combinedUserData;
     if (source === 'local') {
-      var combinedUserData = {
+      combinedUserData = {
         first_name: firstname,
         last_name: lastname,
         email,
@@ -57,7 +58,7 @@ export default class Signup extends React.Component {
       }
     }
     if (source === 'google') {
-      var combinedUserData = {
+      combinedUserData = {
         first_name: data.profileobj.givenName,
         last_name: data.profileobj.familyName,
         email: data.profileobj.email,

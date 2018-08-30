@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Typography, Button, Modal, Paper, Grid } from '@material-ui/core'
-import Login from './Login.jsx'
-import Signup from './Signup.jsx'
+import React, { Component } from 'react';
+import { Button, Modal, Paper, Grid } from '@material-ui/core';
+import Login from './Login.jsx';
+import Signup from './Signup.jsx';
 
 const paperStyle = {
   position: 'absolute',
@@ -9,26 +9,26 @@ const paperStyle = {
   backgroundColor: 'white',
   border: '3px solid',
   padding: 10
-}
+};
 
-const modalStyle = { top: '15%', left: '25%' }
+const modalStyle = { top: '15%', left: '25%' };
 
 export default class LoginLogoutWrapper extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       loginFormOpen: false,
       signUpFormOpen: false
-    }
-    this.handleFormCompletion = this.handleFormCompletion.bind(this)
+    };
+    this.handleFormCompletion = this.handleFormCompletion.bind(this);
     //
   }
-  handleFormCompletion (result) {
-    this.setState({ loginFormOpen: false, signUpFormOpen: false })
-    this.props.handleUserStatusChange(result)
+  handleFormCompletion(result) {
+    this.setState({ loginFormOpen: false, signUpFormOpen: false });
+    this.props.handleUserStatusChange(result);
   }
 
-  render () {
+  render() {
     return this.props.userIsLoggedIn ? (
       <Button
         className="logoutButton"
@@ -68,6 +68,6 @@ export default class LoginLogoutWrapper extends Component {
           </Modal>
         </Grid>
       </Grid>
-    )
+    );
   }
 }
