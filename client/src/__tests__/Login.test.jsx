@@ -23,8 +23,4 @@ describe('Login Component', () => {
     var wrapper = shallow(<Login />)
     expect(wrapper.find('.loginGoogleButton').exists()).toEqual(true)
   })
-  it('Should have a Facebook login button', () => {
-    var wrapper = shallow(<Login />)
-    expect(wrapper.find('.loginFacebookButton').exists()).toEqual(true)
-  })
 })
