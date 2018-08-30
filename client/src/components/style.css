@@ -8,41 +8,27 @@ body {
 
 #hero-image {
   width: 100%;
+  max-height: 90vh;
   height: auto;
 }
 
 #hero-content {
     position: absolute;
-    top: 23%;
-    left: 34%;
+    top: 25%;
+    left: 25%;
     color: white;
-    font-size: 1.5em;
-}
-
-#about {
-  padding: 10px;
-}
-
-#feature-list {
-  padding: 10px;
+    font-size: 2.5em;
 }
 
 .sticky-footer {
   background: #e5e5e5;
-  position: static;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   text-align: center;
   border-top: 1px solid #e5e5e5;
   z-index: 10;
   transform: translateZ(0);
-}
-#example {
-  float:left;
-  max-width: 30em;
-  max-height: 30em;
-  margin-right: 10px;
-  position:static;
 }
